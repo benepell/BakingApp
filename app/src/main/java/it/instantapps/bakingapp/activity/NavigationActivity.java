@@ -116,7 +116,7 @@ public class NavigationActivity extends AppCompatActivity {
                         send.putExtra(Costants.EXTRA_DETAIL_STEP_ID, result[0]);
                         send.putExtra(Costants.EXTRA_RECIPE_WIDGET, args[0].getWidget());
                         send.putExtra(Costants.EXTRA_RECIPE_NAME, args[0].getRecipeName());
-                        send.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        send.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(send);
                         return cursor;
                     }
@@ -163,7 +163,7 @@ public class NavigationActivity extends AppCompatActivity {
             send.putExtra(Costants.EXTRA_DETAIL_STEP_ID, args[0].getIntendId());
             send.putExtra(Costants.EXTRA_RECIPE_WIDGET, args[0].getWidget());
             send.putExtra(Costants.EXTRA_RECIPE_NAME, args[0].getRecipeName());
-            send.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            send.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
             context.startActivity(send);
 
             return null;
@@ -197,7 +197,7 @@ public class NavigationActivity extends AppCompatActivity {
                         send.putExtra(Costants.EXTRA_DETAIL_STEP_ID, result[0]);
                         send.putExtra(Costants.EXTRA_RECIPE_WIDGET, args[0].getWidget());
                         send.putExtra(Costants.EXTRA_RECIPE_NAME, args[0].getRecipeName());
-                        send.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                        send.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(send);
 
                         cursor.close();
