@@ -1,0 +1,109 @@
+<resources>
+    <!-- GENERAL -->
+    <string name="app_name">Baking Time</string>
+    <string name="content_authority" translatable="false">it.instantapps.bakingapp</string>
+
+    <string name="device_type_tablet" translatable="false">TABLET</string>
+    <string name="device_type_phone" translatable="false">PHONE</string>
+    <string name="pref_device_tablet" translatable="false">it.instantapps.bakingapp.device.tablet</string>
+    <string name="span_count_grid_recipe" translatable="false">3</string>
+    <string name="tablet_span_count_grid_recipe" translatable="false">2</string>
+    <string name="tablet_portrait_span_count_grid_step" translatable="false">2</string>
+    <string name="tablet_landscape_span_count_grid_step" translatable="false">3</string>
+
+    <string name="network_state_not_connected">No Internet connection &#8230; \nMake sure Wi-Fi \nor cellular data is turned on,\n then click here to try again.</string>
+
+    <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"http://bakingapp.instantapps.it\",\n  }\n}]</string>
+
+    <string name="pref_insert_data" translatable="false">it.instantapps.bakingapp.insertData</string>
+    <string name="pref_video_uri" translatable="false">it.instantapps.bakingapp.prefVideoUri</string>
+
+    <string name="title_activity_base">BaseActivity</string>
+    <string name="title_activity_main">Baking Time</string>
+    <string name="title_activity_detail">Baking Time</string>
+    <string name="title_activity_step">Baking Time</string>
+    <string name="title_activity_navigation">Settings</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <string name="image_detail">Details steps</string>
+
+    <string name="tab_ingredient_detail">Ingredients</string>
+    <string name="tab_step_detail">Steps</string>
+
+    <string name="notification_text">click here for more information</string>
+    <string name="play">Play</string>
+    <string name="pause">Pause</string>
+    <string name="restart">Restart</string>
+
+    <string name="title_widget_remove">Remove Widget</string>
+    <string name="title_widget_add">Add Widget</string>
+    <string name="title_navigation_back">Back Step</string>
+    <string name="title_navigation_forward">Step Forward</string>
+
+    <string name="error_video">Error loading player: no playable video</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="image_description_app">Baking Time Android Nanodegree</string>
+    <string name="url_app" translatable="false">http://bakingapp.instantapps.it</string>
+    <string name="title_menu_home">Home</string>
+    <string name="title_menu_ingredients">Ingredients</string>
+    <string name="title_menu_steps">Steps</string>
+    <string name="title_menu_settings">Settings</string>
+    <string name="title_nav_cat">Communicate</string>
+    <string name="share_shopping_list">Share Shopping List</string>
+    <string name="send_video">Send Video</string>
+
+    <string name="pref_tab_layout" translatable="false">pref_tab_layout</string>
+    <string name="title_tab_layout">Tab Layout</string>
+    <string name="summary_tab_layout">Tab Layout provides a horizontal layout to display ingredients and steps</string>
+
+    <string name="pref_video_notification" translatable="false">pref_video_notification</string>
+    <string name="title_video_notification">Video Notification</string>
+    <string name="summary_video_notification">Continue video playback in background when turning device screen off or click Home button.</string>
+
+    <string name="pref_resume_video" translatable="false">pref_resume_video</string>
+    <string name="title_resume_video">Video Resume</string>
+    <string name="summary_resume_video">Enable resume and autoplay.</string>
+
+    <string name="pref_sync_frequency" translatable="false">pref_sync_frequency</string>
+    <string name="pref_title_sync_frequency" translatable="false">Sync Data</string>
+    <string-array name="pref_sync_frequency_titles">
+        <item>15 minutes</item>
+        <item>6 hours</item>
+        <item>12 hours</item>
+        <item>24 hours</item>
+        <item>48 hours</item>
+        <item>Never</item>
+    </string-array>
+    <string-array name="pref_sync_frequency_values" translatable="false">
+        <item>900</item>
+        <item>21600</item>
+        <item>43200</item>
+        <item>86400</item>
+        <item>172800</item>
+        <item>0</item>
+    </string-array>
+
+    <string name="title_clear_data">Factory data reset</string>
+    <string name="summary_clear_data">Delete all data stored on device.</string>
+    <string name="text_clear_data">This action will delete all your data. Are you sure you want to continue?</string>
+    <string name="text_dialog_confirm_reset">Delete All Data DONE.</string>
+    <string name="title_dialog_confirm">Factory data reset</string>
+    <string name="text_dialog_confirm_no_reset">Cancel</string>
+    <string name="text_positive_dialog_confirm">Delete</string>
+
+    <string name="pref_app_version" translatable="false">pref_app_version</string>
+    <string name="title_app_version">Version</string>
+
+    <string name="pref_privacy" translatable="false">pref_privacy_version</string>
+    <string name="app_url_privacy" translatable="false">https://www.apache.org/licenses/LICENSE-2.0</string>
+
+    <string name="app_support_mail" translatable="false">support@instantapps.it</string>
+    <string name="subject_support_mail">Problem with</string>
+    <string name="text_mail_intent">Select email application.</string>
+
+    <string name="pref_write_external_storage" translatable="false">it.instantapps.bakingapp.app.write.external.storage</string>
+    <string name="text_click_end_ingredient">End list ingredient</string>
+
+</resources>

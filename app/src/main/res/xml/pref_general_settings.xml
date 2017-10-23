@@ -1,0 +1,53 @@
+<android.support.v7.preference.PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="@string/pref_tab_layout"
+        android:summary="@string/summary_tab_layout"
+        android:title="@string/title_tab_layout" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="@string/pref_video_notification"
+        android:summary="@string/summary_video_notification"
+        android:title="@string/title_video_notification" />
+
+    <SwitchPreferenceCompat
+        android:defaultValue="true"
+        android:key="@string/pref_resume_video"
+        android:summary="@string/summary_resume_video"
+        android:title="@string/title_resume_video" />
+
+    <ListPreference
+        android:defaultValue="86400"
+        android:entries="@array/pref_sync_frequency_titles"
+        android:entryValues="@array/pref_sync_frequency_values"
+        android:key="@string/pref_sync_frequency"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null"
+        android:title="@string/pref_title_sync_frequency" />
+
+    <it.instantapps.bakingapp.preference.DialogConfirm
+        android:summary="@string/summary_clear_data"
+        android:title="@string/title_clear_data" />
+
+    <PreferenceCategory android:key="pref_cat_1">
+
+        <Preference
+            android:key="@string/pref_app_version"
+            android:title="@string/title_app_version" />
+
+        <Preference
+            android:key="@string/pref_privacy"
+            android:title="Terms and privacy policy">
+            <intent
+                android:action="android.intent.action.VIEW"
+                android:data="@string/app_url_privacy" />
+        </Preference>
+
+        <Preference
+            android:key="pref_contact"
+            android:title="Contact Us" />
+
+    </PreferenceCategory>
+</android.support.v7.preference.PreferenceScreen>
