@@ -99,6 +99,34 @@ public class DetailActivity extends BaseActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItemShare;
+        menuItemShare = menu.getItem(0);
+
+            menuItemShare.setVisible(true);
+            menuItemShare.setIcon(R.drawable.ic_list_share);
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_share_video:
+                new ShoppingListAsyncTask().execute(getRecipeId());
+                return true;
+        }
+        return false;
+    }
+
+    @Override
     public void onBackPressed() {
         super.onBackPressed();
         startActivity(new Intent(this, MainActivity.class).setFlags(
@@ -171,34 +199,6 @@ public class DetailActivity extends BaseActivity
         }
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuItemShare;
-        menuItemShare = menu.getItem(0);
-
-        if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
-            menuItemShare.setVisible(true);
-        }
-
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.navigation_share_video:
-                new ShoppingListAsyncTask().execute(getRecipeId());
-                return true;
-        }
-        return false;
-    }
 
 
 }

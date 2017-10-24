@@ -198,6 +198,56 @@ public class StepActivity extends BaseActivity
     }
 
     @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_share_video:
+                sendNavUrl();
+                break;
+
+            case R.id.navigation_widget:
+                navigationIntent(R.id.navigation_widget);
+                return true;
+        }
+
+        return false;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItemShare;
+        MenuItem menuItemWidget;
+        menuItemShare = menu.getItem(0);
+        menuItemWidget = menu.getItem(1);
+
+        if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            menuItemShare.setVisible(true);
+            menuItemWidget.setVisible(true);
+        }
+
+        if (getWidget() != 0) {
+            menuItemWidget.setCheckable(true);
+            menuItemWidget.setChecked(true);
+            menuItemWidget.setIcon(R.drawable.ic_widgets_blu_24dp);
+            menuItemWidget.setTitle(R.string.title_widget_remove);
+
+        } else {
+            menuItemWidget.setCheckable(false);
+            menuItemWidget.setChecked(false);
+            menuItemWidget.setTitle(R.string.title_widget_add);
+        }
+
+
+        return true;
+    }
+
+    @Override
     public void onStart() {
         super.onStart();
         if (Util.SDK_INT > 23) {
@@ -465,27 +515,6 @@ public class StepActivity extends BaseActivity
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
-    @Override
-    public boolean onCreateOptionsMenu(Menu menu) {
-        MenuInflater inflater = getMenuInflater();
-        inflater.inflate(R.menu.menu, menu);
-        return true;
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()) {
-            case R.id.navigation_share_video:
-                sendNavUrl();
-                break;
-
-            case R.id.navigation_widget:
-                navigationIntent(R.id.navigation_widget);
-                return true;
-        }
-
-        return false;
-    }
 
     private void activeNavigation() {
         if ((getRecipeId() >= 0) && (mBottomNavigationView != null)) {
@@ -497,34 +526,6 @@ public class StepActivity extends BaseActivity
             mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         }
 
-    }
-
-    @Override
-    public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuItemShare;
-        MenuItem menuItemWidget;
-        menuItemShare = menu.getItem(0);
-        menuItemWidget = menu.getItem(1);
-
-        if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
-            menuItemShare.setVisible(true);
-            menuItemWidget.setVisible(true);
-        }
-
-        if (getWidget() != 0) {
-            menuItemWidget.setCheckable(true);
-            menuItemWidget.setChecked(true);
-            menuItemWidget.setIcon(R.drawable.ic_widgets_blu_24dp);
-            menuItemWidget.setTitle(R.string.title_widget_remove);
-
-        } else {
-            menuItemWidget.setCheckable(false);
-            menuItemWidget.setChecked(false);
-            menuItemWidget.setTitle(R.string.title_widget_add);
-        }
-
-
-        return true;
     }
 
 

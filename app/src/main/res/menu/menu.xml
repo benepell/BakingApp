@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/navigation_share_video"
+        android:icon="@drawable/ic_menu_share_white"
+        android:title="@string/send_video"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+    <item
+        android:id="@+id/navigation_widget"
+        android:icon="@drawable/ic_widgets_white_24dp"
+        android:title="@string/title_widget_add"
+        android:visible="false"
+        app:showAsAction="ifRoom" />
+
+</menu>

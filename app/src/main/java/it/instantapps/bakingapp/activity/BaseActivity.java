@@ -273,6 +273,7 @@ public class BaseActivity extends AppCompatActivity
                             "Recipe: " + getRecipeName());
 
                     shareIntent.putExtra(Intent.EXTRA_TEXT, builder.toString());
+                    shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(shareIntent);
                 }
             } finally {
