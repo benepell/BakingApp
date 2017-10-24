@@ -107,11 +107,14 @@ public class DetailActivity extends BaseActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
-        MenuItem menuItemShare;
-        menuItemShare = menu.getItem(0);
-
-            menuItemShare.setVisible(true);
-            menuItemShare.setIcon(R.drawable.ic_list_share);
+        MenuItem menuItemListShopping;
+        menuItemListShopping = menu.getItem(0);
+        if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            menuItemListShopping.setVisible(true);
+        }else if(PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))){
+            menuItemListShopping.setVisible(true);
+        }
+        menuItemListShopping.setIcon(R.drawable.ic_list_shopping);
 
         return true;
     }

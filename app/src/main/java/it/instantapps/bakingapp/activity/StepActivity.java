@@ -207,9 +207,12 @@ public class StepActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
+            case R.id.navigation_list_shopping:
+                new ShoppingListAsyncTask().execute(getRecipeId());
+                return true;
             case R.id.navigation_share_video:
                 sendNavUrl();
-                break;
+                return true;
 
             case R.id.navigation_widget:
                 navigationIntent(R.id.navigation_widget);
@@ -221,15 +224,30 @@ public class StepActivity extends BaseActivity
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItemListShopping;
         MenuItem menuItemShare;
         MenuItem menuItemWidget;
-        menuItemShare = menu.getItem(0);
-        menuItemWidget = menu.getItem(1);
 
-        if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+        menuItemListShopping = menu.getItem(0);
+        menuItemShare = menu.getItem(1);
+        menuItemWidget = menu.getItem(2);
+
+
+        if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             menuItemShare.setVisible(true);
             menuItemWidget.setVisible(true);
+
+        } else if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            menuItemListShopping.setVisible(true);
+            menuItemShare.setVisible(true);
+            menuItemWidget.setVisible(true);
+
+        } else if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            menuItemShare.setVisible(true);
+            menuItemWidget.setVisible(true);
+
         }
+
 
         if (getWidget() != 0) {
             menuItemWidget.setCheckable(true);

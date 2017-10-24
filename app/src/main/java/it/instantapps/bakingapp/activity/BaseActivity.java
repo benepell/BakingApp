@@ -49,7 +49,6 @@ public class BaseActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         sWeakReference = new WeakReference<>(getApplicationContext());
-
         ViewStub mStub;
         if (isEnableNavigationView()) {
             setContentView(R.layout.activity_base);
@@ -341,7 +340,7 @@ public class BaseActivity extends AppCompatActivity
             return true;
         }
 
-        if ((frameLayout!=null)&&(frameLayout.getTag() == getString(R.string.device_type_tablet))) {
+        if (frameLayout.getTag() == getString(R.string.device_type_tablet)) {
             pref = getSharedPreferences(getString(R.string.pref_device_tablet), 0);
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean(getString(R.string.pref_device_tablet), true);

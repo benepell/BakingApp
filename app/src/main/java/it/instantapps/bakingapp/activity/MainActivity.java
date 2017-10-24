@@ -81,7 +81,7 @@ public class MainActivity extends BaseActivity implements
         ButterKnife.bind(this);
         Timber.plant(new Timber.DebugTree());
         SyncUtils.initialize(this);
-
+        isTablet();
         Utility.RequestPermissionExtStorage(MainActivity.this);
         initializeMainJob();
         clearPosition();
