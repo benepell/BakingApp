@@ -7,11 +7,6 @@
         android:title="@string/title_navigation_back" />
 
     <item
-        android:id="@+id/navigation_widget"
-        android:icon="@drawable/ic_widgets_black_24dp"
-        android:title="@string/title_widget_add" />
-
-    <item
         android:id="@+id/navigation_forward"
         android:icon="@drawable/ic_arrow_forward_black_24dp"
         android:title="@string/title_navigation_forward" />

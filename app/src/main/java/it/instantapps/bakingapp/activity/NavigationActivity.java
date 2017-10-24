@@ -58,14 +58,14 @@ public class NavigationActivity extends AppCompatActivity {
 
             switch (navigationType) {
 
-                case R.id.navigation_back:
-
-                    new NavigationBackAsyncTask().execute(navigation);
-                    break;
-
                 case R.id.navigation_widget:
 
                     new NavigationWidgetAsyncTask().execute(navigation);
+                    break;
+
+                case R.id.navigation_back:
+
+                    new NavigationBackAsyncTask().execute(navigation);
                     break;
 
                 case R.id.navigation_forward:

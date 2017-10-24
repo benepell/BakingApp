@@ -4,6 +4,9 @@ import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
@@ -167,5 +170,35 @@ public class DetailActivity extends BaseActivity
             mFrameStepLayout.setVisibility(View.VISIBLE);
         }
     }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItemShare;
+        menuItemShare = menu.getItem(0);
+
+        if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            menuItemShare.setVisible(true);
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_share_video:
+                new ShoppingListAsyncTask().execute(getRecipeId());
+                return true;
+        }
+        return false;
+    }
+
 
 }

@@ -204,7 +204,7 @@ public class BaseActivity extends AppCompatActivity
         }
     }
 
-    private boolean sendNavUrl() {
+    boolean sendNavUrl() {
         SharedPreferences pref = getSharedPreferences(getString(R.string.pref_video_uri), 0);
         String videoUrl = pref.getString(getString(R.string.pref_video_uri), "");
 
@@ -215,7 +215,7 @@ public class BaseActivity extends AppCompatActivity
         return false;
     }
 
-    private static class ShoppingListAsyncTask extends AsyncTask<Integer, Void, Cursor> {
+    static class ShoppingListAsyncTask extends AsyncTask<Integer, Void, Cursor> {
 
         @Override
         protected Cursor doInBackground(Integer... integers) {

@@ -14,6 +14,8 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
@@ -110,7 +112,9 @@ public class StepActivity extends BaseActivity
 
         if ((getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
             mBottomNavigationView = findViewById(R.id.navigation);
+            activeNavigation();
         }
+
 
         Intent intent = getIntent();
 
@@ -165,12 +169,7 @@ public class StepActivity extends BaseActivity
                 mContainerFragment.setVisibility(View.VISIBLE);
             }
 
-            if (isTablet()) {
-                activeNavigation();
-            }
-
         } else {
-            activeNavigation();
 
             if ((mVideoUri != null) && (!mVideoUri.isEmpty())) {
                 mContainerLayout.setVisibility(View.VISIBLE);
@@ -466,28 +465,68 @@ public class StepActivity extends BaseActivity
                         | View.SYSTEM_UI_FLAG_IMMERSIVE);
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater inflater = getMenuInflater();
+        inflater.inflate(R.menu.menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
+            case R.id.navigation_share_video:
+                sendNavUrl();
+                break;
+
+            case R.id.navigation_widget:
+                navigationIntent(R.id.navigation_widget);
+                return true;
+        }
+
+        return false;
+    }
+
     private void activeNavigation() {
         if ((getRecipeId() >= 0) && (mBottomNavigationView != null)) {
             setNavigationIdMax(getRecipeId());
             mBottomNavigationView.setVisibility(View.VISIBLE);
             mBottomNavigationView.getMenu().getItem(0).setCheckable(false);
-            mBottomNavigationView.getMenu().getItem(2).setCheckable(false);
+            mBottomNavigationView.getMenu().getItem(1).setCheckable(false);
 
-            if (getWidget() != 0) {
-                mBottomNavigationView.getMenu().getItem(1).setCheckable(true);
-                mBottomNavigationView.getMenu().getItem(1).setChecked(true);
-                mBottomNavigationView.getMenu().getItem(1).setTitle(R.string.title_widget_remove);
-
-            } else {
-                mBottomNavigationView.getMenu().getItem(1).setCheckable(false);
-                mBottomNavigationView.getMenu().getItem(1).setChecked(false);
-                mBottomNavigationView.getMenu().getItem(1).setTitle(R.string.title_widget_add);
-
-            }
             mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         }
 
     }
+
+    @Override
+    public boolean onPrepareOptionsMenu(Menu menu) {
+        MenuItem menuItemShare;
+        MenuItem menuItemWidget;
+        menuItemShare = menu.getItem(0);
+        menuItemWidget = menu.getItem(1);
+
+        if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            menuItemShare.setVisible(true);
+            menuItemWidget.setVisible(true);
+        }
+
+        if (getWidget() != 0) {
+            menuItemWidget.setCheckable(true);
+            menuItemWidget.setChecked(true);
+            menuItemWidget.setIcon(R.drawable.ic_widgets_blu_24dp);
+            menuItemWidget.setTitle(R.string.title_widget_remove);
+
+        } else {
+            menuItemWidget.setCheckable(false);
+            menuItemWidget.setChecked(false);
+            menuItemWidget.setTitle(R.string.title_widget_add);
+        }
+
+
+        return true;
+    }
+
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
             = new BottomNavigationView.OnNavigationItemSelectedListener() {
@@ -502,10 +541,6 @@ public class StepActivity extends BaseActivity
                     } else {
                         item.setEnabled(false);
                     }
-                    return true;
-
-                case R.id.navigation_widget:
-                    navigationIntent(R.id.navigation_widget);
                     return true;
 
                 case R.id.navigation_forward:
@@ -560,15 +595,15 @@ public class StepActivity extends BaseActivity
     }
 
     private void visibleFrameTabletLayout() {
-            if(PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))){
-                FrameLayout frameTabLayout = findViewById(R.id.content_tablet_tab_fragment);
-                frameTabLayout.setVisibility(View.VISIBLE);
-            }else {
-                FrameLayout frameIngredientLayout = findViewById(R.id.content_tablet_ingredient_fragment);
-                frameIngredientLayout.setVisibility(View.VISIBLE);
-                FrameLayout frameStepLayout = findViewById(R.id.content_tablet_step_fragment);
-                frameStepLayout.setVisibility(View.VISIBLE);
-            }
+        if (PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))) {
+            FrameLayout frameTabLayout = findViewById(R.id.content_tablet_tab_fragment);
+            frameTabLayout.setVisibility(View.VISIBLE);
+        } else {
+            FrameLayout frameIngredientLayout = findViewById(R.id.content_tablet_ingredient_fragment);
+            frameIngredientLayout.setVisibility(View.VISIBLE);
+            FrameLayout frameStepLayout = findViewById(R.id.content_tablet_step_fragment);
+            frameStepLayout.setVisibility(View.VISIBLE);
+        }
     }
 
 
@@ -577,13 +612,13 @@ public class StepActivity extends BaseActivity
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             Bundle bundle = new Bundle();
 
-            if(PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))) {
+            if (PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))) {
                 bundle.putInt(Costants.BUNDLE_TAB_RECIPE_ID, index);
                 bundle.putInt(Costants.BUNDLE_TAB_ORDERTAB, orderTab);
                 TabFragment fragment = new TabFragment();
                 fragment.setArguments(bundle);
                 transaction.replace(R.id.content_tablet_tab_fragment, fragment);
-            }else {
+            } else {
 
                 IngredientFragment ingredientFragment = new IngredientFragment();
                 bundle.putString(Costants.EXTRA_RECIPE_NAME, getRecipeName());
