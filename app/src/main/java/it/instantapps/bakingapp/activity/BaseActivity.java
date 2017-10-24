@@ -272,7 +272,7 @@ public class BaseActivity extends AppCompatActivity
                             "Recipe: " + getRecipeName());
 
                     shareIntent.putExtra(Intent.EXTRA_TEXT, builder.toString());
-                    shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY|Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    shareIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                     context.startActivity(shareIntent);
                 }
             } finally {
@@ -340,7 +340,7 @@ public class BaseActivity extends AppCompatActivity
             return true;
         }
 
-        if (frameLayout.getTag() == getString(R.string.device_type_tablet)) {
+        if ((frameLayout != null) && (frameLayout.getTag() == getString(R.string.device_type_tablet))) {
             pref = getSharedPreferences(getString(R.string.pref_device_tablet), 0);
             SharedPreferences.Editor editor = pref.edit();
             editor.putBoolean(getString(R.string.pref_device_tablet), true);
