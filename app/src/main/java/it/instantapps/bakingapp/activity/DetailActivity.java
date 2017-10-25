@@ -121,7 +121,7 @@ public class DetailActivity extends BaseActivity
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.navigation_share_video:
+            case R.id.navigation_list_shopping:
                 new ShoppingListAsyncTask().execute(getRecipeId());
                 return true;
         }
