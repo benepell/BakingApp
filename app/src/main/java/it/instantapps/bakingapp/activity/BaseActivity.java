@@ -340,6 +340,7 @@ public class BaseActivity extends AppCompatActivity
             return true;
         }
 
+        //noinspection ConstantConditions,ConstantConditions
         if ((frameLayout != null) && (frameLayout.getTag() == getString(R.string.device_type_tablet))) {
             pref = getSharedPreferences(getString(R.string.pref_device_tablet), 0);
             SharedPreferences.Editor editor = pref.edit();

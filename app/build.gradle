@@ -46,9 +46,6 @@ dependencies {
 
     compile 'com.github.bumptech.glide:okhttp3-integration:' + rootProject.glideOkHttpIntegretionVersion
 
-    compile 'jp.wasabeef:glide-transformations:' + rootProject.wasabeefGlideTrasformationsVersion
-    compile 'jp.co.cyberagent.android.gpuimage:gpuimage-library:' + rootProject.wasabeefGlideGPUFiltersVersion
-
     compile 'com.google.android.exoplayer:exoplayer:' + rootProject.exoPlayerVersion
 
     compile 'commons-io:commons-io:' + rootProject.apacheCommonsVersion

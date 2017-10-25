@@ -52,9 +52,6 @@ import butterknife.ButterKnife;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.Costants;
-import jp.wasabeef.glide.transformations.gpu.BrightnessFilterTransformation;
-
-import static com.bumptech.glide.request.RequestOptions.bitmapTransform;
 
 public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHolder> {
 
@@ -102,7 +99,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                 .asBitmap()
                 .load(imageRecipe)
                 .apply(requestOptions)
-                .apply(bitmapTransform(new BrightnessFilterTransformation(Costants.WP_GLIDE_BRIGHTNESS_RECIPE)))
                 .into(new SimpleTarget<Bitmap>(Costants.GLIDE_IMAGE_WIDTH_STEP, Costants.GLIDE_IMAGE_HEIGHT_STEP) {
                     @Override
                     public void onLoadFailed(@Nullable Drawable errorDrawable) {
