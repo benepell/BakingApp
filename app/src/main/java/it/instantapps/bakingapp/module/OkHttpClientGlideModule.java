@@ -37,11 +37,6 @@ import okhttp3.OkHttpClient;
                file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
                fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
 
-           } else if ((Build.VERSION.SDK_INT < 23) &&
-                   (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
-
-               fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
-               file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
            } else {
 
                file = new File(context.getCacheDir(), Costants.CACHE_VIDEO_DIR);

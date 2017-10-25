@@ -58,12 +58,6 @@ public class CacheDataSourceFactory implements DataSource.Factory {
             fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
 
-        } else if ((Build.VERSION.SDK_INT < 23) &&
-                (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
-
-            fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
-            fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
-            file = new File(mContext.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
         } else {
 
             file = new File(mContext.getCacheDir(), Costants.CACHE_VIDEO_DIR);
@@ -88,8 +82,6 @@ public class CacheDataSourceFactory implements DataSource.Factory {
     public static void getClearData(Context context) {
         File file;
         if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
-            file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
-        } else if (Build.VERSION.SDK_INT < 23) {
             file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
         } else {
             file = new File(context.getCacheDir(), Costants.CACHE_VIDEO_DIR);
