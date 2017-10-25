@@ -21,7 +21,7 @@
             android:gravity="bottom|center_horizontal"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@android:color/white"
-            android:textSize="20sp"
+            android:textSize="24sp"
             android:textStyle="bold|italic" />
 
     </FrameLayout>
