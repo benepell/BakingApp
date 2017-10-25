@@ -2,6 +2,7 @@ package it.instantapps.bakingapp.fragment;
 
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -51,7 +52,7 @@ public class DetailStepFragment extends Fragment {
     private String mThumbnailUrl;
     private String mVideoUri;
 
-    public static DetailStepFragment newInstance(int idData, String description, String shortDescription, String thumbnailUrl,String videoUri) {
+    public static DetailStepFragment newInstance(int idData, String description, String shortDescription, String thumbnailUrl, String videoUri) {
         DetailStepFragment detailStepFragment = new DetailStepFragment();
 
         Bundle args = new Bundle();
@@ -68,19 +69,19 @@ public class DetailStepFragment extends Fragment {
     }
 
     private String getDescription() {
-        return getArguments().getString(Costants.BUNDLE_DETAIL_STEP_DESCRIPTION);
+        return (getArguments() == null) ? null: getArguments().getString(Costants.BUNDLE_DETAIL_STEP_DESCRIPTION) ;
     }
 
     private String getShortDescription() {
-        return getArguments().getString(Costants.BUNDLE_DETAIL_STEP_SHORT_DESCRIPTION);
+        return (getArguments() == null) ? null: getArguments().getString(Costants.BUNDLE_DETAIL_STEP_SHORT_DESCRIPTION);
     }
 
     private String getThumbnailUrl() {
-        return getArguments().getString(Costants.BUNDLE_DETAIL_STEP_THUMBNAILURL);
+        return (getArguments() == null) ? null: getArguments().getString(Costants.BUNDLE_DETAIL_STEP_THUMBNAILURL);
     }
 
     private String getVideoUri() {
-        return getArguments().getString(Costants.BUNDLE_DETAIL_STEP_VIDEOURI);
+        return (getArguments() == null) ? null: getArguments().getString(Costants.BUNDLE_DETAIL_STEP_VIDEOURI);
     }
 
     @Override
@@ -94,7 +95,7 @@ public class DetailStepFragment extends Fragment {
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_step_detail, container, false);
 
@@ -105,7 +106,7 @@ public class DetailStepFragment extends Fragment {
 
         mRecyclerView.setHasFixedSize(true);
 
-        DetailStepAdapter adapter = new DetailStepAdapter(mDescription, mShortDescription, mThumbnailUrl,mVideoUri);
+        DetailStepAdapter adapter = new DetailStepAdapter(mDescription, mShortDescription, mThumbnailUrl, mVideoUri);
 
         mRecyclerView.setAdapter(adapter);
 

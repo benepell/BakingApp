@@ -3,6 +3,7 @@ package it.instantapps.bakingapp.fragment;
 import android.content.Context;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -74,7 +75,7 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
     }
 
     private int getShownIndex() {
-        return getArguments().getInt(Costants.EXTRA_INGREDIENT_ID, 0);
+        return (getArguments() == null) ? -1 : getArguments().getInt(Costants.EXTRA_INGREDIENT_ID, 0);
     }
 
     @Override
@@ -83,13 +84,15 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
         int mDataId = getShownIndex();
         if (mDataId > 0) {
             sWeakReference = new WeakReference<>(mDataId);
-            getActivity().getSupportLoaderManager().initLoader(Costants.INGREDIENT_LOADER_ID, null, this);
+            if (getActivity() != null) {
+                getActivity().getSupportLoaderManager().initLoader(Costants.INGREDIENT_LOADER_ID, null, this);
+            }
         }
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_ingredient, container, false);
 
         ButterKnife.bind(this, view);
@@ -154,7 +157,9 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
             mFragmentIngredientListener = (IngredientFragment.FragmentIngredientListener) getActivity();
 
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().getLocalClassName() + "must implement OnFragmentIngredientListener");
+            if (getActivity() != null){
+                throw new ClassCastException(getActivity().getLocalClassName() + "must implement OnFragmentIngredientListener");
+            }
         }
     }
 
@@ -192,14 +197,14 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
         @Override
         public Cursor loadInBackground() {
             try {
-                if(sWeakReference!=null){
+                if (sWeakReference != null) {
 
                     return getContext().getContentResolver().query(Contract.IngredientEntry.CONTENT_URI,
                             null,
                             Contract.IngredientEntry.COLUMN_NAME_RECIPES_ID + " = ?",
                             new String[]{String.valueOf(sWeakReference.get())},
                             Contract.IngredientEntry._ID + " ASC");
-                }else {
+                } else {
                     return null;
                 }
 

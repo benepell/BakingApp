@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -63,15 +64,16 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
-        getActivity().getSupportLoaderManager().initLoader(RECIPE_LOADER_ID, null, this);
+        if (getActivity() != null) {
+            getActivity().getSupportLoaderManager().initLoader(RECIPE_LOADER_ID, null, this);
+        }
 
     }
 
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_recipe, container, false);
 
@@ -94,7 +96,7 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
         } else {
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-                if (getActivity().findViewById(R.id.fragment_list_container) != null) {
+                if ((getActivity() != null) && (getActivity().findViewById(R.id.fragment_list_container) != null)) {
                     gridLayoutManager = new GridLayoutManager(getActivity(),
                             Integer.valueOf(getString(R.string.tablet_span_count_grid_recipe)));
                     mRecyclerView.setLayoutManager(gridLayoutManager);
@@ -159,9 +161,11 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
 
     private boolean isTablet() {
         SharedPreferences pref;
-        pref = getActivity().getSharedPreferences(getString(R.string.pref_device_tablet), 0);
-        return pref.getBoolean(getString(R.string.pref_device_tablet), false);
-
+        if (getActivity() != null) {
+            pref = getActivity().getSharedPreferences(getString(R.string.pref_device_tablet), 0);
+            return pref.getBoolean(getString(R.string.pref_device_tablet), false);
+        }
+        return false;
     }
 
     private static class RecipeFragmentAsyncTask extends AsyncTaskLoader<Cursor> {

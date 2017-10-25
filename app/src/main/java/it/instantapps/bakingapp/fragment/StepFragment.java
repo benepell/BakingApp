@@ -5,6 +5,7 @@ import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.LoaderManager;
@@ -79,7 +80,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
     }
 
     private int getShownIndex() {
-        return getArguments().getInt(Costants.EXTRA_STEP_ID, 0);
+        return (getArguments() == null) ? -1 : getArguments().getInt(Costants.EXTRA_STEP_ID, 0);
     }
 
 
@@ -90,13 +91,15 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
 
         if (mDataId > 0) {
             sWeakReference = new WeakReference<>(mDataId);
-            getActivity().getSupportLoaderManager().initLoader(Costants.STEP_LOADER_ID, null, this);
+            if (getActivity() != null) {
+                getActivity().getSupportLoaderManager().initLoader(Costants.STEP_LOADER_ID, null, this);
+            }
         }
     }
 
     @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, Bundle savedInstanceState) {
 
         View view = inflater.inflate(R.layout.fragment_step, container, false);
 
@@ -109,7 +112,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
 
                 GridLayoutManager gridLayoutManager;
 
-                if (getActivity().findViewById(R.id.exo__detail_step_fragment_player_view) == null) {
+                if ((getActivity() != null) && (getActivity().findViewById(R.id.exo__detail_step_fragment_player_view) == null)) {
                     gridLayoutManager = new GridLayoutManager(getActivity(), Integer.valueOf(getString(R.string.tablet_landscape_span_count_grid_step)));
 
                 } else {
@@ -130,7 +133,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
-                if (getActivity().findViewById(R.id.content_detail_tab_fragment) != null) {
+                if ((getActivity() != null) && (getActivity().findViewById(R.id.content_detail_tab_fragment) != null)) {
                     GridLayoutManager gridLayoutManager = new GridLayoutManager(getActivity(),
                             Integer.valueOf(getString(R.string.tablet_portrait_span_count_grid_step)));
                     mRecyclerView.setLayoutManager(gridLayoutManager);
@@ -195,7 +198,9 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
             mListener = (FragmentInteractionListener) getActivity();
 
         } catch (ClassCastException e) {
-            throw new ClassCastException(getActivity().getLocalClassName() + "must implement OnFragmentStepInteractionListener");
+            if (getActivity() != null) {
+                throw new ClassCastException(getActivity().getLocalClassName() + "must implement OnFragmentStepInteractionListener");
+            }
         }
     }
 
@@ -214,9 +219,12 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
 
     private boolean isTablet() {
         SharedPreferences pref;
-        pref = getActivity().getSharedPreferences(getString(R.string.pref_device_tablet), 0);
-        return pref.getBoolean(getString(R.string.pref_device_tablet), false);
+        if (getActivity() != null) {
+            pref = getActivity().getSharedPreferences(getString(R.string.pref_device_tablet), 0);
+            return pref.getBoolean(getString(R.string.pref_device_tablet), false);
 
+        }
+        return false;
     }
 
     private static class StepFragmentAsyncTask extends AsyncTaskLoader<Cursor> {
@@ -249,14 +257,14 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
         @Override
         public Cursor loadInBackground() {
             try {
-                if(sWeakReference!=null){
+                if (sWeakReference != null) {
                     return getContext().getContentResolver().query(Contract.StepEntry.CONTENT_URI,
                             mProjection,
                             Contract.StepEntry.COLUMN_NAME_RECIPES_ID + " = ?",
                             new String[]{String.valueOf(sWeakReference.get())},
                             Contract.StepEntry._ID + " ASC");
 
-                }else {
+                } else {
                     return null;
                 }
 
