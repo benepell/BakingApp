@@ -114,7 +114,6 @@ public class DetailActivity extends BaseActivity
         }else if(PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))){
             menuItemListShopping.setVisible(true);
         }
-        menuItemListShopping.setIcon(R.drawable.ic_list_shopping);
 
         return true;
     }
