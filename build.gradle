@@ -29,13 +29,18 @@ task clean(type: Delete) {
 }
 
 ext {
-   buildToolsVersion = "26.0.2"
-    supportLibVersion = "26.0.2"
+    buildToolsVersion = "26.0.2"
+
+    supportLibVersion = "26.1.0"
     supportConstraintVersion = "1.0.2"
+    firebaseJobDispVersion = "0.8.3"
+
     espressoVersion = "2.2.2"
-    retrofitVersion = "2.3.0"
     timberVersion = "4.5.1"
+
     butterKnifeVersion = "8.8.1"
+    retrofitVersion = "2.3.0"
+    apacheCommonsVersion = "2.5"
 
     glideVersion = "4.2.0"
     glideOkHttpIntegretionVersion = glideVersion + "@aar"
@@ -43,9 +48,7 @@ ext {
     wasabeefGlideTrasformationsVersion = "3.0.1"
     wasabeefGlideGPUFiltersVersion = "1.4.1"
 
-    exoPlayerVersion ="r2.5.3"
-    apacheCommonsVersion = "2.5"
-    firebaseJobDispVersion = "0.8.3"
+    exoPlayerVersion = "r2.5.3"
 
 }
 
