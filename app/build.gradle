@@ -24,11 +24,11 @@ dependencies {
     androidTestCompile('com.android.support.test.espresso:espresso-core:' + rootProject.espressoVersion, {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
+
     compile 'com.android.support:appcompat-v7:' + rootProject.supportLibVersion
-    compile 'com.android.support:preference-v7:' + rootProject.supportLibVersion
 
     compile 'com.android.support:recyclerview-v7:' + rootProject.supportLibVersion
-    compile 'com.android.support.constraint:constraint-layout:' + rootProject.supportConstraintVersion
+    compile 'com.android.support:preference-v7:' + rootProject.supportLibVersion
 
     compile 'com.android.support:cardview-v7:' + rootProject.supportLibVersion
     compile 'com.android.support:design:' + rootProject.supportLibVersion
