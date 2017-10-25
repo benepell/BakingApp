@@ -8,7 +8,7 @@
     <color name="colorBackgroundImage">@color/grey_300</color>
     <color name="colorBackgroundCardSecondary">@color/grey_200</color>
     <color name="colorBackgroundPlayer">@color/black</color>
-    <color name="colorBackgroundTextList">@color/grey_100</color>
+    <color name="colorBackgroundTextList">@color/yellow_50</color>
 
     <color name="red_400">#EF5350</color>
     <color name="red_800">#C62828</color>
@@ -17,13 +17,14 @@
     <color name="light_blue_A400" tools:keep="@color/light_blue_A400">#00B0FF</color>
 
     <color name="blue_A700">#2962FF</color>
+    <color name="yellow_50">#FFFDE7</color>
     <color name="light_green_A200">#B2FF59</color>
 
-    <color name="grey_100">#F5F5F5</color>
     <color name="grey_200">#EEEEEE</color>
     <color name="grey_300">#E0E0E0</color>
 
     <color name="black">#000000</color>
     <color name="white">#FFFFFF</color>
+
 
 </resources>

@@ -18,15 +18,14 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:padding="@dimen/padding_detail_step" />
+        android:padding="@dimen/padding_medium_detail_step" />
 
     <TextView
         android:id="@+id/tv_detail_step_description"
-        style="@style/TextAppearance.AppCompat.Medium"
+        style="@style/TextAppearance.AppCompat.Large"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_gravity="center_horizontal"
-        android:fontFamily="@font/indie_flower"
-        android:padding="@dimen/padding_detail_step" />
+        android:padding="@dimen/padding_medium_detail_step" />
 
 </LinearLayout>

@@ -9,5 +9,6 @@
     <dimen name="margin_fragment_detail">8dp</dimen>
     <dimen name="thumb_height_detail_step">200dp</dimen>
     <dimen name="padding_detail_step">16dp</dimen>
-    <dimen name="margin_top_media">8dp</dimen>
+    <dimen name="padding_medium_detail_step">8dp</dimen>
+    <dimen name="margin_top_media">16dp</dimen>
 </resources>

@@ -87,8 +87,6 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
                 holder.mImageViewDetailStep.setVisibility(View.VISIBLE);
             } else {
-                holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundTextList);
-
                 holder.mImageViewDetailStep.setImageResource(R.drawable.no_media);
                 holder.mImageViewDetailStep.setVisibility(View.VISIBLE);
             }
