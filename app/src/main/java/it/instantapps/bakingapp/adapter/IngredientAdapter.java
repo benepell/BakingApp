@@ -2,6 +2,8 @@ package it.instantapps.bakingapp.adapter;
 
 import android.content.Context;
 import android.database.Cursor;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -43,7 +45,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.De
 
     private final IngredientItemClickListener mOnIngredientItemClickListener;
     private Cursor mCursor;
-
+    private Context mContext;
     public IngredientAdapter(IngredientItemClickListener ingredientItemClickListener) {
         mOnIngredientItemClickListener = ingredientItemClickListener;
     }
@@ -54,7 +56,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.De
 
     @Override
     public DetailIngredientHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context mContext = parent.getContext();
+        mContext = parent.getContext();
         int layoutId = R.layout.list_ingredient;
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
@@ -79,12 +81,20 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.De
 
         Timber.d("position: " + position + " - " + BaseActivity.getPositionIngredient());
 
+
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.abel);
+        holder.mTextViewIngredientName.setTypeface(typeface);
+
         StringBuilder stringBuilder = new StringBuilder(ingredientName.trim().toLowerCase());
         stringBuilder.setCharAt(0,Character.toUpperCase(ingredientName.charAt(0)));
         holder.mTextViewIngredientName.setText(stringBuilder);
 
+
         DecimalFormat decimalFormat = new DecimalFormat("#.##");
         holder.mTextViewQuantityName.setText(String.valueOf(decimalFormat.format(quantityName)));
+
+        holder.mTextViewMeasureName.setTypeface(typeface);
+        measureName = "(" + measureName + ")";
         holder.mTextViewMeasureName.setText(measureName);
 
     }

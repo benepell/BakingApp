@@ -22,8 +22,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="4dp"
-            android:layout_weight="1"
-            android:textStyle="bold|italic" />
+            android:layout_weight="1" />
 
 
         <TextView
@@ -42,8 +41,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
             android:layout_margin="4dp"
-            android:gravity="end"
-            android:textStyle="bold" />
+            android:gravity="end" />
 
 
     </LinearLayout>
