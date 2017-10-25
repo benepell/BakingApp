@@ -1,6 +1,8 @@
 package it.instantapps.bakingapp.adapter;
 
 import android.content.Context;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -44,9 +46,9 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
     private final String mShortDescription;
     private final String mThumbnailUrl;
     private final String mVideoUri;
+    private Context mContext;
 
-
-    public DetailStepAdapter(  String description, String shortDescription, String thumbnailUrl, String videoUri) {
+    public DetailStepAdapter(String description, String shortDescription, String thumbnailUrl, String videoUri) {
         mDescription = description;
         mShortDescription = shortDescription;
         mThumbnailUrl = thumbnailUrl;
@@ -55,7 +57,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
     @Override
     public DetailStepHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        Context mContext = parent.getContext();
+        mContext = parent.getContext();
         int layoutId = R.layout.list_detail_step;
         LayoutInflater inflater = LayoutInflater.from(mContext);
 
@@ -93,8 +95,14 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
         }
 
+        Typeface typeface = ResourcesCompat.getFont(mContext, R.font.calligraffitti);
+        holder.mTextViewShortDetailDescription.setTypeface(typeface);
         holder.mTextViewShortDetailDescription.setText(mShortDescription);
+
+        Typeface typefaceDesc = ResourcesCompat.getFont(mContext, R.font.indie_flower);
+        holder.mTextViewDetailDescription.setTypeface(typefaceDesc);
         holder.mTextViewDetailDescription.setText(mDescription);
+
     }
 
     @Override
@@ -102,7 +110,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
         return 1;
     }
 
-    public class DetailStepHolder extends RecyclerView.ViewHolder {
+    class DetailStepHolder extends RecyclerView.ViewHolder {
 
         @SuppressWarnings("unused")
         @BindView(R.id.tv_short_detail_step_description)
@@ -117,7 +125,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
         ImageView mImageViewDetailStep;
 
 
-        public DetailStepHolder(View itemView) {
+        DetailStepHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
         }

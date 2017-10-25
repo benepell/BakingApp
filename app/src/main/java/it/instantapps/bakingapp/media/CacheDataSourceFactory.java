@@ -2,6 +2,7 @@ package it.instantapps.bakingapp.media;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -26,7 +27,7 @@ public class CacheDataSourceFactory implements DataSource.Factory {
     private final Context mContext;
     private final DefaultDataSourceFactory mDefaultDatasourceFactory;
 
-    public CacheDataSourceFactory(Context context) {
+    CacheDataSourceFactory(Context context) {
         super();
         mContext = context;
 
@@ -49,11 +50,22 @@ public class CacheDataSourceFactory implements DataSource.Factory {
         File file;
         long fileCache;
         long fileCacheMax;
-        if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(mContext))) {
+        if ((Build.VERSION.SDK_INT >= 23) &&
+                (Utility.isPermissionExtStorage(mContext)) &&
+                (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
+
             file = new File(mContext.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
             fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
+
+        } else if ((Build.VERSION.SDK_INT < 23) &&
+                (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
+
+            fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
+            fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
+            file = new File(mContext.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
         } else {
+
             file = new File(mContext.getCacheDir(), Costants.CACHE_VIDEO_DIR);
             fileCache = Costants.CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.CACHE_SIZE_MAX;
@@ -76,6 +88,8 @@ public class CacheDataSourceFactory implements DataSource.Factory {
     public static void getClearData(Context context) {
         File file;
         if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
+            file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
+        } else if (Build.VERSION.SDK_INT < 23) {
             file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
         } else {
             file = new File(context.getCacheDir(), Costants.CACHE_VIDEO_DIR);

@@ -2,6 +2,7 @@ package it.instantapps.bakingapp.module;
 
 import android.content.Context;
 import android.os.Build;
+import android.os.Environment;
 
 
 import com.bumptech.glide.Glide;
@@ -29,10 +30,20 @@ import okhttp3.OkHttpClient;
 
            File file;
            long fileCacheMax;
-           if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
+           if ((Build.VERSION.SDK_INT >= 23) &&
+                   (Utility.isPermissionExtStorage(context)) &&
+                   (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
+
                file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
                fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
+
+           } else if ((Build.VERSION.SDK_INT < 23) &&
+                   (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
+
+               fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
+               file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
            } else {
+
                file = new File(context.getCacheDir(), Costants.CACHE_VIDEO_DIR);
                fileCacheMax = Costants.CACHE_SIZE_MAX;
 

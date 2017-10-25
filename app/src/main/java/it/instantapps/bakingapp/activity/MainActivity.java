@@ -86,6 +86,7 @@ public class MainActivity extends BaseActivity implements
         initializeMainJob();
         clearPosition();
 
+
     }
 
     @Override
@@ -152,21 +153,21 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-    public void restartNetwork(View view){
-        if(view!=null){
-        view.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               initializeMainJob();
-            }
-        });
+    public void restartNetwork(View view) {
+        if (view != null) {
+            view.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    initializeMainJob();
+                }
+            });
         }
     }
 
     private void initializeMainJob() {
         SharedPreferences pref = getSharedPreferences(getString(R.string.pref_insert_data), 0);
         boolean isPrefData = false;
-        if(pref!=null){
+        if (pref != null) {
             isPrefData = pref.getBoolean(getString(R.string.pref_insert_data), false);
         }
         if (!isPrefData) {
