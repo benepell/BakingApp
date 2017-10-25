@@ -26,14 +26,21 @@ package it.instantapps.bakingapp.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.provider.FontRequest;
+import android.support.v4.provider.FontsContractCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -55,6 +62,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     private final ListItemClickListener mOnClickListener;
     private Context mContext;
     private Cursor mCursor;
+    private Handler mHandler = null;
 
     public RecipeAdapter(ListItemClickListener listener) {
         mOnClickListener = listener;
@@ -117,6 +125,30 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                 });
 
 
+        FontRequest request = new FontRequest(
+                "com.google.android.gms.fonts",
+                "com.google.android.gms", "Permanent Marker",
+                R.array.com_google_android_gms_fonts_certs);
+
+        FontsContractCompat.FontRequestCallback callback = new FontsContractCompat
+                .FontRequestCallback() {
+            @Override
+            public void onTypefaceRetrieved(Typeface typeface) {
+                holder.mTextViewRecipeName.setTypeface(typeface);
+            }
+
+            @Override
+            public void onTypefaceRequestFailed(int reason) {
+                Toast.makeText(mContext,
+                         R.string.text_font_failed, Toast.LENGTH_LONG)
+                        .show();
+            }
+        };
+
+        FontsContractCompat
+                .requestFont(mContext, request, callback,
+                       getHandlerThreadHandler());
+
         holder.mTextViewRecipeName.setText(nameRecipe);
 
         holder.mTextViewRecipeServings.setText(String.valueOf(servingsRecipe));
@@ -124,6 +156,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         int widget = mCursor.getInt(mCursor.getColumnIndex(Contract.RecipeEntry.COLUMN_NAME_WIDGET));
 
         holder.bind(index, nameRecipe, widget);
+    }
+
+    private Handler getHandlerThreadHandler() {
+        if (mHandler == null) {
+            HandlerThread handlerThread = new HandlerThread("fonts");
+            handlerThread.start();
+            mHandler = new Handler(handlerThread.getLooper());
+        }
+        return mHandler;
     }
 
     @Override
@@ -146,7 +187,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         private int mIdData;
         private int mWidget;
 
-        public RecipeHolder(View itemView) {
+        RecipeHolder(View itemView) {
             super(itemView);
 
             ButterKnife.bind(this, itemView);

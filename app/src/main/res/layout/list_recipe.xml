@@ -21,8 +21,8 @@
             android:gravity="bottom|center_horizontal"
             android:textAppearance="@style/TextAppearance.AppCompat.Title"
             android:textColor="@android:color/white"
-            android:textSize="30sp"
-            android:textStyle="bold|italic" />
+            android:textSize="40sp"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tv_recipe_servings"

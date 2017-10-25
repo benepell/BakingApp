@@ -4,15 +4,22 @@ import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.PorterDuff;
+import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.support.annotation.Nullable;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v4.provider.FontRequest;
+import android.support.v4.provider.FontsContractCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -56,6 +63,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
     private Context mContext;
     private Cursor mCursor;
+    private Handler mHandler = null;
 
     public StepAdapter(StepItemClickListener listener) {
         mOnStepClickLister = listener;
@@ -136,6 +144,31 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
                 });
 
 
+        FontRequest request = new FontRequest(
+                "com.google.android.gms.fonts",
+                "com.google.android.gms", "Permanent Marker",
+                R.array.com_google_android_gms_fonts_certs);
+
+        FontsContractCompat.FontRequestCallback callback = new FontsContractCompat
+                .FontRequestCallback() {
+            @Override
+            public void onTypefaceRetrieved(Typeface typeface) {
+                holder.mTextViewShortDescription.setTypeface(typeface);
+            }
+
+            @Override
+            public void onTypefaceRequestFailed(int reason) {
+                Toast.makeText(mContext,
+                        R.string.text_font_failed, Toast.LENGTH_LONG)
+                        .show();
+            }
+        };
+
+        FontsContractCompat
+                .requestFont(mContext, request, callback,
+                        getHandlerThreadHandler());
+
+
         String strTvShortDescription = String.valueOf(position + 1) + ". " + shortDescription;
         holder.mTextViewShortDescription.setText(strTvShortDescription);
     }
@@ -155,7 +188,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
         private int mId;
 
-        public StepHolder(View itemView) {
+        StepHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
 
@@ -174,6 +207,15 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
         }
 
+    }
+
+    private Handler getHandlerThreadHandler() {
+        if (mHandler == null) {
+            HandlerThread handlerThread = new HandlerThread("fonts");
+            handlerThread.start();
+            mHandler = new Handler(handlerThread.getLooper());
+        }
+        return mHandler;
     }
 
 
