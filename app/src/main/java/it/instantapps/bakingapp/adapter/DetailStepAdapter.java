@@ -1,6 +1,8 @@
 package it.instantapps.bakingapp.adapter;
 
 import android.content.Context;
+import android.content.SharedPreferences;
+import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
@@ -70,7 +72,14 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
     public void onBindViewHolder(final DetailStepHolder holder, int position) {
 
         if (mVideoUri != null && mVideoUri.isEmpty()) {
-            holder.mImageViewDetailStep.setBackgroundResource(R.color.black);
+
+            if(!isTablet() && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ){
+                holder.mTextViewDetailDescription.setVisibility(View.GONE);
+                holder.mTextViewShortDetailDescription.setVisibility(View.GONE);
+                holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundPlayer);
+            }else {
+                holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundCardSecondary);
+            }
 
             if (mThumbnailUrl != null && !mThumbnailUrl.isEmpty()) {
                 final RequestOptions requestOptions;
@@ -127,5 +136,12 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
             super(itemView);
             ButterKnife.bind(this, itemView);
         }
+    }
+
+    private boolean isTablet() {
+        SharedPreferences pref;
+        pref = mContext.getSharedPreferences(mContext.getString(R.string.pref_device_tablet), 0);
+        return pref.getBoolean(mContext.getString(R.string.pref_device_tablet), false);
+
     }
 }

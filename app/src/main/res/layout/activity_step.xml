@@ -14,6 +14,7 @@
         android:layout_width="match_parent"
         android:layout_height="200dp"
         android:layout_marginTop="@dimen/margin_top_media"
+        android:layout_marginBottom="@dimen/margin_top_media"
         android:background="@color/colorBackgroundPlayer"
         android:orientation="vertical"
         android:visibility="gone">
