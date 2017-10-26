@@ -8,6 +8,7 @@
         android:id="@+id/image_detail_step_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
+        android:padding="@dimen/padding_medium_detail_step"
         android:contentDescription="@string/image_detail"
         android:visibility="gone" />
 
@@ -15,12 +16,12 @@
         android:id="@+id/tv_short_detail_step_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
     <TextView
         android:id="@+id/tv_detail_step_description"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:visibility="gone"/>
+        android:visibility="gone" />
 
 </LinearLayout>

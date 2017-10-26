@@ -8,8 +8,8 @@
         android:id="@+id/image_detail_step_thumbnail"
         android:layout_width="match_parent"
         android:layout_height="@dimen/thumb_height_detail_step"
-        android:padding="@dimen/padding_detail_step"
         android:contentDescription="@string/image_detail"
+        android:padding="@dimen/padding_detail_step"
         android:visibility="gone" />
 
     <TextView

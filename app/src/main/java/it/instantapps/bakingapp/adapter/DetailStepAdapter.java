@@ -73,11 +73,11 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
         if (mVideoUri != null && mVideoUri.isEmpty()) {
 
-            if(!isTablet() && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE ){
+            if (!isTablet() && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 holder.mTextViewDetailDescription.setVisibility(View.GONE);
                 holder.mTextViewShortDetailDescription.setVisibility(View.GONE);
                 holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundPlayer);
-            }else {
+            } else {
                 holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundCardSecondary);
             }
 
