@@ -105,5 +105,12 @@ class DbHelper extends SQLiteOpenHelper {
         new DataUtils(mContext).clearPreferenceDb();
     }
 
-
+    @Override
+    public void onDowngrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.RecipeEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.IngredientEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + Contract.StepEntry.TABLE_NAME);
+        onCreate(db);
+        new DataUtils(mContext).clearPreferenceDb();
+    }
 }

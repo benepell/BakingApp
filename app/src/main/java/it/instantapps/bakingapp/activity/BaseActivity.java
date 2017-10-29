@@ -330,18 +330,18 @@ public class BaseActivity extends AppCompatActivity
         sPositionStep = RecyclerView.NO_POSITION;
     }
 
-    boolean isTablet() {
+        boolean isTablet() {
+            boolean isTablet =  PrefManager.isPref (getBaseContext(),R.string.pref_device_tablet);
 
-        boolean isTablet = PrefManager.isPref(getApplicationContext(), R.string.pref_device_tablet);
-        if (isTablet) {
-            return true;
-        }
+            if (isTablet) {
+                return true;
+            }
 
-        //noinspection ConstantConditions,ConstantConditions
-        if ((frameLayout != null) && (frameLayout.getTag() == getString(R.string.device_type_tablet))) {
-            PrefManager.putBoolPref(getApplicationContext(), R.string.pref_device_tablet);
-            return true;
+            //noinspection ConstantConditions,ConstantConditions
+            if ((frameLayout != null) && (frameLayout.getTag() == getString(R.string.device_type_tablet))) {
+                PrefManager.putBoolPref(getBaseContext(),R.string.pref_device_tablet,true);
+                return true;
+            }
+            return false;
         }
-        return false;
-    }
 }

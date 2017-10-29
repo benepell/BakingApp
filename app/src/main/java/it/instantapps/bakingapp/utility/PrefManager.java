@@ -66,11 +66,11 @@ public class PrefManager {
 
     }
 
-    public static void putBoolPref(Context context, int key) {
+    public static void putBoolPref(Context context, int key, @SuppressWarnings("SameParameterValue") boolean value) {
         SharedPreferences prefId = context
-                .getSharedPreferences(context.getString(R.string.pref_widget_id), Context.MODE_PRIVATE);
+                .getSharedPreferences(context.getString(key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefId.edit();
-        editor.putBoolean(context.getString(key), true);
+        editor.putBoolean(context.getString(key), value);
         editor.apply();
 
     }

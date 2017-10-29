@@ -126,7 +126,7 @@ public class MainActivity extends BaseActivity implements
             case Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    PrefManager.putBoolPref(mContext, R.string.pref_write_external_storage);
+                    PrefManager.putBoolPref(mContext, R.string.pref_write_external_storage,true);
                 }
             }
         }
