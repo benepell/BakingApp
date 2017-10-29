@@ -81,12 +81,14 @@ public class CacheDataSourceFactory implements DataSource.Factory {
 
     public static void getClearData(Context context) {
         File file;
+        String path;
         if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
-            file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
+            path = Environment.getExternalStorageState().toString().concat(Costants.CACHE_VIDEO_DIR);
         } else {
-            file = new File(context.getCacheDir(), Costants.CACHE_VIDEO_DIR);
+            path = Environment.getDataDirectory().toString().concat(Costants.CACHE_VIDEO_DIR);
         }
         try {
+            file = new File(path);
             FileUtils.deleteDirectory(file);
         } catch (IOException e) {
             e.printStackTrace();
