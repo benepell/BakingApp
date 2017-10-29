@@ -68,6 +68,7 @@ public class DialogConfirm extends DialogPreference {
                 CacheDataSourceFactory.getClearData(context);
                 new DataUtils(context).ClearDataPrivacy();
                 PrefManager.clearSharedPref(context);
+                PrefManager.clearPref(context);
                 BaseActivity.clearRecipeId();
                 Glide.get(context).clearDiskCache();
                 updateWidget(context);
@@ -76,7 +77,7 @@ public class DialogConfirm extends DialogPreference {
             return null;
         }
 
-        private void updateWidget(Context context){
+        private void updateWidget(Context context) {
             try {
                 Intent intent = new Intent(context, RecipeAppWidget.class);
                 intent.setAction(RECIPE_WIDGET_UPDATE);

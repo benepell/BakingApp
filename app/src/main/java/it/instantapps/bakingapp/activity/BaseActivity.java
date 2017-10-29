@@ -3,7 +3,6 @@ package it.instantapps.bakingapp.activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -28,6 +27,7 @@ import butterknife.ButterKnife;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.Costants;
+import it.instantapps.bakingapp.utility.PrefManager;
 
 public class BaseActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -204,8 +204,7 @@ public class BaseActivity extends AppCompatActivity
     }
 
     boolean sendNavUrl() {
-        SharedPreferences pref = getSharedPreferences(getString(R.string.pref_video_uri), 0);
-        String videoUrl = pref.getString(getString(R.string.pref_video_uri), "");
+        String videoUrl = PrefManager.getStringPref(getApplicationContext(), R.string.pref_video_uri);
 
         if (!TextUtils.isEmpty(videoUrl)) {
             startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(videoUrl)));
@@ -332,20 +331,15 @@ public class BaseActivity extends AppCompatActivity
     }
 
     boolean isTablet() {
-        SharedPreferences pref;
-        pref = getSharedPreferences(getString(R.string.pref_device_tablet), 0);
-        boolean isTablet = pref.getBoolean(getString(R.string.pref_device_tablet), false);
 
+        boolean isTablet = PrefManager.isPref(getApplicationContext(), R.string.pref_device_tablet);
         if (isTablet) {
             return true;
         }
 
         //noinspection ConstantConditions,ConstantConditions
         if ((frameLayout != null) && (frameLayout.getTag() == getString(R.string.device_type_tablet))) {
-            pref = getSharedPreferences(getString(R.string.pref_device_tablet), 0);
-            SharedPreferences.Editor editor = pref.edit();
-            editor.putBoolean(getString(R.string.pref_device_tablet), true);
-            editor.apply();
+            PrefManager.putBoolPref(getApplicationContext(), R.string.pref_device_tablet);
             return true;
         }
         return false;

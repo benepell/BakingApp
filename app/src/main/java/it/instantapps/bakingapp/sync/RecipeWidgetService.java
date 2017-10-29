@@ -2,7 +2,6 @@ package it.instantapps.bakingapp.sync;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.os.Binder;
 import android.widget.RemoteViews;
@@ -12,6 +11,7 @@ import java.text.DecimalFormat;
 
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.data.Contract;
+import it.instantapps.bakingapp.utility.PrefManager;
 
 public class RecipeWidgetService extends RemoteViewsService {
 
@@ -33,10 +33,7 @@ public class RecipeWidgetService extends RemoteViewsService {
 
         @Override
         public void onCreate() {
-            SharedPreferences sharedPref;
-            sharedPref = mContext.getSharedPreferences(mContext.getString(R.string.pref_widget_id), 0);
-            mRecipeId = sharedPref.getInt(mContext.getString(R.string.pref_widget_id),0);
-
+            mRecipeId = PrefManager.getIntPref(mContext);
         }
 
         @Override

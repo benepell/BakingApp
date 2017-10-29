@@ -5,7 +5,6 @@ import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
@@ -146,11 +145,11 @@ public class StepActivity extends BaseActivity
         if ((sIdData > 0)) {
             infoDbVideo(sIdData);
             showVideo();
-            prefVideoUri();
+            PrefManager.putStringPref(mContext,R.string.pref_video_uri,getVideoUri());
         } else {
             infoDbVideo(getFirstRow(getRecipeId()));
             showVideo();
-            prefVideoUri();
+            PrefManager.putStringPref(mContext,R.string.pref_video_uri,getVideoUri());
         }
 
 
@@ -250,9 +249,7 @@ public class StepActivity extends BaseActivity
 
         }
 
-        SharedPreferences sharedPreferences;
-        sharedPreferences = getSharedPreferences(getString(R.string.pref_widget_id), 0);
-        int widgetId = sharedPreferences.getInt(getString(R.string.pref_widget_id), 0);
+        int widgetId = PrefManager.getIntPref(mContext);
 
         if ((widgetId != 0)&& (widgetId == getRecipeId())) {
             menuItemWidget.setCheckable(true);
@@ -383,7 +380,7 @@ public class StepActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        closeVideoBackground(false);
+        closeVideoBackground();
         backToDetailActivity();
 
     }
@@ -502,14 +499,11 @@ public class StepActivity extends BaseActivity
         }
     }
 
-    private void closeVideoBackground(boolean notBackPressed) {
+    private void closeVideoBackground() {
         if (mContext != null) {
             NotificationManager notificationManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
             if (notificationManager != null) {
                 notificationManager.cancel(Costants.NOTIFICATION_CHANNEL_ID, Costants.NOTIFICATION_ID);
-            }
-            if ((notBackPressed) && (getDescription() == null)) {
-                startActivity(new Intent(mContext, MainActivity.class));
             }
         }
     }
@@ -586,14 +580,6 @@ public class StepActivity extends BaseActivity
         intent.putExtra(Costants.EXTRA_RECIPE_NAME, getRecipeName());
         intent.putExtra(Costants.EXTRA_DETAIL_STEP_ID, sIdData);
         startActivity(intent);
-    }
-
-    private void prefVideoUri() {
-        SharedPreferences pref = mContext.getSharedPreferences(mContext.getString(R.string.pref_video_uri), 0);
-        SharedPreferences.Editor editor = pref.edit();
-        editor.putString(mContext.getString(R.string.pref_video_uri), getVideoUri());
-        editor.apply();
-
     }
 
     public void backToDetailActivity() {
@@ -689,27 +675,14 @@ public class StepActivity extends BaseActivity
 
     private void addRemoveWidget(int recipeId, String recipeName) {
 
-        SharedPreferences sharedPreferences;
-        sharedPreferences = getSharedPreferences(getString(R.string.pref_widget_id), 0);
-        int widgetId = sharedPreferences.getInt(getString(R.string.pref_widget_id), 0);
-
+        int widgetId = PrefManager.getIntPref(mContext);
         if (widgetId == getRecipeId()) {
             recipeId = 0;
             recipeName = "";
         }
 
-        SharedPreferences prefId = getApplicationContext()
-                .getSharedPreferences(getApplicationContext().getString(R.string.pref_widget_id), 0);
-        SharedPreferences.Editor editor = prefId.edit();
-        editor.putInt(getApplicationContext().getString(R.string.pref_widget_id), recipeId);
-        editor.apply();
-
-        SharedPreferences prefName = getApplicationContext()
-                .getSharedPreferences(getApplicationContext().getString(R.string.pref_widget_name), 0);
-        SharedPreferences.Editor editorName = prefName.edit();
-        editorName.putString(getApplicationContext().getString(R.string.pref_widget_name), recipeName);
-        editorName.apply();
-
+        PrefManager.putIntPref(mContext, recipeId);
+        PrefManager.putStringPref(mContext,R.string.pref_widget_name,recipeName);
 
         try {
             Intent intent = new Intent(this, RecipeAppWidget.class);

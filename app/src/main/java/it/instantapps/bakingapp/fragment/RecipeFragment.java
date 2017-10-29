@@ -1,7 +1,6 @@
 package it.instantapps.bakingapp.fragment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -23,6 +22,7 @@ import butterknife.ButterKnife;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.adapter.RecipeAdapter;
 import it.instantapps.bakingapp.data.Contract;
+import it.instantapps.bakingapp.utility.PrefManager;
 import timber.log.Timber;
 
 import static it.instantapps.bakingapp.utility.Costants.RECIPE_LOADER_ID;
@@ -80,7 +80,7 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
         ButterKnife.bind(this, view);
         GridLayoutManager gridLayoutManager;
 
-        if (isTablet()) {
+        if (PrefManager.isPref(getActivity(), R.string.pref_device_tablet)) {
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 gridLayoutManager = new GridLayoutManager(getActivity(),
@@ -159,14 +159,6 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
         void onFragmentInteraction(int id, String recipeName);
     }
 
-    private boolean isTablet() {
-        SharedPreferences pref;
-        if (getActivity() != null) {
-            pref = getActivity().getSharedPreferences(getString(R.string.pref_device_tablet), 0);
-            return pref.getBoolean(getString(R.string.pref_device_tablet), false);
-        }
-        return false;
-    }
 
     private static class RecipeFragmentAsyncTask extends AsyncTaskLoader<Cursor> {
 

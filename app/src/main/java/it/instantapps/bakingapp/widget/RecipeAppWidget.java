@@ -6,7 +6,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Paint;
@@ -22,6 +21,7 @@ import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.activity.MainActivity;
 import it.instantapps.bakingapp.sync.RecipeWidgetService;
 import it.instantapps.bakingapp.utility.Costants;
+import it.instantapps.bakingapp.utility.PrefManager;
 
 import static it.instantapps.bakingapp.utility.Costants.RECIPE_WIDGET_UPDATE;
 
@@ -35,13 +35,9 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
     private void handleActionUpdateRecipeWidget(Context context) {
 
-        SharedPreferences sharedPreferences;
-        sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_widget_name), 0);
-        String widgetRecipeName = sharedPreferences.getString(context.getString(R.string.pref_widget_name), "");
+        String widgetRecipeName = PrefManager.getStringPref(context,R.string.pref_widget_name);
 
-        SharedPreferences sharedPref;
-        sharedPref = context.getSharedPreferences(context.getString(R.string.pref_widget_id), 0);
-        int id = sharedPref.getInt(context.getString(R.string.pref_widget_id),0);
+        int id = PrefManager.getIntPref(context);
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_app_widget);
 

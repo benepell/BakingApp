@@ -1,7 +1,6 @@
 package it.instantapps.bakingapp.fragment;
 
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.graphics.Color;
 import android.os.Bundle;
@@ -21,6 +20,7 @@ import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.activity.DetailActivity;
 import it.instantapps.bakingapp.adapter.FragmentTabAdapter;
 import it.instantapps.bakingapp.utility.Costants;
+import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.widget.SlidingTabLayout;
 
 /*
@@ -138,9 +138,7 @@ public class TabFragment extends Fragment {
 
             });
         } else {
-            SharedPreferences pref;
-            pref = getActivity().getSharedPreferences(getString(R.string.pref_device_tablet), 0);
-            boolean isTablet = pref.getBoolean(getString(R.string.pref_device_tablet), false);
+            boolean isTablet = PrefManager.isPref(getActivity(), R.string.pref_device_tablet);
 
             if ((isTablet) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);

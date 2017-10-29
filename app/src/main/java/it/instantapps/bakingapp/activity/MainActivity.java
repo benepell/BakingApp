@@ -2,7 +2,6 @@ package it.instantapps.bakingapp.activity;
 
 import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
 import android.os.Bundle;
@@ -24,6 +23,7 @@ import it.instantapps.bakingapp.rest.RestExecute;
 import it.instantapps.bakingapp.sync.SyncUtils;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.NetworkState;
+import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
 import timber.log.Timber;
 
@@ -126,10 +126,7 @@ public class MainActivity extends BaseActivity implements
             case Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    SharedPreferences pref = mContext.getSharedPreferences(mContext.getString(R.string.pref_write_external_storage), 0);
-                    SharedPreferences.Editor editor = pref.edit();
-                    editor.putBoolean(mContext.getString(R.string.pref_write_external_storage), true);
-                    editor.apply();
+                    PrefManager.putBoolPref(mContext,R.string.pref_write_external_storage);
                 }
             }
         }
@@ -184,12 +181,7 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void initializeMainJob() {
-        SharedPreferences pref = getSharedPreferences(getString(R.string.pref_insert_data), 0);
-        boolean isPrefData = false;
-        if (pref != null) {
-            isPrefData = pref.getBoolean(getString(R.string.pref_insert_data), false);
-        }
-        if (!isPrefData) {
+        if (!PrefManager.isPref(mContext,R.string.pref_insert_data)) {
             if (new NetworkState(mContext).isOnline()) {
                 showProgressBar();
                 new RestExecute().loadData(this);
@@ -208,9 +200,6 @@ public class MainActivity extends BaseActivity implements
         mStateProgressBar = false;
 
         RecipeFragment recipeFragment = new RecipeFragment();
-//        Bundle bundle = new Bundle();
-//        recipeFragment.setArguments(bundle);
-
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_list_container, recipeFragment).commit();
 

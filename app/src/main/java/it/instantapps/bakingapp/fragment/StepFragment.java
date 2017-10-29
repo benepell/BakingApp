@@ -1,7 +1,6 @@
 package it.instantapps.bakingapp.fragment;
 
 import android.content.Context;
-import android.content.SharedPreferences;
 import android.content.res.Configuration;
 import android.database.Cursor;
 import android.os.Bundle;
@@ -106,7 +105,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
         ButterKnife.bind(this, view);
 
 
-        if (isTablet()) {
+        if (PrefManager.isPref(getActivity(), R.string.pref_device_tablet)) {
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 
@@ -215,16 +214,6 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
             mRecyclerView.smoothScrollToPosition(position);
             mAdapter.notifyDataSetChanged();
         }
-    }
-
-    private boolean isTablet() {
-        SharedPreferences pref;
-        if (getActivity() != null) {
-            pref = getActivity().getSharedPreferences(getString(R.string.pref_device_tablet), 0);
-            return pref.getBoolean(getString(R.string.pref_device_tablet), false);
-
-        }
-        return false;
     }
 
     private static class StepFragmentAsyncTask extends AsyncTaskLoader<Cursor> {

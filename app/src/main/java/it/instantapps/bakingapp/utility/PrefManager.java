@@ -35,7 +35,7 @@ public class PrefManager {
 
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(context);
-        return   sharedPref.getBoolean
+        return sharedPref.getBoolean
                 (key, false);
     }
 
@@ -44,23 +44,71 @@ public class PrefManager {
 
         SharedPreferences sharedPref =
                 PreferenceManager.getDefaultSharedPreferences(context);
-        return  Integer.valueOf(
+        return Integer.valueOf(
                 sharedPref.getString(context.getString(R.string.pref_sync_frequency), "0"));
     }
 
-    public static void clearSharedPref(Context context){
+    public static void putIntPref(Context context, int value) {
+        SharedPreferences prefId = context
+                .getSharedPreferences(context.getString(R.string.pref_widget_id), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefId.edit();
+        editor.putInt(context.getString(R.string.pref_widget_id), value);
+        editor.apply();
+
+    }
+
+    public static void putStringPref(Context context, int key, String value) {
+        SharedPreferences prefId = context
+                .getSharedPreferences(context.getString(R.string.pref_widget_id), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefId.edit();
+        editor.putString(context.getString(key), value);
+        editor.apply();
+
+    }
+
+    public static void putBoolPref(Context context, int key) {
+        SharedPreferences prefId = context
+                .getSharedPreferences(context.getString(R.string.pref_widget_id), Context.MODE_PRIVATE);
+        SharedPreferences.Editor editor = prefId.edit();
+        editor.putBoolean(context.getString(key), true);
+        editor.apply();
+
+    }
+
+    public static int getIntPref(Context context) {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = context.getSharedPreferences(context.getString(R.string.pref_widget_id), Context.MODE_PRIVATE);
+        return sharedPreferences.getInt(context.getString(R.string.pref_widget_id), 0);
+    }
+
+    public static String getStringPref(Context context, int key) {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = context.getSharedPreferences(context.getString(key), Context.MODE_PRIVATE);
+        return sharedPreferences.getString(context.getString(key), "");
+    }
+
+    public static boolean isPref(Context context, int key) {
+        SharedPreferences sharedPreferences;
+        sharedPreferences = context.getSharedPreferences(context.getString(key), Context.MODE_PRIVATE);
+        return sharedPreferences.getBoolean(context.getString(key), false);
+    }
+
+
+    public static void clearSharedPref(Context context) {
         PreferenceManager.setDefaultValues(context, R.xml.pref_general_settings, false);
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.edit().clear().apply();
 
-        int[] prefArrays = {R.string.pref_video_uri,R.string.pref_resume_video,R.string.pref_tab_layout,
-                R.string.pref_title_sync_frequency,R.string.pref_video_notification,R.string.pref_widget_id};
+    }
 
-        for(int pref:prefArrays) {
+    public static void clearPref(Context context) {
+        int[] prefArrays = {R.string.pref_video_uri, R.string.pref_resume_video, R.string.pref_tab_layout,
+                R.string.pref_title_sync_frequency, R.string.pref_video_notification, R.string.pref_widget_id};
+
+        for (int pref : prefArrays) {
             context.getSharedPreferences(context.getString(pref), 0).edit().clear().apply();
         }
     }
-
 
 
 }
