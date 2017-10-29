@@ -9,4 +9,9 @@
     <dimen name="card_elevation_recipe">8dp</dimen>
     <dimen name="thumb_height_detail_step">350dp</dimen>
 
+
+    <dimen name="widget_min_width">158dp</dimen>
+    <dimen name="widget_min_height">180dp</dimen>
+
+
 </resources>
