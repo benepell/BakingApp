@@ -53,7 +53,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
                     bitmapTitleImage(context, widgetRecipeName));
 
             Intent intent = new Intent(context, MainActivity.class);
-//            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_CLEAR_TOP|Intent.FLAG_ACTIVITY_NO_HISTORY);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK|Intent.FLAG_ACTIVITY_NO_HISTORY);
             intent.putExtra(Costants.EXTRA_RECIPE_WIDGET_ID, id);
             intent.putExtra(Costants.EXTRA_RECIPE_NAME, widgetRecipeName);
             PendingIntent pendingIntent = PendingIntent.getActivities(context, id, new Intent[]{intent}, 0);

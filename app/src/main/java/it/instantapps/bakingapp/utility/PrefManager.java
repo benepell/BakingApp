@@ -53,7 +53,15 @@ public class PrefManager {
         SharedPreferences sharedPreferences = PreferenceManager.getDefaultSharedPreferences(context);
         sharedPreferences.edit().clear().apply();
 
+        int[] prefArrays = {R.string.pref_video_uri,R.string.pref_resume_video,R.string.pref_tab_layout,
+                R.string.pref_title_sync_frequency,R.string.pref_video_notification,R.string.pref_widget_id};
+
+        for(int pref:prefArrays) {
+            context.getSharedPreferences(context.getString(pref), 0).edit().clear().apply();
+        }
     }
+
+
 
 }
 
