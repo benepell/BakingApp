@@ -61,8 +61,6 @@ public class DetailActivity extends BaseActivity
     FrameLayout mFrameStepLayout;
 
 
-    private int mWidget;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setLayoutResource(R.layout.activity_detail);
@@ -81,7 +79,6 @@ public class DetailActivity extends BaseActivity
 
         if (savedInstanceState != null) {
             setRecipeId(savedInstanceState.getInt(Costants.BUNDLE_RECIPE_ID, 0));
-            mWidget = savedInstanceState.getInt(Costants.BUNDLE_RECIPE_WIDGET);
             setRecipeName(savedInstanceState.getString(Costants.BUNDLE_RECIPE_NAME));
 
         } else {
@@ -90,7 +87,6 @@ public class DetailActivity extends BaseActivity
                 setRecipeName(intent.getStringExtra(Costants.EXTRA_RECIPE_NAME));
             }
 
-            mWidget = (intent != null) ? intent.getIntExtra(Costants.EXTRA_RECIPE_WIDGET, 0) : 0;
             int orderTab = (intent != null) ? intent.getIntExtra(Costants.EXTRA_TAB_ORDERTAB, Costants.TAB_ORDER_INGREDIENT) : -1;
             startFragment(getRecipeId(), orderTab);
         }
@@ -140,7 +136,6 @@ public class DetailActivity extends BaseActivity
         setPositionStep(position);
         Intent intent = new Intent(DetailActivity.this, StepActivity.class);
         intent.putExtra(Costants.EXTRA_DETAIL_STEP_ID, id);
-        intent.putExtra(Costants.EXTRA_RECIPE_WIDGET, mWidget);
         intent.putExtra(Costants.EXTRA_RECIPE_NAME, BaseActivity.getRecipeName());
         startActivity(intent);
     }
@@ -153,7 +148,6 @@ public class DetailActivity extends BaseActivity
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(Costants.BUNDLE_RECIPE_ID, getRecipeId());
-        outState.putInt(Costants.BUNDLE_RECIPE_WIDGET, mWidget);
         outState.putString(Costants.BUNDLE_RECIPE_NAME, getRecipeName());
         super.onSaveInstanceState(outState);
     }

@@ -148,9 +148,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
         holder.mTextViewRecipeServings.setText(String.valueOf(servingsRecipe));
 
-        int widget = mCursor.getInt(mCursor.getColumnIndex(Contract.RecipeEntry.COLUMN_NAME_WIDGET));
-
-        holder.bind(index, nameRecipe, widget);
+        holder.bind(index, nameRecipe);
     }
 
     private Handler getHandlerThreadHandler() {
@@ -180,7 +178,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         private String mRecipeName;
 
         private int mIdData;
-        private int mWidget;
 
         RecipeHolder(View itemView) {
             super(itemView);
@@ -190,16 +187,15 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
             itemView.setOnClickListener(this);
         }
 
-        void bind(int idData, String recipeName, int widget) {
+        void bind(int idData, String recipeName) {
             mIdData = idData;
             mRecipeName = recipeName;
-            mWidget = widget;
 
         }
 
         @Override
         public void onClick(View view) {
-            mOnClickListener.onListItemClick(mIdData, mRecipeName, mWidget);
+            mOnClickListener.onListItemClick(mIdData, mRecipeName);
         }
 
     }
@@ -220,6 +216,6 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     public interface ListItemClickListener {
 
-        void onListItemClick(int clickItemIndex, String recipeName, int mWidget);
+        void onListItemClick(int clickItemIndex, String recipeName);
     }
 }

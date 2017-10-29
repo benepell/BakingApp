@@ -135,8 +135,8 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
     }
 
     @Override
-    public void onListItemClick(int clickItemIndex, String recipeName, int widget) {
-        mListener.onFragmentInteraction(clickItemIndex, recipeName, widget);
+    public void onListItemClick(int clickItemIndex, String recipeName) {
+        mListener.onFragmentInteraction(clickItemIndex, recipeName);
     }
 
     @Override
@@ -156,7 +156,7 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
     }
 
     public interface FragmentInteractionListener {
-        void onFragmentInteraction(int id, String recipeName, int widget);
+        void onFragmentInteraction(int id, String recipeName);
     }
 
     private boolean isTablet() {

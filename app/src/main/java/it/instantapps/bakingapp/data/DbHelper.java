@@ -35,7 +35,7 @@ class DbHelper extends SQLiteOpenHelper {
 
     private final Context mContext;
 
-    private static final int DATABASE_VERSION = 1;
+    private static final int DATABASE_VERSION = 2;
 
     public DbHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -50,8 +50,7 @@ class DbHelper extends SQLiteOpenHelper {
                         Contract.RecipeEntry._ID + " INTEGER PRIMARY KEY, " +
                         Contract.RecipeEntry.COLUMN_NAME_NAME + " TEXT NOT NULL, " +
                         Contract.RecipeEntry.COLUMN_NAME_SERVINGS + " REAL NOT NULL, " +
-                        Contract.RecipeEntry.COLUMN_NAME_IMAGE + " TEXT, " +
-                        Contract.RecipeEntry.COLUMN_NAME_WIDGET + " INTEGER DEFAULT 0 " +
+                        Contract.RecipeEntry.COLUMN_NAME_IMAGE + " TEXT " +
                         ");";
 
         final String SQL_CREATE_INGREDIENT_TABLE =

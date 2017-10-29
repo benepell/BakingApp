@@ -59,6 +59,8 @@ public class Costants {
     public static final int INGREDIENT_LOADER_ID = 1;
     public static final int STEP_LOADER_ID = 2;
 
+    public static final String RECIPE_WIDGET_UPDATE = "it.instantapps.bakingapp.receiver.recipe.widget.update";
+
     public static final int DEFAULT_TIMBER_COUNT = 3;
 
     public static final int TAB_ORDER_INGREDIENT = 0;
@@ -66,8 +68,10 @@ public class Costants {
 
     public static final String EXTRA_RECIPE_ID = "it.instantapps.bakingapp.activity.recipe.id";
     public static final String EXTRA_RECIPE_POSITION = "it.instantapps.bakingapp.activity.recipe.position";
-    public static final String EXTRA_RECIPE_WIDGET = "it.instantapps.bakingapp.activity.recipe.widget";
     public static final String EXTRA_TAB_ORDERTAB = "it.instantapps.bakingapp.activity.tab.ordertab";
+
+    public static final String EXTRA_RECIPE_WIDGET_ID = "it.instantapps.bakingapp.activity.recipe.widget.id";
+    public static final String ACTION_START_RECIPE= "it.instantapps.bakingapp.widget.action.start.recipe";
 
     public static final String EXTRA_PROGRESSBAR_MAIN = "it.instantapps.bakingapp.activity.recipe.progressbar";
 

@@ -65,7 +65,6 @@ public class MainActivity extends BaseActivity implements
     private String mRecipeName;
 
     private int mId;
-    private int mWidget;
 
     private boolean mStateProgressBar;
 
@@ -80,7 +79,15 @@ public class MainActivity extends BaseActivity implements
         mContext = MainActivity.this;
         ButterKnife.bind(this);
         Timber.plant(new Timber.DebugTree());
+
         SyncUtils.initialize(this);
+        Intent intent = getIntent();
+        if (intent != null) {
+            startWidget(getIntent().getIntExtra(Costants.EXTRA_RECIPE_WIDGET_ID, -1),
+                    getIntent().getStringExtra(Costants.EXTRA_RECIPE_NAME));
+
+        }
+
         isTablet();
         Utility.RequestPermissionExtStorage(MainActivity.this);
         initializeMainJob();
@@ -89,17 +96,31 @@ public class MainActivity extends BaseActivity implements
 
     }
 
+    private void startWidget(int recipeWidgetId, String recipeName) {
+        if (recipeWidgetId >= 0) {
+            Intent intent;
+            intent = new Intent(mContext, DetailActivity.class);
+            intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY | Intent.FLAG_ACTIVITY_NO_ANIMATION);
+            intent.putExtra(Costants.EXTRA_RECIPE_ID, recipeWidgetId);
+            intent.putExtra(Costants.EXTRA_RECIPE_NAME, recipeName);
+            setRecipeId(recipeWidgetId);
+            setRecipeName(recipeName);
+
+            startActivity(intent);
+        }
+    }
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
         mId = savedInstanceState.getInt(Costants.EXTRA_RECIPE_ID);
-        mWidget = savedInstanceState.getInt(Costants.EXTRA_RECIPE_WIDGET);
         mRecipeName = savedInstanceState.getString(Costants.EXTRA_RECIPE_NAME);
         mStateProgressBar = savedInstanceState.getBoolean(Costants.EXTRA_PROGRESSBAR_MAIN);
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
+                                           @NonNull int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         switch (requestCode) {
             case Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
@@ -117,14 +138,13 @@ public class MainActivity extends BaseActivity implements
     @Override
     protected void onSaveInstanceState(Bundle outState) {
         outState.putInt(Costants.EXTRA_RECIPE_ID, mId);
-        outState.putInt(Costants.EXTRA_RECIPE_WIDGET, mWidget);
         outState.putString(Costants.EXTRA_RECIPE_NAME, mRecipeName);
         outState.putBoolean(Costants.EXTRA_PROGRESSBAR_MAIN, mStateProgressBar);
         super.onSaveInstanceState(outState);
     }
 
     @Override
-    public void onFragmentInteraction(int id, String recipeName, int widget) {
+    public void onFragmentInteraction(int id, String recipeName) {
         Intent intent;
         if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             intent = new Intent(mContext, StepActivity.class);
@@ -134,7 +154,6 @@ public class MainActivity extends BaseActivity implements
             intent.putExtra(Costants.EXTRA_RECIPE_ID, id);
 
         }
-        intent.putExtra(Costants.EXTRA_RECIPE_WIDGET, widget);
         intent.putExtra(Costants.EXTRA_RECIPE_NAME, recipeName);
         startActivity(intent);
     }
@@ -189,8 +208,8 @@ public class MainActivity extends BaseActivity implements
         mStateProgressBar = false;
 
         RecipeFragment recipeFragment = new RecipeFragment();
-        Bundle bundle = new Bundle();
-        recipeFragment.setArguments(bundle);
+//        Bundle bundle = new Bundle();
+//        recipeFragment.setArguments(bundle);
 
         getSupportFragmentManager().beginTransaction()
                 .replace(R.id.fragment_list_container, recipeFragment).commit();

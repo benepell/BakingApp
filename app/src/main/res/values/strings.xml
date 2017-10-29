@@ -18,6 +18,9 @@
     <string name="pref_insert_data" translatable="false">it.instantapps.bakingapp.insertData</string>
     <string name="pref_video_uri" translatable="false">it.instantapps.bakingapp.prefVideoUri</string>
 
+    <string name="pref_widget_id" translatable="false">it.instantapps.bakingapp.pref.widget.it</string>
+    <string name="pref_widget_name" translatable="false">it.instantapps.bakingapp.pref.widget.name</string>
+
     <string name="title_activity_base">BaseActivity</string>
     <string name="title_activity_main">Baking Time</string>
     <string name="title_activity_detail">Baking Time</string>
@@ -106,5 +109,8 @@
     <string name="pref_write_external_storage" translatable="false">it.instantapps.bakingapp.app.write.external.storage</string>
     <string name="text_click_end_ingredient">End list ingredient</string>
     <string name="text_font_failed">request font failed</string>
+
+    <string name="recipe_widget_name">Yellow Cake</string>
+    <string name="widget_text_error">no recipe selected</string>
 
 </resources>

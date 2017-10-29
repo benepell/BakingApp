@@ -1,6 +1,5 @@
 package it.instantapps.bakingapp.activity;
 
-import android.content.ContentValues;
 import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
@@ -52,16 +51,10 @@ public class NavigationActivity extends AppCompatActivity {
             navigation.setIntendId(intent.getIntExtra(Costants.EXTRA_DETAIL_STEP_ID, -1));
             navigation.setRecipeName(intent.getStringExtra(Costants.EXTRA_RECIPE_NAME));
             navigation.setRecipeId(intent.getIntExtra(Costants.EXTRA_RECIPE_ID, -1));
-            navigation.setWidget(intent.getIntExtra(Costants.EXTRA_RECIPE_WIDGET, 0));
 
             int navigationType = intent.getIntExtra(Costants.EXTRA_NAVIGATION_TYPE, 0);
 
             switch (navigationType) {
-
-                case R.id.navigation_widget:
-
-                    new NavigationWidgetAsyncTask().execute(navigation);
-                    break;
 
                 case R.id.navigation_back:
 
@@ -74,16 +67,15 @@ public class NavigationActivity extends AppCompatActivity {
                     break;
 
                 case R.string.device_type_tablet:
-                    tabletResult(navigation.getIntendId(), navigation.getRecipeName(), navigation.getWidget());
+                    tabletResult(navigation.getIntendId(), navigation.getRecipeName());
             }
 
         }
     }
 
-    private void tabletResult(int id, String recipeName, int widget) {
+    private void tabletResult(int id, String recipeName) {
         Intent send = new Intent(NavigationActivity.this, StepActivity.class);
         send.putExtra(Costants.EXTRA_DETAIL_STEP_ID, id);
-        send.putExtra(Costants.EXTRA_RECIPE_WIDGET, widget);
         send.putExtra(Costants.EXTRA_RECIPE_NAME, recipeName);
         send.setFlags(Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(send);
@@ -114,7 +106,6 @@ public class NavigationActivity extends AppCompatActivity {
                         BaseActivity.setPositionStep(BaseActivity.getPositionStep() - 1);
                         Intent send = new Intent(context, StepActivity.class);
                         send.putExtra(Costants.EXTRA_DETAIL_STEP_ID, result[0]);
-                        send.putExtra(Costants.EXTRA_RECIPE_WIDGET, args[0].getWidget());
                         send.putExtra(Costants.EXTRA_RECIPE_NAME, args[0].getRecipeName());
                         send.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(send);
@@ -131,42 +122,6 @@ public class NavigationActivity extends AppCompatActivity {
             if ((cursor != null) && (!cursor.isClosed())) {
                 cursor.close();
             }
-        }
-    }
-
-
-    private static class NavigationWidgetAsyncTask extends AsyncTask<Navigation, Void, Void> {
-
-        @Override
-        protected Void doInBackground(Navigation... args) {
-
-            final Uri uri = Contract.RecipeEntry.CONTENT_URI;
-
-            ContentValues contentValues = new ContentValues(1);
-            Context context = sWeakReference.get();
-
-            if (args[0].getWidget() != 0) {
-                args[0].setWidget(0);
-            } else {
-                args[0].setWidget(1);
-            }
-
-            contentValues.put(Contract.RecipeEntry.COLUMN_NAME_WIDGET, args[0].getWidget());
-
-            final String selection = Contract.RecipeEntry._ID + "  = ?";
-
-            final String[] argSelection = new String[]{String.valueOf(args[0].getRecipeId())};
-
-            context.getContentResolver().update(uri, contentValues, selection, argSelection);
-
-            Intent send = new Intent(context, StepActivity.class);
-            send.putExtra(Costants.EXTRA_DETAIL_STEP_ID, args[0].getIntendId());
-            send.putExtra(Costants.EXTRA_RECIPE_WIDGET, args[0].getWidget());
-            send.putExtra(Costants.EXTRA_RECIPE_NAME, args[0].getRecipeName());
-            send.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
-            context.startActivity(send);
-
-            return null;
         }
     }
 
@@ -195,7 +150,6 @@ public class NavigationActivity extends AppCompatActivity {
                         BaseActivity.setPositionStep(BaseActivity.getPositionStep() + 1);
                         Intent send = new Intent(context, StepActivity.class);
                         send.putExtra(Costants.EXTRA_DETAIL_STEP_ID, result[0]);
-                        send.putExtra(Costants.EXTRA_RECIPE_WIDGET, args[0].getWidget());
                         send.putExtra(Costants.EXTRA_RECIPE_NAME, args[0].getRecipeName());
                         send.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_SINGLE_TOP | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         context.startActivity(send);
@@ -224,7 +178,6 @@ public class NavigationActivity extends AppCompatActivity {
         private int intendId;
         private int recipeId;
         private String recipeName;
-        private int widget;
 
         int getIntendId() {
             return intendId;
@@ -250,12 +203,5 @@ public class NavigationActivity extends AppCompatActivity {
             this.recipeName = recipeName;
         }
 
-        int getWidget() {
-            return widget;
-        }
-
-        void setWidget(int widget) {
-            this.widget = widget;
-        }
     }
 }

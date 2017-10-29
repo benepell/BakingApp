@@ -1,6 +1,7 @@
 package it.instantapps.bakingapp.activity;
 
 import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -40,7 +41,10 @@ import it.instantapps.bakingapp.media.ExoPlayerManager;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
+import it.instantapps.bakingapp.widget.RecipeAppWidget;
 import timber.log.Timber;
+
+import static it.instantapps.bakingapp.utility.Costants.RECIPE_WIDGET_UPDATE;
 
 @SuppressWarnings("unused")
 public class StepActivity extends BaseActivity
@@ -87,7 +91,6 @@ public class StepActivity extends BaseActivity
 
     private int mNavigationIdMax;
     private int mNavigationId;
-    private int mWidget;
 
     private boolean mIsVideoBackground = true;
 
@@ -121,7 +124,6 @@ public class StepActivity extends BaseActivity
         if (savedInstanceState != null) {
             setRecipeName(savedInstanceState.getString(Costants.BUNDLE_RECIPE_NAME));
             setRecipeId(savedInstanceState.getInt(Costants.BUNDLE_RECIPE_ID));
-            setWidget(savedInstanceState.getInt(Costants.BUNDLE_RECIPE_WIDGET));
             setNavigationId(savedInstanceState.getInt(Costants.BUNDLE_DETAIL_STEP_NAVIGATION_ID));
             setVideoUri(savedInstanceState.getString(Costants.BUNDLE_DETAIL_STEP_VIDEOURI));
             setThumbnailURL(savedInstanceState.getString(Costants.BUNDLE_DETAIL_STEP_THUMBNAILURL));
@@ -130,7 +132,6 @@ public class StepActivity extends BaseActivity
             sIdData = savedInstanceState.getInt(Costants.BUNDLE_DETAIL_STEP_ID);
         } else if (intent != null) {
             sIdData = intent.getIntExtra(Costants.EXTRA_DETAIL_STEP_ID, -1);
-            mWidget = intent.getIntExtra(Costants.EXTRA_RECIPE_WIDGET, -1);
             setRecipeName(intent.getStringExtra(Costants.EXTRA_RECIPE_NAME));
         }
 
@@ -215,12 +216,13 @@ public class StepActivity extends BaseActivity
                 return true;
 
             case R.id.navigation_widget:
-                navigationIntent(R.id.navigation_widget);
+                addRemoveWidget(getRecipeId(), getRecipeName());
                 return true;
         }
 
         return false;
     }
+
 
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
@@ -248,19 +250,21 @@ public class StepActivity extends BaseActivity
 
         }
 
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences(getString(R.string.pref_widget_id), 0);
+        int widgetId = sharedPreferences.getInt(getString(R.string.pref_widget_id), 0);
 
-        if (getWidget() != 0) {
+        if ((widgetId != 0)&& (widgetId == getRecipeId())) {
             menuItemWidget.setCheckable(true);
             menuItemWidget.setChecked(true);
             menuItemWidget.setIcon(R.drawable.ic_widgets_blu_24dp);
             menuItemWidget.setTitle(R.string.title_widget_remove);
 
-        } else {
+        } else{
             menuItemWidget.setCheckable(false);
             menuItemWidget.setChecked(false);
             menuItemWidget.setTitle(R.string.title_widget_add);
         }
-
 
         return true;
     }
@@ -314,7 +318,6 @@ public class StepActivity extends BaseActivity
 
         setRecipeId(savedInstanceState.getInt(Costants.BUNDLE_RECIPE_ID));
         setRecipeName(savedInstanceState.getString(Costants.BUNDLE_RECIPE_NAME));
-        setWidget(savedInstanceState.getInt(Costants.BUNDLE_RECIPE_WIDGET));
         setVideoUri(savedInstanceState.getString(Costants.BUNDLE_DETAIL_STEP_VIDEOURI));
         setThumbnailURL(savedInstanceState.getString(Costants.BUNDLE_DETAIL_STEP_THUMBNAILURL));
         setShortDescription(savedInstanceState.getString(Costants.BUNDLE_DETAIL_STEP_SHORT_DESCRIPTION));
@@ -333,7 +336,6 @@ public class StepActivity extends BaseActivity
 
         outState.putInt(Costants.BUNDLE_RECIPE_ID, getRecipeId());
         outState.putString(Costants.BUNDLE_RECIPE_NAME, getRecipeName());
-        outState.putInt(Costants.BUNDLE_RECIPE_WIDGET, getWidget());
         outState.putInt(Costants.BUNDLE_DETAIL_STEP_ID, sIdData);
         outState.putInt(Costants.BUNDLE_DETAIL_STEP_NAVIGATION_ID, mNavigationId);
         outState.putString(Costants.BUNDLE_DETAIL_STEP_VIDEOURI, getVideoUri());
@@ -359,7 +361,6 @@ public class StepActivity extends BaseActivity
         Intent intent = new Intent(StepActivity.this, NavigationActivity.class);
         intent.putExtra(Costants.EXTRA_NAVIGATION_TYPE, R.string.device_type_tablet);
         intent.putExtra(Costants.EXTRA_DETAIL_STEP_ID, id);
-        intent.putExtra(Costants.EXTRA_RECIPE_WIDGET, getWidget());
         intent.putExtra(Costants.EXTRA_RECIPE_NAME, getRecipeName());
         startActivity(intent);
     }
@@ -584,7 +585,6 @@ public class StepActivity extends BaseActivity
         intent.putExtra(Costants.EXTRA_NAVIGATION_TYPE, navigationType);
         intent.putExtra(Costants.EXTRA_RECIPE_NAME, getRecipeName());
         intent.putExtra(Costants.EXTRA_DETAIL_STEP_ID, sIdData);
-        intent.putExtra(Costants.EXTRA_RECIPE_WIDGET, getWidget());
         startActivity(intent);
     }
 
@@ -607,7 +607,6 @@ public class StepActivity extends BaseActivity
         intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         intent.putExtra(Costants.EXTRA_RECIPE_NAME, getRecipeName());
         intent.putExtra(Costants.EXTRA_RECIPE_ID, getRecipeId());
-        intent.putExtra(Costants.EXTRA_RECIPE_WIDGET, getWidget());
         intent.putExtra(Costants.EXTRA_TAB_ORDERTAB, Costants.TAB_ORDER_STEP);
         startActivity(intent);
 
@@ -688,6 +687,42 @@ public class StepActivity extends BaseActivity
         return row;
     }
 
+    private void addRemoveWidget(int recipeId, String recipeName) {
+
+        SharedPreferences sharedPreferences;
+        sharedPreferences = getSharedPreferences(getString(R.string.pref_widget_id), 0);
+        int widgetId = sharedPreferences.getInt(getString(R.string.pref_widget_id), 0);
+
+        if (widgetId == getRecipeId()) {
+            recipeId = 0;
+            recipeName = "";
+        }
+
+        SharedPreferences prefId = getApplicationContext()
+                .getSharedPreferences(getApplicationContext().getString(R.string.pref_widget_id), 0);
+        SharedPreferences.Editor editor = prefId.edit();
+        editor.putInt(getApplicationContext().getString(R.string.pref_widget_id), recipeId);
+        editor.apply();
+
+        SharedPreferences prefName = getApplicationContext()
+                .getSharedPreferences(getApplicationContext().getString(R.string.pref_widget_name), 0);
+        SharedPreferences.Editor editorName = prefName.edit();
+        editorName.putString(getApplicationContext().getString(R.string.pref_widget_name), recipeName);
+        editorName.apply();
+
+
+        try {
+            Intent intent = new Intent(this, RecipeAppWidget.class);
+            intent.setAction(RECIPE_WIDGET_UPDATE);
+            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
+            pendingIntent.send();
+        } catch (PendingIntent.CanceledException e) {
+            Timber.e("pending" + e.getMessage());
+        }
+        invalidateOptionsMenu();
+    }
+
+
     public int getNavigationIdMax() {
         return mNavigationIdMax;
     }
@@ -714,14 +749,6 @@ public class StepActivity extends BaseActivity
 
     public int getNavigationId() {
         return mNavigationId;
-    }
-
-    public int getWidget() {
-        return mWidget;
-    }
-
-    public void setWidget(int widget) {
-        mWidget = widget;
     }
 
     public static int getIdData() {

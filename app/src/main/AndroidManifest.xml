@@ -17,7 +17,6 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-
         <meta-data
             android:name="asset_statements"
             android:resource="@string/asset_statements" />
@@ -29,7 +28,6 @@
             android:name=".activity.BaseActivity"
             android:label="@string/title_activity_base"
             android:theme="@style/AppTheme" />
-
         <activity
             android:name=".activity.MainActivity"
             android:label="@string/title_activity_main"
@@ -53,26 +51,22 @@
                     android:scheme="http" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".activity.DetailActivity"
             android:label="@string/title_activity_detail"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.StepActivity"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_step"
             android:launchMode="singleTop"
             android:theme="@style/AppTheme.NoActionBar" />
-
         <activity
             android:name=".activity.NavigationActivity"
             android:excludeFromRecents="true"
             android:label="@string/title_activity_navigation"
             android:launchMode="singleTop"
             android:noHistory="true" />
-
         <activity
             android:name=".activity.SettingsActivity"
             android:excludeFromRecents="true"
@@ -81,7 +75,6 @@
             android:noHistory="true"
             android:parentActivityName=".activity.MainActivity"
             android:theme="@style/AppTheme">
-
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".activity.MainActivity" />
@@ -100,10 +93,24 @@
             </intent-filter>
         </service>
 
+        <service
+            android:name=".sync.RecipeWidgetService"
+            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+
         <receiver android:name=".activity.StepActivity$MediaReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />
             </intent-filter>
+        </receiver>
+
+        <receiver android:name=".widget.RecipeAppWidget">
+            <intent-filter>
+                <action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+            </intent-filter>
+
+            <meta-data
+                android:name="android.appwidget.provider"
+                android:resource="@xml/recipe_app_widget_info" />
         </receiver>
 
     </application>
