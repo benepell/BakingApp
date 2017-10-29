@@ -31,16 +31,17 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
         String widgetRecipeName = PrefManager.getStringPref(context, R.string.pref_widget_name);
 
-        int id = PrefManager.getIntPref(context);
+        int id = PrefManager.getIntPref(context,R.string.pref_widget_id);
 
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_app_widget);
 
-        if (id > 0) {
+        if ((id > 0)&& (!widgetRecipeName.isEmpty())) {
             views.setViewVisibility(R.id.widget_text_error, View.GONE);
             views.setViewVisibility(R.id.widget_listView, View.VISIBLE);
             views.setViewVisibility(R.id.recipe_widget_name, View.VISIBLE);
-            views.setImageViewBitmap(R.id.recipe_widget_name,
-                    bitmapTitleImage(context, widgetRecipeName));
+                views.setImageViewBitmap(R.id.recipe_widget_name,
+                        bitmapTitleImage(context.getApplicationContext(), widgetRecipeName));
+
 
             Intent intent = new Intent(context, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);

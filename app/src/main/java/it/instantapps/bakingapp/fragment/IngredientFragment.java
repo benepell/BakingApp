@@ -135,7 +135,7 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
     @Override
     public void onIngredientItemClick(int position, int itemCount) {
 
-        if (!PrefManager.isSharedPref(getActivity(), getString(R.string.pref_tab_layout))) {
+        if (!PrefManager.isGeneralSettings(getActivity(), getString(R.string.pref_tab_layout))) {
 
             if (position == (itemCount - 2)) {
                 Toast.makeText(getActivity(), R.string.text_click_end_ingredient, Toast.LENGTH_SHORT).show();

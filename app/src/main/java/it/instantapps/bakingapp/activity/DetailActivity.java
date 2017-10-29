@@ -107,7 +107,7 @@ public class DetailActivity extends BaseActivity
         menuItemListShopping = menu.getItem(0);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             menuItemListShopping.setVisible(true);
-        }else if(PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))){
+        }else if(PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))){
             menuItemListShopping.setVisible(true);
         }
 
@@ -157,7 +157,7 @@ public class DetailActivity extends BaseActivity
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             Bundle bundle = new Bundle();
 
-            if (PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))) {
+            if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
                 bundle.putInt(Costants.BUNDLE_TAB_RECIPE_ID, index);
                 bundle.putInt(Costants.BUNDLE_TAB_ORDERTAB, orderTab);
                 TabFragment fragment = new TabFragment();
@@ -181,7 +181,7 @@ public class DetailActivity extends BaseActivity
     }
 
     private void visibleFrameLayout() {
-        if (PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))) {
+        if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
             mFrameTabLayout.setVisibility(View.VISIBLE);
         } else {
             if (!isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {

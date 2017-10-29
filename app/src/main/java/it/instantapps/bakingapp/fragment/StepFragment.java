@@ -155,7 +155,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
 
         mRecyclerView.setAdapter(mAdapter);
 
-        if (PrefManager.isSharedPref(getActivity(), getActivity().getString(R.string.pref_tab_layout))) {
+        if (PrefManager.isGeneralSettings(getActivity(), getActivity().getString(R.string.pref_tab_layout))) {
             LayoutAnimationController layoutAnimationController = AnimationUtils.loadLayoutAnimation(getActivity(), R.anim.layout_animation_from_right);
             mRecyclerView.setLayoutAnimation(layoutAnimationController);
         }

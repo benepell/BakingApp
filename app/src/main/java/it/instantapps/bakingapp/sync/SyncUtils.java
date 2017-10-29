@@ -11,6 +11,7 @@ import com.firebase.jobdispatcher.Job;
 import com.firebase.jobdispatcher.Lifetime;
 import com.firebase.jobdispatcher.Trigger;
 
+import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
 
@@ -67,7 +68,7 @@ public class SyncUtils {
     public static void initialize(Context context) {
         if (sInitialized) return;
         sInitialized = true;
-        int interval = PrefManager.getIntSharedPref(context);
+        int interval = PrefManager.getIntGeneralSettings(context, R.string.pref_sync_frequency);
         scheduleFirebaseJobDispatcherSync(context, interval);
     }
 }

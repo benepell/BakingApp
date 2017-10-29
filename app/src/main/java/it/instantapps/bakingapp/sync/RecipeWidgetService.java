@@ -33,7 +33,7 @@ public class RecipeWidgetService extends RemoteViewsService {
 
         @Override
         public void onCreate() {
-            mRecipeId = PrefManager.getIntPref(mContext);
+            mRecipeId = PrefManager.getIntPref(mContext,R.string.pref_widget_id);
         }
 
         @Override

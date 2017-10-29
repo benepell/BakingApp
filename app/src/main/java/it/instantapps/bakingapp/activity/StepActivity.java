@@ -137,7 +137,7 @@ public class StepActivity extends BaseActivity
             new Utility(StepActivity.this, getSupportActionBar()).setColorOfflineActionBar();
         }
 
-        mIsVideoBackground = PrefManager.isSharedPref(this,
+        mIsVideoBackground = PrefManager.isGeneralSettings(this,
                 getString(R.string.pref_video_notification));
 
         if ((sIdData > 0)) {
@@ -247,7 +247,7 @@ public class StepActivity extends BaseActivity
 
         }
 
-        int widgetId = PrefManager.getIntPref(mContext);
+        int widgetId = PrefManager.getIntPref(mContext,R.string.pref_widget_id);
 
         if ((widgetId != 0)&& (widgetId == getRecipeId())) {
             menuItemWidget.setCheckable(true);
@@ -277,7 +277,7 @@ public class StepActivity extends BaseActivity
         super.onPause();
 
         if (mExoPlayerManager != null) {
-            mExoPlayerManager.updateResumePosition(PrefManager.isSharedPref(this,
+            mExoPlayerManager.updateResumePosition(PrefManager.isGeneralSettings(this,
                     getString(R.string.pref_resume_video)));
         }
         if (!mIsVideoBackground) {
@@ -597,7 +597,7 @@ public class StepActivity extends BaseActivity
     }
 
     private void visibleFrameTabletLayout() {
-        if (PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))) {
+        if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
             FrameLayout frameTabLayout = findViewById(R.id.content_tablet_tab_fragment);
             frameTabLayout.setVisibility(View.VISIBLE);
         } else {
@@ -614,7 +614,7 @@ public class StepActivity extends BaseActivity
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             Bundle bundle = new Bundle();
 
-            if (PrefManager.isSharedPref(this, getString(R.string.pref_tab_layout))) {
+            if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
                 bundle.putInt(Costants.BUNDLE_TAB_RECIPE_ID, index);
                 bundle.putInt(Costants.BUNDLE_TAB_ORDERTAB, orderTab);
                 TabFragment fragment = new TabFragment();
@@ -673,13 +673,13 @@ public class StepActivity extends BaseActivity
 
     private void addRemoveWidget(int recipeId, String recipeName) {
 
-        int widgetId = PrefManager.getIntPref(mContext);
+        int widgetId = PrefManager.getIntPref(mContext,R.string.pref_widget_id);
         if (widgetId == getRecipeId()) {
             recipeId = 0;
             recipeName = "";
         }
 
-        PrefManager.putIntPref(mContext, recipeId);
+        PrefManager.putIntPref(mContext, R.string.pref_widget_id,recipeId);
         PrefManager.putStringPref(mContext,R.string.pref_widget_name,recipeName);
 
         widgetUpdate(mContext);

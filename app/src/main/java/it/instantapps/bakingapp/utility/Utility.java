@@ -62,7 +62,7 @@ public class Utility {
         return mContext.getPackageManager().getPackageInfo(mContext.getPackageName(), 0).versionName;
     }
 
-    public static boolean isPermissionExtStorage(Context context){
+    public static boolean isPermissionExtStorage(Context context) {
         SharedPreferences pref = context.getSharedPreferences(context.getString(R.string.pref_write_external_storage), 0);
         return pref.getBoolean(context.getString(R.string.pref_write_external_storage), false);
     }
@@ -71,7 +71,7 @@ public class Utility {
         if (ContextCompat.checkSelfPermission(thisActivity,
                 Manifest.permission.WRITE_EXTERNAL_STORAGE)
                 != PackageManager.PERMISSION_GRANTED) {
-            if (! ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
+            if (!ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
                     Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
                 ActivityCompat.requestPermissions(thisActivity,
                         new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
@@ -82,6 +82,8 @@ public class Utility {
     }
 
     public static Bitmap bitmapTitleImage(Context context, String string) {
+
+        if ((context == null) || (string.length() == 0)) return null;
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.permanent_marker);
         int fontSizePx = (int) (30 * context.getResources().getDisplayMetrics().scaledDensity);

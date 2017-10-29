@@ -95,7 +95,7 @@
 
         <service
             android:name=".sync.RecipeWidgetService"
-            android:permission="android.permission.BIND_REMOTEVIEWS"/>
+            android:permission="android.permission.BIND_REMOTEVIEWS" />
 
         <receiver android:name=".activity.StepActivity$MediaReceiver">
             <intent-filter>

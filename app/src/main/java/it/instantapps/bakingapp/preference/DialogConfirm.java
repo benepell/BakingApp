@@ -63,7 +63,7 @@ public class DialogConfirm extends DialogPreference {
             if (context != null) {
                 CacheDataSourceFactory.getClearData(context);
                 new DataUtils(context).ClearDataPrivacy();
-                PrefManager.clearSharedPref(context);
+                PrefManager.clearGeneralSettings(context);
                 PrefManager.clearPref(context);
                 BaseActivity.clearRecipeId();
                 Glide.get(context).clearDiskCache();
