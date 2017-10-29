@@ -101,11 +101,17 @@ public class Utility {
         int textHeight = (int) (fontMetrics.descent - fontMetrics.ascent + fontMetrics.leading);
 
         TextPaint textPaint = new TextPaint(paint);
-        Bitmap bitmap = Bitmap.createBitmap((int) textPaint.measureText(string),
-                textHeight, Bitmap.Config.ARGB_8888);
-        Canvas myCanvas = new Canvas(bitmap);
-        myCanvas.drawText(string, 0, bitmap.getHeight(), paint);
-        return bitmap;
+        if(textPaint.measureText(string)>0){
+
+            Bitmap bitmap = Bitmap.createBitmap((int) textPaint.measureText(string),
+                    textHeight, Bitmap.Config.ARGB_8888);
+            Canvas myCanvas = new Canvas(bitmap);
+            if((bitmap.getHeight()>0)){
+                myCanvas.drawText(string, 0, bitmap.getHeight(), paint);
+                return bitmap;
+            }
+        }
+        return null;
     }
 
 }
