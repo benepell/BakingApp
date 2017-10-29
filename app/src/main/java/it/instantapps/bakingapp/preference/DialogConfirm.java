@@ -1,9 +1,7 @@
 package it.instantapps.bakingapp.preference;
 
-import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.DialogPreference;
@@ -19,10 +17,8 @@ import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.media.CacheDataSourceFactory;
 import it.instantapps.bakingapp.utility.PrefManager;
-import it.instantapps.bakingapp.widget.RecipeAppWidget;
-import timber.log.Timber;
 
-import static it.instantapps.bakingapp.utility.Costants.RECIPE_WIDGET_UPDATE;
+import static it.instantapps.bakingapp.widget.RecipeAppWidget.widgetUpdate;
 
 
 public class DialogConfirm extends DialogPreference {
@@ -71,22 +67,12 @@ public class DialogConfirm extends DialogPreference {
                 PrefManager.clearPref(context);
                 BaseActivity.clearRecipeId();
                 Glide.get(context).clearDiskCache();
-                updateWidget(context);
+                widgetUpdate(context);
             }
 
             return null;
         }
 
-        private void updateWidget(Context context) {
-            try {
-                Intent intent = new Intent(context, RecipeAppWidget.class);
-                intent.setAction(RECIPE_WIDGET_UPDATE);
-                PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-                pendingIntent.send();
-            } catch (PendingIntent.CanceledException e) {
-                Timber.e("pendingIntent: " + e.getMessage());
-            }
-        }
 
         @Override
         protected void onPostExecute(Void aVoid) {

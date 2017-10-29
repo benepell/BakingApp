@@ -1,7 +1,6 @@
 package it.instantapps.bakingapp.activity;
 
 import android.app.NotificationManager;
-import android.app.PendingIntent;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
@@ -40,10 +39,9 @@ import it.instantapps.bakingapp.media.ExoPlayerManager;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
-import it.instantapps.bakingapp.widget.RecipeAppWidget;
 import timber.log.Timber;
 
-import static it.instantapps.bakingapp.utility.Costants.RECIPE_WIDGET_UPDATE;
+import static it.instantapps.bakingapp.widget.RecipeAppWidget.widgetUpdate;
 
 @SuppressWarnings("unused")
 public class StepActivity extends BaseActivity
@@ -684,14 +682,8 @@ public class StepActivity extends BaseActivity
         PrefManager.putIntPref(mContext, recipeId);
         PrefManager.putStringPref(mContext,R.string.pref_widget_name,recipeName);
 
-        try {
-            Intent intent = new Intent(this, RecipeAppWidget.class);
-            intent.setAction(RECIPE_WIDGET_UPDATE);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            pendingIntent.send();
-        } catch (PendingIntent.CanceledException e) {
-            Timber.e("pending" + e.getMessage());
-        }
+        widgetUpdate(mContext);
+
         invalidateOptionsMenu();
     }
 

@@ -5,11 +5,17 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.graphics.Bitmap;
+import android.graphics.Canvas;
 import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
+import android.text.TextPaint;
 
 import it.instantapps.bakingapp.R;
 
@@ -74,4 +80,30 @@ public class Utility {
 
         }
     }
+
+    public static Bitmap bitmapTitleImage(Context context, String string) {
+
+        Typeface typeface = ResourcesCompat.getFont(context, R.font.permanent_marker);
+        int fontSizePx = (int) (30 * context.getResources().getDisplayMetrics().scaledDensity);
+
+        Paint paint = new Paint();
+        paint.setAntiAlias(true);
+        paint.setSubpixelText(true);
+        paint.setTypeface(typeface);
+        paint.setStyle(Paint.Style.FILL_AND_STROKE);
+        paint.setColor(context.getResources().getColor(R.color.white));
+        paint.setTextSize(fontSizePx);
+        paint.setTextAlign(Paint.Align.LEFT);
+        Paint.FontMetrics fontMetrics = paint.getFontMetrics();
+
+        int textHeight = (int) (fontMetrics.descent - fontMetrics.ascent + fontMetrics.leading);
+
+        TextPaint textPaint = new TextPaint(paint);
+        Bitmap bitmap = Bitmap.createBitmap((int) textPaint.measureText(string),
+                textHeight, Bitmap.Config.ARGB_8888);
+        Canvas myCanvas = new Canvas(bitmap);
+        myCanvas.drawText(string, 0, bitmap.getHeight(), paint);
+        return bitmap;
+    }
+
 }
