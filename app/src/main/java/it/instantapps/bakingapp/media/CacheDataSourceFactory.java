@@ -83,7 +83,7 @@ public class CacheDataSourceFactory implements DataSource.Factory {
         File file;
         String path;
         if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
-            path = Environment.getExternalStorageState().toString().concat(Costants.CACHE_VIDEO_DIR);
+            path = Environment.getExternalStorageState().concat(Costants.CACHE_VIDEO_DIR);
         } else {
             path = Environment.getDataDirectory().toString().concat(Costants.CACHE_VIDEO_DIR);
         }
