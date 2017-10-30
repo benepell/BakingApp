@@ -85,7 +85,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
         for (int appWidgetId : appWidgetIds) {
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, appWidgetId);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_listView);
             updateAppWidget(context);
         }
         super.onUpdate(context, appWidgetManager, appWidgetIds);
