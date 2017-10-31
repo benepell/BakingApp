@@ -28,24 +28,23 @@ public class RecipeAppWidget extends AppWidgetProvider {
         handleActionUpdateRecipeWidget(context);
     }
 
-    private void handleActionUpdateRecipeWidget(Context context) {
+    private RemoteViews handleActionUpdateRecipeWidget(Context context) {
 
         String widgetRecipeName = PrefManager.getStringPref(context, R.string.pref_widget_name);
 
         int id = PrefManager.getIntPref(context, R.string.pref_widget_id);
-
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_app_widget);
 
         if ((id > 0) && (!widgetRecipeName.isEmpty())) {
             views.setViewVisibility(R.id.widget_text_error, View.GONE);
             views.setViewVisibility(R.id.widget_listView, View.VISIBLE);
             views.setViewVisibility(R.id.recipe_widget_name, View.VISIBLE);
-            Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(),widgetRecipeName);
+            Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), widgetRecipeName);
             if (bitmap != null) {
                 views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);
 
-            }else {
-                views.setViewVisibility(R.id.recipe_widget_name,View.INVISIBLE);
+            } else {
+                views.setViewVisibility(R.id.recipe_widget_name, View.INVISIBLE);
             }
 
             Intent intent = new Intent(context, MainActivity.class);
@@ -66,29 +65,25 @@ public class RecipeAppWidget extends AppWidgetProvider {
             views.setTextViewText(R.id.widget_text_error, context.getString(R.string.widget_text_error));
 
         }
-        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
-        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, RecipeAppWidget.class));
-        appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, views.getLayoutId());
-        appWidgetManager.updateAppWidget(appWidgetIds, views);
-
+        return views;
     }
 
     @Override
     public void onReceive(Context context, Intent intent) {
-        super.onReceive(context, intent);
+        AppWidgetManager appWidgetManager = AppWidgetManager.getInstance(context);
+        int[] appWidgetIds = appWidgetManager.getAppWidgetIds(new ComponentName(context, RecipeAppWidget.class));
+
         String action = intent.getAction();
         if (Objects.equals(action, RECIPE_WIDGET_UPDATE)) {
-            handleActionUpdateRecipeWidget(context);
+            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_listView);
+            appWidgetManager.updateAppWidget(appWidgetIds, handleActionUpdateRecipeWidget(context));
         }
+        super.onReceive(context, intent);
     }
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        for (int appWidgetId : appWidgetIds) {
-            appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_listView);
-            updateAppWidget(context);
-        }
-        super.onUpdate(context, appWidgetManager, appWidgetIds);
+        appWidgetManager.updateAppWidget(appWidgetIds, handleActionUpdateRecipeWidget(context));
     }
 
     @Override

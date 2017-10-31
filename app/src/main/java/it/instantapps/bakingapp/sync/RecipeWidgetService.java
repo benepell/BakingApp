@@ -15,7 +15,6 @@ import it.instantapps.bakingapp.utility.PrefManager;
 
 public class RecipeWidgetService extends RemoteViewsService {
 
-    private int mRecipeId;
     @Override
     public RemoteViewsFactory onGetViewFactory(Intent intent) {
         return new RecipeRemoteViewsFactory(this.getApplicationContext());
@@ -33,11 +32,12 @@ public class RecipeWidgetService extends RemoteViewsService {
 
         @Override
         public void onCreate() {
-            mRecipeId = PrefManager.getIntPref(mContext,R.string.pref_widget_id);
+
         }
 
         @Override
         public void onDataSetChanged() {
+            int recipeId = PrefManager.getIntPref(mContext, R.string.pref_widget_id);
             if (mCursor != null) mCursor.close();
 
             final long identityToken = Binder.clearCallingIdentity();
@@ -45,7 +45,7 @@ public class RecipeWidgetService extends RemoteViewsService {
             mCursor = mContext.getContentResolver().query(Contract.IngredientEntry.CONTENT_URI,
                     null,
                     Contract.IngredientEntry.COLUMN_NAME_RECIPES_ID + " = ?",
-                    new String[]{String.valueOf(mRecipeId)},
+                    new String[]{String.valueOf(recipeId)},
                     null);
 
             Binder.restoreCallingIdentity(identityToken);
@@ -70,7 +70,6 @@ public class RecipeWidgetService extends RemoteViewsService {
             RemoteViews views = new RemoteViews(mContext.getPackageName(),
                     R.layout.recipe_list_widget);
 
-
             mCursor.moveToPosition(position);
 
             String ingredientName = mCursor.getString(mCursor.getColumnIndex(Contract.IngredientEntry.COLUMN_NAME_INGREDIENT));
@@ -91,7 +90,7 @@ public class RecipeWidgetService extends RemoteViewsService {
 
         @Override
         public RemoteViews getLoadingView() {
-           return null;
+            return null;
         }
 
         @Override
