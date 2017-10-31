@@ -1,4 +1,4 @@
-package it.instantapps.bakingapp.rest;
+package it.instantapps.bakingapp.service;
 
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ import retrofit2.http.GET;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-interface UdacityService {
+public interface UdacityService {
     @GET(" ")
     Call<ArrayList<Recipe>> getUdacityService();
 }

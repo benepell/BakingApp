@@ -39,7 +39,7 @@ import it.instantapps.bakingapp.media.ExoPlayerManager;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
-import it.instantapps.bakingapp.sync.UpdateWidgetService;
+import it.instantapps.bakingapp.service.UpdateWidgetService;
 import timber.log.Timber;
 
 

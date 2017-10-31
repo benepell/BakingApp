@@ -1,4 +1,4 @@
-package it.instantapps.bakingapp.sync;
+package it.instantapps.bakingapp.service;
 
 import android.content.Context;
 import android.content.Intent;
@@ -12,7 +12,6 @@ import java.text.DecimalFormat;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.PrefManager;
-import timber.log.Timber;
 
 public class RecipeWidgetService extends RemoteViewsService {
 
@@ -109,7 +108,6 @@ public class RecipeWidgetService extends RemoteViewsService {
         public boolean hasStableIds() {
             return true;
         }
-
 
     }
 

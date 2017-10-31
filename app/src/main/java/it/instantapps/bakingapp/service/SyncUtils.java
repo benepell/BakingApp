@@ -1,4 +1,4 @@
-package it.instantapps.bakingapp.sync;
+package it.instantapps.bakingapp.service;
 
 import android.content.Context;
 import android.support.annotation.NonNull;

@@ -86,7 +86,7 @@
             android:exported="false" />
 
         <service
-            android:name=".sync.FirebaseJobService"
+            android:name=".service.FirebaseJobService"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.firebase.jobdispatcher.ACTION_EXECUTE" />
@@ -94,10 +94,10 @@
         </service>
 
         <service
-            android:name=".sync.RecipeWidgetService"
+            android:name=".service.RecipeWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
-        <service android:name=".sync.UpdateWidgetService" />
+        <service android:name=".service.UpdateWidgetService" />
 
         <receiver android:name=".activity.StepActivity$MediaReceiver">
             <intent-filter>

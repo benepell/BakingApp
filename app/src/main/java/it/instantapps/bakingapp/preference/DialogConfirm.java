@@ -17,7 +17,7 @@ import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.media.CacheDataSourceFactory;
 import it.instantapps.bakingapp.utility.PrefManager;
-import it.instantapps.bakingapp.sync.UpdateWidgetService;
+import it.instantapps.bakingapp.service.UpdateWidgetService;
 
 
 public class DialogConfirm extends DialogPreference {

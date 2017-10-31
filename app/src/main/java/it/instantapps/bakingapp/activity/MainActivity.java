@@ -20,7 +20,7 @@ import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.fragment.RecipeFragment;
 import it.instantapps.bakingapp.model.Recipe;
 import it.instantapps.bakingapp.rest.RestExecute;
-import it.instantapps.bakingapp.sync.SyncUtils;
+import it.instantapps.bakingapp.service.SyncUtils;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.NetworkState;
 import it.instantapps.bakingapp.utility.PrefManager;

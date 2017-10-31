@@ -1,4 +1,4 @@
-package it.instantapps.bakingapp.sync;
+package it.instantapps.bakingapp.service;
 
 import android.app.IntentService;
 import android.app.PendingIntent;

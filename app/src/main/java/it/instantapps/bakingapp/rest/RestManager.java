@@ -27,6 +27,7 @@ package it.instantapps.bakingapp.rest;
 import java.util.ArrayList;
 
 import it.instantapps.bakingapp.model.Recipe;
+import it.instantapps.bakingapp.service.UdacityService;
 import it.instantapps.bakingapp.utility.Costants;
 import okhttp3.OkHttpClient;
 import retrofit2.Call;

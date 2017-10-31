@@ -14,7 +14,7 @@ import java.util.Objects;
 
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.activity.MainActivity;
-import it.instantapps.bakingapp.sync.RecipeWidgetService;
+import it.instantapps.bakingapp.service.RecipeWidgetService;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
 
