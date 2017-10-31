@@ -97,6 +97,8 @@
             android:name=".sync.RecipeWidgetService"
             android:permission="android.permission.BIND_REMOTEVIEWS" />
 
+        <service android:name=".sync.UpdateWidgetService" />
+
         <receiver android:name=".activity.StepActivity$MediaReceiver">
             <intent-filter>
                 <action android:name="android.intent.action.MEDIA_BUTTON" />

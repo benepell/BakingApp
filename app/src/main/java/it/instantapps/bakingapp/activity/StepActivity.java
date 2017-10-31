@@ -39,9 +39,9 @@ import it.instantapps.bakingapp.media.ExoPlayerManager;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
+import it.instantapps.bakingapp.sync.UpdateWidgetService;
 import timber.log.Timber;
 
-import static it.instantapps.bakingapp.widget.RecipeAppWidget.widgetUpdate;
 
 @SuppressWarnings("unused")
 public class StepActivity extends BaseActivity
@@ -682,7 +682,7 @@ public class StepActivity extends BaseActivity
         PrefManager.putIntPref(mContext, R.string.pref_widget_id,recipeId);
         PrefManager.putStringPref(mContext,R.string.pref_widget_name,recipeName);
 
-        widgetUpdate(mContext);
+        UpdateWidgetService.startWidgetService(mContext);
 
         invalidateOptionsMenu();
     }

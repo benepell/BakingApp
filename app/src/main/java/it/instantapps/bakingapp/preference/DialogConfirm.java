@@ -17,8 +17,7 @@ import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.media.CacheDataSourceFactory;
 import it.instantapps.bakingapp.utility.PrefManager;
-
-import static it.instantapps.bakingapp.widget.RecipeAppWidget.widgetUpdate;
+import it.instantapps.bakingapp.sync.UpdateWidgetService;
 
 
 public class DialogConfirm extends DialogPreference {
@@ -67,7 +66,7 @@ public class DialogConfirm extends DialogPreference {
                 PrefManager.clearPref(context);
                 BaseActivity.clearRecipeId();
                 Glide.get(context).clearDiskCache();
-                widgetUpdate(context);
+               UpdateWidgetService.startWidgetService(context);
             }
 
             return null;

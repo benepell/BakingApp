@@ -17,7 +17,6 @@ import it.instantapps.bakingapp.activity.MainActivity;
 import it.instantapps.bakingapp.sync.RecipeWidgetService;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
-import timber.log.Timber;
 
 import static it.instantapps.bakingapp.utility.Costants.RECIPE_WIDGET_UPDATE;
 import static it.instantapps.bakingapp.utility.Utility.bitmapTitleImage;
@@ -31,16 +30,15 @@ public class RecipeAppWidget extends AppWidgetProvider {
         int id = PrefManager.getIntPref(context, R.string.pref_widget_id);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_app_widget);
 
-        if ((id > 0) && (!widgetRecipeName.isEmpty())) {
+        if (id > 0) {
+
             views.setViewVisibility(R.id.widget_text_error, View.GONE);
             views.setViewVisibility(R.id.widget_listView, View.VISIBLE);
-            views.setViewVisibility(R.id.recipe_widget_name, View.VISIBLE);
+
             Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), widgetRecipeName);
             if (bitmap != null) {
                 views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);
 
-            } else {
-                views.setViewVisibility(R.id.recipe_widget_name, View.INVISIBLE);
             }
 
             Intent intent = new Intent(context, MainActivity.class);
@@ -55,11 +53,18 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
         } else {
             views.setViewVisibility(R.id.widget_listView, View.GONE);
-            views.setViewVisibility(R.id.recipe_widget_name, View.GONE);
-
             views.setViewVisibility(R.id.widget_text_error, View.VISIBLE);
             views.setTextViewText(R.id.widget_text_error, context.getString(R.string.widget_text_error));
 
+            Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), context.getString(R.string.app_name));
+            if (bitmap != null) {
+                views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);
+
+            }
+
+            Intent intent = new Intent(context, MainActivity.class);
+            PendingIntent pendingIntent = PendingIntent.getActivities(context, 0, new Intent[]{intent}, 0);
+            views.setOnClickPendingIntent(R.id.widget_text_error,pendingIntent);
         }
         return views;
     }
@@ -72,7 +77,9 @@ public class RecipeAppWidget extends AppWidgetProvider {
         String action = intent.getAction();
         if (Objects.equals(action, RECIPE_WIDGET_UPDATE)) {
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_listView);
-            appWidgetManager.updateAppWidget(appWidgetIds, handleActionUpdateRecipeWidget(context));
+            for(int appWidgetId:appWidgetIds){
+               appWidgetManager.updateAppWidget(appWidgetId, handleActionUpdateRecipeWidget(context));
+           }
         }
         super.onReceive(context, intent);
     }
@@ -90,15 +97,6 @@ public class RecipeAppWidget extends AppWidgetProvider {
     public void onDisabled(Context context) {
     }
 
-    public static void widgetUpdate(Context context) {
-        try {
-            Intent intent = new Intent(context, RecipeAppWidget.class);
-            intent.setAction(RECIPE_WIDGET_UPDATE);
-            PendingIntent pendingIntent = PendingIntent.getBroadcast(context.getApplicationContext(), 0, intent, PendingIntent.FLAG_UPDATE_CURRENT);
-            pendingIntent.send();
-        } catch (PendingIntent.CanceledException e) {
-            Timber.e("pending" + e.getMessage());
-        }
-    }
+
 }
 

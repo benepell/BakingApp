@@ -8,10 +8,11 @@
         android:id="@+id/recipe_widget_name"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:minHeight="40dp"
         android:background="@color/colorPrimary"
         android:contentDescription="@string/recipe_widget_name"
         android:paddingBottom="8dp"
-        android:visibility="invisible" />
+        android:visibility="visible" />
 
     <ListView
         android:id="@+id/widget_listView"
@@ -24,10 +25,10 @@
         android:id="@+id/widget_text_error"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-       android:background="@color/colorPrimary"
+        android:background="@color/colorBackgroundTextList"
         android:textColor="@color/blue_A700"
         android:gravity="center"
-        style="@style/TextAppearance.AppCompat.Large"
+        style="@style/TextAppearance.AppCompat.Medium"
         android:contentDescription="@string/widget_text_error"
         android:visibility="gone"/>
 

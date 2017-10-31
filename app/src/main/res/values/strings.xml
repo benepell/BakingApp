@@ -111,6 +111,6 @@
     <string name="text_font_failed">request font failed</string>
 
     <string name="recipe_widget_name">Yellow Cake</string>
-    <string name="widget_text_error">no recipe selected</string>
+    <string name="widget_text_error">no widget selected, click on add widget in recipe details.</string>
 
 </resources>

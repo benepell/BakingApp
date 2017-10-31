@@ -12,6 +12,7 @@ import java.text.DecimalFormat;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.PrefManager;
+import timber.log.Timber;
 
 public class RecipeWidgetService extends RemoteViewsService {
 
@@ -38,6 +39,7 @@ public class RecipeWidgetService extends RemoteViewsService {
         @Override
         public void onDataSetChanged() {
             int recipeId = PrefManager.getIntPref(mContext, R.string.pref_widget_id);
+
             if (mCursor != null) mCursor.close();
 
             final long identityToken = Binder.clearCallingIdentity();
@@ -110,6 +112,5 @@ public class RecipeWidgetService extends RemoteViewsService {
 
 
     }
-
 
 }
