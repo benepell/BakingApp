@@ -46,7 +46,7 @@ In this project you will:
 
 ## Screens
 <!--
-![screen](https://github.com/benepell/BakingAppProject3/tree/master/images)
+![screen](https://github.com/benepell/BakingAppProject3/tree/master/images/poster.png)
 
 -->
 
