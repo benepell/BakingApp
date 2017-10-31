@@ -23,7 +23,7 @@ import static it.instantapps.bakingapp.utility.Utility.bitmapTitleImage;
 
 public class RecipeAppWidget extends AppWidgetProvider {
 
-    private RemoteViews handleActionUpdateRecipeWidget(Context context) {
+    private RemoteViews viewsUpdateRecipeWidget(Context context) {
 
         String widgetRecipeName = PrefManager.getStringPref(context, R.string.pref_widget_name);
 
@@ -79,7 +79,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
         if (Objects.equals(action, RECIPE_WIDGET_UPDATE)) {
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_listView);
             for(int appWidgetId:appWidgetIds){
-               appWidgetManager.partiallyUpdateAppWidget(appWidgetId, handleActionUpdateRecipeWidget(context));
+               appWidgetManager.partiallyUpdateAppWidget(appWidgetId, viewsUpdateRecipeWidget(context));
            }
         }
         super.onReceive(context, intent);
@@ -87,7 +87,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
     @Override
     public void onUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds) {
-        appWidgetManager.updateAppWidget(appWidgetIds, handleActionUpdateRecipeWidget(context));
+        appWidgetManager.updateAppWidget(appWidgetIds, viewsUpdateRecipeWidget(context));
     }
 
     @Override
