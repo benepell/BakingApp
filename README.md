@@ -45,10 +45,9 @@ In this project you will:
 - [x] Widget displays ingredient list for desired recipe.
 
 ## Screens
-<!--
-![screen](https://github.com/benepell/BakingAppProject3/tree/master/images/poster.png)
 
--->
+![screen](BakingAppProject3/images/poster.png)
+
 
 ## Libraries
 <!--
