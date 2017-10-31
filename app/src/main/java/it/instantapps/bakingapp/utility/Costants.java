@@ -155,6 +155,8 @@ public class Costants {
     public static final int GLIDE_IMAGE_WIDTH_STEP = 300;
     public static final int GLIDE_IMAGE_HEIGHT_STEP = 200;
 
+    public static final int BITMAT_FONT_SIZE_DP = 30;
+
 
 
     public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 10;

@@ -86,14 +86,14 @@ public class Utility {
         if ((context == null) || (string.length() == 0)) return null;
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.permanent_marker);
-        int fontSizePx = (int) (30 * context.getResources().getDisplayMetrics().scaledDensity);
+        int fontSizePx = (int) (Costants.BITMAT_FONT_SIZE_DP * context.getResources().getDisplayMetrics().scaledDensity);
 
         Paint paint = new Paint();
         paint.setAntiAlias(true);
         paint.setSubpixelText(true);
         paint.setTypeface(typeface);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setColor(context.getResources().getColor(R.color.white));
+        paint.setColor(context.getResources().getColor( R.color.white));
         paint.setTextSize(fontSizePx);
         paint.setTextAlign(Paint.Align.LEFT);
         Paint.FontMetrics fontMetrics = paint.getFontMetrics();
