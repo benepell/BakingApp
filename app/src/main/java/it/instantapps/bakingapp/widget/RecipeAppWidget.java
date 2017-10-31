@@ -24,10 +24,6 @@ import static it.instantapps.bakingapp.utility.Utility.bitmapTitleImage;
 
 public class RecipeAppWidget extends AppWidgetProvider {
 
-    private void updateAppWidget(Context context) {
-        handleActionUpdateRecipeWidget(context);
-    }
-
     private RemoteViews handleActionUpdateRecipeWidget(Context context) {
 
         String widgetRecipeName = PrefManager.getStringPref(context, R.string.pref_widget_name);
