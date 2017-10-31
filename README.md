@@ -50,7 +50,7 @@ In this project you will:
 
 
 ## Libraries
-<!--
+
 * [Glide](https://github.com/bumptech/glide)
 * [OkHttp](https://github.com/square/okhttp)
 * [Retrofit 2](https://square.github.io/retrofit/)
@@ -59,7 +59,6 @@ In this project you will:
 * [Exoplayer](https://github.com/google/ExoPlayer/)
 * [Firebase jobdispatcher ](https://github.com/firebase/firebase-jobdispatcher-android/)
 
--->
 
 ## License
 
