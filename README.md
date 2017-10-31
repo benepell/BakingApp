@@ -48,7 +48,7 @@ In this project you will:
 ## Screens
 
 ![screen](https://github.com/benepell/BakingAppProject3/blob/master/images/poster.png)
-![screen](https://j.gifs.com/rR0ygE.gif)
+![screen height="200"](https://j.gifs.com/rR0ygE.gif)
 
 ## Libraries
 
