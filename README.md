@@ -48,7 +48,6 @@ In this project you will:
 ## Screens
 
 ![screen](https://github.com/benepell/BakingAppProject3/blob/master/images/poster.png)
-<iframe src='//gifs.com/embed/bakingapp-rR0ygE' frameborder='0' scrolling='no' width='800px' height='600px' style='-webkit-backface-visibility: hidden;-webkit-transform: scale(1);' ></iframe>
 
 ## Libraries
 
