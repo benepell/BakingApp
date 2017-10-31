@@ -85,7 +85,6 @@ public class RecipeWidgetService extends RemoteViewsService {
             measureName = "(" + measureName + ")";
             views.setTextViewText(R.id.recipe_widget_ingredient_measure, measureName);
 
-
             return views;
         }
 

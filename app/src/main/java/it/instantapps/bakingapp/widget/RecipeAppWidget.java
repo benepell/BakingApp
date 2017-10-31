@@ -79,7 +79,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
         if (Objects.equals(action, RECIPE_WIDGET_UPDATE)) {
             appWidgetManager.notifyAppWidgetViewDataChanged(appWidgetIds, R.id.widget_listView);
             for(int appWidgetId:appWidgetIds){
-               appWidgetManager.updateAppWidget(appWidgetId, handleActionUpdateRecipeWidget(context));
+               appWidgetManager.partiallyUpdateAppWidget(appWidgetId, handleActionUpdateRecipeWidget(context));
            }
         }
         super.onReceive(context, intent);
