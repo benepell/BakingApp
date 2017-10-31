@@ -27,6 +27,8 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
         String widgetRecipeName = PrefManager.getStringPref(context, R.string.pref_widget_name);
 
+        if(widgetRecipeName.isEmpty()) widgetRecipeName = context.getString(R.string.app_name);
+
         int id = PrefManager.getIntPref(context, R.string.pref_widget_id);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_app_widget);
 
@@ -34,7 +36,6 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
             views.setViewVisibility(R.id.widget_text_error, View.GONE);
             views.setViewVisibility(R.id.widget_listView, View.VISIBLE);
-
             Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), widgetRecipeName);
             if (bitmap != null) {
                 views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);
@@ -56,7 +57,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
             views.setViewVisibility(R.id.widget_text_error, View.VISIBLE);
             views.setTextViewText(R.id.widget_text_error, context.getString(R.string.widget_text_error));
 
-            Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), context.getString(R.string.app_name));
+            Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), widgetRecipeName);
             if (bitmap != null) {
                 views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);
 
