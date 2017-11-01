@@ -52,7 +52,7 @@ public class CacheDataSourceFactory implements DataSource.Factory {
         long fileCacheMax;
         if ((Build.VERSION.SDK_INT >= 23) &&
                 (Utility.isPermissionExtStorage(mContext)) &&
-                (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
+                isExternalStorageWritable()) {
 
             file = new File(mContext.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
             fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
@@ -94,6 +94,11 @@ public class CacheDataSourceFactory implements DataSource.Factory {
             e.printStackTrace();
         }
     }
+
+   private boolean isExternalStorageWritable() {
+        String state = Environment.getExternalStorageState();
+       return Environment.MEDIA_MOUNTED.equals(state);
+   }
 
 
 }

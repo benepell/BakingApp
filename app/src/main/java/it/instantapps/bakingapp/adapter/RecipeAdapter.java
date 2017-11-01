@@ -158,9 +158,12 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
             }
         };
 
-        FontsContractCompat
-                .requestFont(mContext, request, callback,
-                       getHandlerThreadHandler());
+
+            FontsContractCompat
+                    .requestFont(mContext, request, callback,
+                            getHandlerThreadHandler());
+
+
 
         holder.mTextViewRecipeName.setText(nameRecipe);
 

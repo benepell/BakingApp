@@ -100,7 +100,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
         final RequestOptions requestOptions;
 
-        if(imageStep.isEmpty()){
+        if (imageStep.isEmpty()) {
             imageStep = null;
             requestOptions = new RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -109,7 +109,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
                     .fitCenter()
                     .placeholder(R.drawable.download_in_progress);
 
-        }else {
+        } else {
             requestOptions = new RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.no_media)
@@ -155,9 +155,9 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
                     }
                 });
 
-        int fontCert =  R.array.com_google_android_gms_fonts_certs_prod;
+        int fontCert = R.array.com_google_android_gms_fonts_certs_prod;
 
-        if(BuildConfig.DEBUG){
+        if (BuildConfig.DEBUG) {
             fontCert = R.array.com_google_android_gms_fonts_certs_dev;
         }
 
