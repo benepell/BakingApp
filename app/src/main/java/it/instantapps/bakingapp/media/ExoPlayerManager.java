@@ -167,7 +167,7 @@ public class ExoPlayerManager implements Player.EventListener {
     public void updateResumePosition(boolean active) {
         if ((active) && (mExoPlayer != null)) {
             mResumeWindow = mExoPlayer.getCurrentWindowIndex();
-            mResumePosition = Math.max(0, mExoPlayer.getContentPosition() - (Costants.EXO_UPDATE_DELAY));
+            mResumePosition = Math.max(0, mExoPlayer.getContentPosition());
         } else{
             clearResumePosition();
             isAutoPlay = false;

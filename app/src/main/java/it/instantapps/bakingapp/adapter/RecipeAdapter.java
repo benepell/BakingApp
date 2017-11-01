@@ -39,7 +39,6 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -150,14 +149,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                 holder.mTextViewRecipeName.setTypeface(typeface);
             }
 
-            @Override
-            public void onTypefaceRequestFailed(int reason) {
-                Toast.makeText(mContext,
-                         R.string.text_font_failed, Toast.LENGTH_LONG)
-                        .show();
-            }
         };
-
 
             FontsContractCompat
                     .requestFont(mContext, request, callback,
@@ -174,9 +166,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
     private Handler getHandlerThreadHandler() {
         if (mHandler == null) {
-            HandlerThread handlerThread = new HandlerThread("fonts");
-            handlerThread.start();
-            mHandler = new Handler(handlerThread.getLooper());
+                HandlerThread handlerThread = new HandlerThread("fonts");
+                handlerThread.start();
+                mHandler = new Handler(handlerThread.getLooper());
         }
         return mHandler;
     }

@@ -78,6 +78,8 @@ public class MainActivity extends BaseActivity implements
 
         mContext = MainActivity.this;
         ButterKnife.bind(this);
+
+
         Timber.plant(new Timber.DebugTree());
 
         SyncUtils.initialize(this);

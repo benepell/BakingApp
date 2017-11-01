@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.AlphaAnimation;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
@@ -99,7 +98,6 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         holder.bind(idStepDetail);
 
         final RequestOptions requestOptions;
-
         if (imageStep.isEmpty()) {
             imageStep = null;
             requestOptions = new RequestOptions()
@@ -160,7 +158,6 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         if (BuildConfig.DEBUG) {
             fontCert = R.array.com_google_android_gms_fonts_certs_dev;
         }
-
         FontRequest request = new FontRequest(
                 "com.google.android.gms.fonts",
                 "com.google.android.gms", "Permanent Marker",
@@ -171,13 +168,6 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
             @Override
             public void onTypefaceRetrieved(Typeface typeface) {
                 holder.mTextViewShortDescription.setTypeface(typeface);
-            }
-
-            @Override
-            public void onTypefaceRequestFailed(int reason) {
-                Toast.makeText(mContext,
-                        R.string.text_font_failed, Toast.LENGTH_LONG)
-                        .show();
             }
         };
 

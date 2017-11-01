@@ -108,7 +108,6 @@
 
     <string name="pref_write_external_storage" translatable="false">it.instantapps.bakingapp.app.write.external.storage</string>
     <string name="text_click_end_ingredient">End list ingredient</string>
-    <string name="text_font_failed">request font failed</string>
 
     <string name="recipe_widget_name">Yellow Cake</string>
     <string name="widget_text_error">no widget selected, click on add widget in recipe details.</string>
