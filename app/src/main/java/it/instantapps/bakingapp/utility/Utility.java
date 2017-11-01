@@ -3,6 +3,7 @@ package it.instantapps.bakingapp.utility;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.Bitmap;
@@ -18,6 +19,7 @@ import android.support.v7.app.ActionBar;
 import android.text.TextPaint;
 
 import it.instantapps.bakingapp.R;
+import it.instantapps.bakingapp.activity.MainActivity;
 
 /*
  *  ____        _    _                  _                
@@ -79,6 +81,10 @@ public class Utility {
             }
 
         }
+    }
+
+    public static void homeActivity(Context context){
+        context.startActivity(new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
     public static Bitmap bitmapTitleImage(Context context, String string) {

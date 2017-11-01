@@ -129,7 +129,6 @@ public class DataUtils {
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean(mContext.getString(R.string.pref_insert_data), false);
         editor.apply();
-        mContext.startActivity(new Intent(mContext, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 
     public void saveDB(ArrayList<Recipe> recipes) {

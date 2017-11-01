@@ -2,6 +2,7 @@ package it.instantapps.bakingapp.preference;
 
 import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.DialogPreference;
@@ -14,10 +15,12 @@ import java.lang.ref.WeakReference;
 
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.activity.BaseActivity;
+import it.instantapps.bakingapp.activity.MainActivity;
 import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.media.CacheDataSourceFactory;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.service.UpdateWidgetService;
+import it.instantapps.bakingapp.utility.Utility;
 
 
 public class DialogConfirm extends DialogPreference {
@@ -57,16 +60,26 @@ public class DialogConfirm extends DialogPreference {
     private static class ResetAsyncTask extends AsyncTask<Void, Void, Void> {
 
         @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+            Context context = sWeakReference.get();
+            if (context != null) {
+                PrefManager.clearGeneralSettings(context);
+                PrefManager.clearPref(context);
+                BaseActivity.clearRecipeId();
+                UpdateWidgetService.startWidgetService(context.getApplicationContext());
+
+            }
+        }
+
+        @Override
         protected Void doInBackground(Void... params) {
             Context context = sWeakReference.get();
             if (context != null) {
                 CacheDataSourceFactory.getClearData(context);
                 new DataUtils(context).ClearDataPrivacy();
-                PrefManager.clearGeneralSettings(context);
-                PrefManager.clearPref(context);
-                BaseActivity.clearRecipeId();
                 Glide.get(context).clearDiskCache();
-               UpdateWidgetService.startWidgetService(context);
+
             }
 
             return null;
@@ -76,8 +89,10 @@ public class DialogConfirm extends DialogPreference {
         @Override
         protected void onPostExecute(Void aVoid) {
             super.onPostExecute(aVoid);
-            if (sWeakReference.get() != null) {
-                Toast.makeText(sWeakReference.get(), R.string.text_dialog_confirm_reset, Toast.LENGTH_SHORT).show();
+            Context context = sWeakReference.get();
+            if (context != null) {
+                Toast.makeText(context, R.string.text_dialog_confirm_reset, Toast.LENGTH_SHORT).show();
+                Utility.homeActivity(context);
             }
         }
     }
