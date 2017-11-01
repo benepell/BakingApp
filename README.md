@@ -1,17 +1,14 @@
-<!--
+
 <a style="margin-bottom: 0;" 
 	href='https://play.google.com/store/apps/details?id=it.instantapps.bakingapp'>
 	<img alt='Get it on Google Play' 
 	src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80px"/>
 </a>
--->
+
 
 # Baking App
 
 Here is a simple and colorful android app which I made for "Android Developer Nanodegree" -Project 3.
-
-## Project Overview
-You will productionize an app, taking it from a functional state to a production-ready state. This will involve finding and handling error cases, adding accessibility features, allowing for localization, adding a widget, and adding a library.
 
 ## Why this Project?
 As a working Android developer, you often have to create and implement apps where you are responsible for designing and planning the steps you need to take to create a production-ready app. Unlike Popular Movies where we gave you an implementation guide, it will be up to you to figure things out for the Baking App.
@@ -48,7 +45,6 @@ In this project you will:
 ## Screens
 
 ![screen](https://github.com/benepell/BakingAppProject3/blob/master/images/poster.png)
-<iframe src='//gifs.com/embed/bakingapp-rR0ygE' frameborder='0' scrolling='no' width='800px' height='600px' style='-webkit-backface-visibility: hidden;-webkit-transform: scale(1);' ></iframe>
 
 ## Libraries
 
