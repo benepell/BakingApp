@@ -127,8 +127,7 @@ public class DetailActivity extends BaseActivity
     @Override
     public void onBackPressed() {
         super.onBackPressed();
-        startActivity(new Intent(this, MainActivity.class).setFlags(
-                Intent.FLAG_ACTIVITY_NO_ANIMATION | Intent.FLAG_ACTIVITY_CLEAR_TASK));
+        MainActivity.homeActivity(this);
     }
 
     @Override

@@ -2,7 +2,6 @@ package it.instantapps.bakingapp.preference;
 
 import android.content.Context;
 import android.content.DialogInterface;
-import android.content.Intent;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.DialogPreference;
@@ -20,7 +19,6 @@ import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.media.CacheDataSourceFactory;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.service.UpdateWidgetService;
-import it.instantapps.bakingapp.utility.Utility;
 
 
 public class DialogConfirm extends DialogPreference {
@@ -92,7 +90,7 @@ public class DialogConfirm extends DialogPreference {
             Context context = sWeakReference.get();
             if (context != null) {
                 Toast.makeText(context, R.string.text_dialog_confirm_reset, Toast.LENGTH_SHORT).show();
-                Utility.homeActivity(context);
+                MainActivity.homeActivity(context);
             }
         }
     }

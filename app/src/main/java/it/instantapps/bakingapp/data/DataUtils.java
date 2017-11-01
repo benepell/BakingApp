@@ -2,14 +2,12 @@ package it.instantapps.bakingapp.data;
 
 import android.content.ContentValues;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 
 import java.util.ArrayList;
 
 import it.instantapps.bakingapp.R;
-import it.instantapps.bakingapp.activity.MainActivity;
 import it.instantapps.bakingapp.model.Ingredient;
 import it.instantapps.bakingapp.model.Recipe;
 import it.instantapps.bakingapp.model.Step;

@@ -219,4 +219,9 @@ public class MainActivity extends BaseActivity implements
         mProgressBar.setVisibility(View.INVISIBLE);
         mStateProgressBar = false;
     }
+
+    public static void homeActivity(Context context){
+        context.startActivity(new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION));
+    }
+
 }
