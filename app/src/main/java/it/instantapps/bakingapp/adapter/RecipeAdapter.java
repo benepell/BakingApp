@@ -49,6 +49,7 @@ import com.bumptech.glide.request.transition.Transition;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
+import it.instantapps.bakingapp.BuildConfig;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.Costants;
@@ -131,11 +132,16 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                     }
                 });
 
+        int fontCert =  R.array.com_google_android_gms_fonts_certs_prod;
+
+        if(BuildConfig.DEBUG){
+            fontCert = R.array.com_google_android_gms_fonts_certs_dev;
+        }
 
         FontRequest request = new FontRequest(
                 "com.google.android.gms.fonts",
                 "com.google.android.gms", "Permanent Marker",
-                R.array.com_google_android_gms_fonts_certs);
+                fontCert);
 
         FontsContractCompat.FontRequestCallback callback = new FontsContractCompat
                 .FontRequestCallback() {
