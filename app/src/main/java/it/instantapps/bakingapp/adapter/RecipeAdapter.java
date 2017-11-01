@@ -88,12 +88,24 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
         int index = mCursor.getInt(mCursor.getColumnIndex(Contract.RecipeEntry._ID));
 
         final RequestOptions requestOptions;
-        requestOptions = new RequestOptions()
-                .diskCacheStrategy(DiskCacheStrategy.ALL)
-                .error(R.drawable.no_media)
-                .fallback(R.drawable.no_media)
-                .fitCenter()
-                .placeholder(R.drawable.download_in_progress);
+        if(imageRecipe.isEmpty()){
+            imageRecipe = null;
+            requestOptions = new RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.NONE)
+                    .skipMemoryCache(true)
+                    .fallback(R.drawable.no_media)
+                    .fitCenter()
+                    .placeholder(R.drawable.download_in_progress);
+
+        }else {
+            requestOptions = new RequestOptions()
+                    .diskCacheStrategy(DiskCacheStrategy.ALL)
+                    .error(R.drawable.no_media)
+                    .fallback(R.drawable.no_media)
+                    .fitCenter()
+                    .placeholder(R.drawable.download_in_progress);
+
+        }
 
         Glide.with(holder.itemView.getContext())
                 .asBitmap()

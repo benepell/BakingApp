@@ -18,6 +18,7 @@ import android.support.v7.app.ActionBar;
 import android.text.TextPaint;
 
 import it.instantapps.bakingapp.R;
+import timber.log.Timber;
 
 /*
  *  ____        _    _                  _                
@@ -83,7 +84,7 @@ public class Utility {
 
     public static Bitmap bitmapTitleImage(Context context, String string) {
 
-        if ((context == null) || (string.length() == 0)) return null;
+        if ((context == null) || (string == null)) return null;
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.permanent_marker);
         int fontSizePx = (int) (Costants.BITMAT_FONT_SIZE_DP * context.getResources().getDisplayMetrics().scaledDensity);
@@ -93,24 +94,31 @@ public class Utility {
         paint.setSubpixelText(true);
         paint.setTypeface(typeface);
         paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setColor(context.getResources().getColor( R.color.white));
+        paint.setColor(context.getResources().getColor(R.color.white));
         paint.setTextSize(fontSizePx);
         paint.setTextAlign(Paint.Align.LEFT);
         Paint.FontMetrics fontMetrics = paint.getFontMetrics();
 
         int textHeight = (int) (fontMetrics.descent - fontMetrics.ascent + fontMetrics.leading);
-
         TextPaint textPaint = new TextPaint(paint);
-        if(textPaint.measureText(string)>0){
+        try {
 
-            Bitmap bitmap = Bitmap.createBitmap((int) textPaint.measureText(string),
-                    textHeight, Bitmap.Config.ARGB_8888);
-            Canvas myCanvas = new Canvas(bitmap);
-            if((bitmap.getHeight()>0)){
-                myCanvas.drawText(string, 0, bitmap.getHeight(), paint);
-                return bitmap;
+        if (textPaint.measureText(string) > 0) {
+
+
+                Bitmap bitmap = Bitmap.createBitmap((int) textPaint.measureText(string),
+                        textHeight, Bitmap.Config.ARGB_8888);
+                Canvas myCanvas = new Canvas(bitmap);
+                if ((bitmap.getHeight() > 0)) {
+                    myCanvas.drawText(string, 0, bitmap.getHeight(), paint);
+                    return bitmap;
+                }
             }
+
+        } catch(IllegalArgumentException e){
+            Timber.e("Benny illegalArg: " + e.getMessage());
         }
+
         return null;
     }
 

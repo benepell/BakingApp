@@ -36,6 +36,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
             views.setViewVisibility(R.id.widget_text_error, View.GONE);
             views.setViewVisibility(R.id.widget_listView, View.VISIBLE);
+
             Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), widgetRecipeName);
             if (bitmap != null) {
                 views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);

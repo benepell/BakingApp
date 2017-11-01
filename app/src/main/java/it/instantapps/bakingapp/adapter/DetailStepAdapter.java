@@ -46,7 +46,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
     private final String mDescription;
     private final String mShortDescription;
-    private final String mThumbnailUrl;
+    private String mThumbnailUrl;
     private final String mVideoUri;
     private Context mContext;
 
@@ -73,7 +73,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
         if (mVideoUri != null && mVideoUri.isEmpty()) {
 
-            if ((! PrefManager.isPref(mContext,R.string.pref_device_tablet)) && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if ((!PrefManager.isPref(mContext, R.string.pref_device_tablet)) && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 holder.mTextViewDetailDescription.setVisibility(View.GONE);
                 holder.mTextViewShortDetailDescription.setVisibility(View.GONE);
                 holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundPlayer);
@@ -81,24 +81,29 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
                 holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundCardSecondary);
             }
 
-            if (mThumbnailUrl != null && !mThumbnailUrl.isEmpty()) {
-                final RequestOptions requestOptions;
+            final RequestOptions requestOptions;
+            if (mThumbnailUrl.isEmpty()) {
+                mThumbnailUrl = null;
+                requestOptions = new RequestOptions()
+                        .diskCacheStrategy(DiskCacheStrategy.NONE)
+                        .skipMemoryCache(true)
+                        .fallback(R.drawable.no_media)
+                        .fitCenter()
+                        .placeholder(R.drawable.download_in_progress);
+
+            } else {
                 requestOptions = new RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.ALL)
                         .fallback(R.drawable.no_media)
                         .error(R.drawable.no_media)
                         .placeholder(R.drawable.download_in_progress);
-
-                Glide.with(holder.itemView.getContext())
-                        .load(mThumbnailUrl)
-                        .apply(requestOptions)
-                        .into(holder.mImageViewDetailStep);
-
-                holder.mImageViewDetailStep.setVisibility(View.VISIBLE);
-            } else {
-                holder.mImageViewDetailStep.setImageResource(R.drawable.no_media);
-                holder.mImageViewDetailStep.setVisibility(View.VISIBLE);
             }
+            Glide.with(holder.itemView.getContext())
+                    .load(mThumbnailUrl)
+                    .apply(requestOptions)
+                    .into(holder.mImageViewDetailStep);
+
+            holder.mImageViewDetailStep.setVisibility(View.VISIBLE);
 
         }
 
