@@ -56,6 +56,27 @@ In this project you will:
 * [Exoplayer](https://github.com/google/ExoPlayer/)
 * [Firebase jobdispatcher ](https://github.com/firebase/firebase-jobdispatcher-android/)
 
+## Test 
+
+### Firebase Test Robo (Passed)
+
+* Galaxy S7 edge, livello API 23
+* Galaxy S7, livello API 23
+* Huawei P8 lite, livello API 21
+* LG G6 LGUS997, livello API 24
+* Low-resolution MDPI phone, Virtual, livello API 23
+* Nexus 10, Virtual, livello API 21
+* Nexus 5, livello API 23
+* Nexus 5, Virtual, livello API 23
+* Nexus 5X, Virtual, livello API 26
+* Nexus 6, Virtual, livello API 21
+* Nexus 6P, Virtual, livello API 26
+* Nexus 7 (2012), Virtual, livello API 21
+* Pixel, livello API 26
+* Sony XPERIA XZ Premium, livello API 25
+
+### Google Play 
+* Verified by Play Protect 
 
 ## License
 
