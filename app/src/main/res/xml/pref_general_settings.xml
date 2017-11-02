@@ -14,9 +14,9 @@
 
     <SwitchPreferenceCompat
         android:defaultValue="false"
-        android:key="@string/pref_resume_video"
-        android:summary="@string/summary_resume_video"
-        android:title="@string/title_resume_video" />
+        android:key="@string/pref_rendering_video"
+        android:summary="@string/summary_rendering_video"
+        android:title="@string/title_rendering_video" />
 
     <ListPreference
         android:defaultValue="86400"

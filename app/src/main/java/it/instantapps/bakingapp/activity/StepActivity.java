@@ -277,8 +277,7 @@ public class StepActivity extends BaseActivity
         super.onPause();
 
         if (mExoPlayerManager != null) {
-            mExoPlayerManager.updateResumePosition(PrefManager.isGeneralSettings(this,
-                    getString(R.string.pref_resume_video)));
+            mExoPlayerManager.updateResumePosition();
         }
         if (!mIsVideoBackground) {
             destroyVideo();

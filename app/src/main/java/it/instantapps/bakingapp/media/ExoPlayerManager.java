@@ -15,6 +15,7 @@ import android.support.v4.media.session.PlaybackStateCompat;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.DefaultLoadControl;
@@ -43,6 +44,7 @@ import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.activity.StepActivity;
 import it.instantapps.bakingapp.utility.Costants;
+import it.instantapps.bakingapp.utility.PrefManager;
 
 import static android.content.Context.NOTIFICATION_SERVICE;
 import static it.instantapps.bakingapp.activity.StepActivity.mMediaSession;
@@ -107,8 +109,18 @@ public class ExoPlayerManager implements Player.EventListener {
             TrackSelection.Factory videoTrackSelectionFactory = new AdaptiveTrackSelection.Factory(bandwidthMeter);
             TrackSelector trackSelector = new DefaultTrackSelector(videoTrackSelectionFactory);
             LoadControl loadControl = new DefaultLoadControl();
+
+            boolean isRenderingVideo = PrefManager.isGeneralSettings(mContext,mContext.getString(R.string.pref_rendering_video));
+
+            int extensionRendererMode;
+            if(isRenderingVideo){
+                extensionRendererMode = DefaultRenderersFactory.EXTENSION_RENDERER_MODE_ON;
+            }else {
+                extensionRendererMode = DefaultRenderersFactory.EXTENSION_RENDERER_MODE_OFF;
+            }
+
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(
-                    new DefaultRenderersFactory(mContext),
+                    new DefaultRenderersFactory(mContext,null,extensionRendererMode),
                     trackSelector,
                     loadControl);
             mSimpleExoPlayerView.setPlayer(mExoPlayer);
@@ -164,13 +176,10 @@ public class ExoPlayerManager implements Player.EventListener {
         return mResumePosition;
     }
 
-    public void updateResumePosition(boolean active) {
-        if ((active) && (mExoPlayer != null)) {
+    public void updateResumePosition() {
+        if (mExoPlayer != null) {
             mResumeWindow = mExoPlayer.getCurrentWindowIndex();
             mResumePosition = Math.max(0, mExoPlayer.getContentPosition());
-        } else{
-            clearResumePosition();
-            isAutoPlay = false;
         }
     }
 
