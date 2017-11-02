@@ -7,9 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionName 'Yellow'
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-        versionCode 3
-
+        versionCode 5
 
     }
     buildTypes {
@@ -43,8 +41,4 @@ dependencies {
     compile 'com.google.android.exoplayer:exoplayer:' + rootProject.exoPlayerVersion
     compile 'commons-io:commons-io:' + rootProject.apacheCommonsVersion
     compile 'com.firebase:firebase-jobdispatcher:' + rootProject.firebaseJobDispVersion
-//    compile 'com.google.firebase:firebase-crash:' + rootProject.firebaseCoreVersion
-//    compile 'com.google.firebase:firebase-core:' + rootProject.firebaseCoreVersion
-    testCompile 'junit:junit:4.12'
 }
-//apply plugin: 'com.google.gms.google-services'
