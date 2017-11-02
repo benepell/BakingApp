@@ -47,7 +47,7 @@ public class RecipeWidgetService extends RemoteViewsService {
                     null,
                     Contract.IngredientEntry.COLUMN_NAME_RECIPES_ID + " = ?",
                     new String[]{String.valueOf(recipeId)},
-                    null);
+                    Contract.IngredientEntry._ID + " ASC");
 
             Binder.restoreCallingIdentity(identityToken);
         }
