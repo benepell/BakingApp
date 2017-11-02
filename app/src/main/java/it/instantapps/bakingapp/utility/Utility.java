@@ -85,7 +85,7 @@ public class Utility {
 
         if ((context == null) || (string == null)) return null;
 
-        Typeface typeface = ResourcesCompat.getFont(context, R.font.pacifico);
+        Typeface typeface = ResourcesCompat.getFont(context, R.font.indie_flower);
         int fontSizePx = (int) (Costants.BITMAT_FONT_SIZE_DP * context.getResources().getDisplayMetrics().scaledDensity);
 
         Paint paint = new Paint();
