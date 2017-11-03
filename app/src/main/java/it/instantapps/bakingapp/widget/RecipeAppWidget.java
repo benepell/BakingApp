@@ -10,7 +10,6 @@ import android.graphics.Bitmap;
 import android.view.View;
 import android.widget.RemoteViews;
 
-import java.util.Locale;
 import java.util.Objects;
 
 import it.instantapps.bakingapp.R;
