@@ -71,19 +71,18 @@ public class MainActivity extends BaseActivity implements
     private String mRecipeName;
 
     private int mId;
-
     private boolean mStateProgressBar;
 
 
     @Override
     public boolean shouldShowRequestPermissionRationale(@NonNull String permission) {
-        if((Objects.equals(permission, Manifest.permission.WRITE_EXTERNAL_STORAGE))&&
-                (!Utility.isPermissionExtStorage(mContext)  &&
-                !PrefManager.isPref(mContext,R.string.pref_request_permission)) ){
+        if ((Objects.equals(permission, Manifest.permission.WRITE_EXTERNAL_STORAGE)) &&
+                (!Utility.isPermissionExtStorage(mContext) &&
+                        !PrefManager.isPref(mContext, R.string.pref_request_permission))) {
             ActivityCompat.requestPermissions(MainActivity.this,
                     new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
                     Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-            PrefManager.putBoolPref(mContext,R.string.pref_request_permission,true);
+            PrefManager.putBoolPref(mContext, R.string.pref_request_permission, true);
         }
         return super.shouldShowRequestPermissionRationale(permission);
     }
@@ -98,7 +97,6 @@ public class MainActivity extends BaseActivity implements
 
         mContext = MainActivity.this;
         ButterKnife.bind(this);
-
 
 
         Timber.plant(new Timber.DebugTree());
@@ -139,8 +137,6 @@ public class MainActivity extends BaseActivity implements
     }
 
 
-
-
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -157,8 +153,8 @@ public class MainActivity extends BaseActivity implements
             case Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE: {
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-                    PrefManager.putBoolPref(mContext, R.string.pref_write_external_storage,true);
-                    PrefManager.putBoolPref(mContext,R.string.pref_request_permission,false);
+                    PrefManager.putBoolPref(mContext, R.string.pref_write_external_storage, true);
+                    PrefManager.putBoolPref(mContext, R.string.pref_request_permission, false);
                 }
             }
         }
@@ -207,6 +203,10 @@ public class MainActivity extends BaseActivity implements
                 @Override
                 public void onClick(View v) {
                     initializeMainJob();
+
+                    if (NetworkState.isOnline(mContext)) {
+                        v.setClickable(false);
+                    }
                 }
             });
         }
@@ -214,7 +214,7 @@ public class MainActivity extends BaseActivity implements
 
     private void initializeMainJob() {
         if (!PrefManager.isPref(mContext, R.string.pref_insert_data)) {
-            if (new NetworkState(mContext).isOnline()) {
+            if (NetworkState.isOnline(mContext)) {
                 showProgressBar();
                 new RestExecute().loadData(this);
             } else {
@@ -252,7 +252,7 @@ public class MainActivity extends BaseActivity implements
         mStateProgressBar = false;
     }
 
-    public static void homeActivity(Context context){
+    public static void homeActivity(Context context) {
         context.startActivity(new Intent(context, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_NO_ANIMATION));
     }
 

@@ -126,7 +126,7 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
 
     @Override
     public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
-        if (data != null) {
+        if ((data != null) && (mAdapter != null)) {
             mAdapter.swapCursor(data);
         }
     }

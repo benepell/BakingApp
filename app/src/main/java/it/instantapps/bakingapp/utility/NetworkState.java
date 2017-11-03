@@ -29,15 +29,9 @@ import android.net.NetworkInfo;
 
 public class NetworkState {
 
-    private final Context mContext;
-
-    public NetworkState(Context context) {
-        mContext = context;
-    }
-
-    public boolean isOnline() {
+    public static boolean isOnline(Context context) {
         ConnectivityManager connMgr = (ConnectivityManager)
-                mContext.getSystemService(Context.CONNECTIVITY_SERVICE);
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
         if(connMgr!=null){
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
             return (networkInfo != null) && (networkInfo.getState() == NetworkInfo.State.CONNECTED);

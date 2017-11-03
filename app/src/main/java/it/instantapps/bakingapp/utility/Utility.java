@@ -51,7 +51,7 @@ public class Utility {
     }
 
     public void setColorOfflineActionBar() {
-        if (!new NetworkState(mContext).isOnline()) {
+        if (! NetworkState.isOnline(mContext)) {
             if (mActionBar != null) {
                 mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(Costants.COLOR_BACKGROUND_ACTIONBAR_OFFLINE)));
             }
