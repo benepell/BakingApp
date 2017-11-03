@@ -158,7 +158,7 @@ public class MainActivity extends BaseActivity implements
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     PrefManager.putBoolPref(mContext, R.string.pref_write_external_storage,true);
-                    PrefManager.putBoolPref(mContext,R.string.pref_request_permission,true);
+                    PrefManager.putBoolPref(mContext,R.string.pref_request_permission,false);
                 }
             }
         }
