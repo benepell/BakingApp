@@ -23,38 +23,43 @@ import okhttp3.OkHttpClient;
 
 @SuppressWarnings({"WeakerAccess", "unused"})
 @GlideModule
-    public class OkHttpClientGlideModule extends AppGlideModule {
- 
-       @Override 
-       public void registerComponents(Context context, Glide glide, Registry registry) {
+public class OkHttpClientGlideModule extends AppGlideModule {
 
-           File file;
-           long fileCacheMax;
-           if ((Build.VERSION.SDK_INT >= 23) &&
-                   (Utility.isPermissionExtStorage(context)) &&
-                   (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
+    @Override
+    public void registerComponents(Context context, Glide glide, Registry registry) {
 
-               file = new File(Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
-                       context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
-               fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
-           } else {
-               file = new File(context.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
-               fileCacheMax = Costants.CACHE_SIZE_MAX;
+        File file;
+        long fileCacheMax;
+        if (Build.VERSION.SDK_INT < 23) {
+            file = new File(Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
+                    context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
+            fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
 
-           }
+        } else if ((Build.VERSION.SDK_INT >= 23) &&
+                (Utility.isPermissionExtStorage(context)) &&
+                (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
 
-           Cache cache = new Cache(file, fileCacheMax);
+            file = new File(Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
+                    context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
+            fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
+        } else {
+            file = new File(context.getCacheDir().toString() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
+            fileCacheMax = Costants.CACHE_SIZE_MAX;
 
+        }
 
-           OkHttpClient client = new OkHttpClient.Builder()
-                   .cache(cache)
-                   .readTimeout(15, TimeUnit.SECONDS)
-                   .connectTimeout(15, TimeUnit.SECONDS)
-                   .build();
+        Cache cache = new Cache(file, fileCacheMax);
 
 
-           OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(client);
- 
-           glide.getRegistry().replace(GlideUrl.class, InputStream.class, factory);
-       }
-   }
+        OkHttpClient client = new OkHttpClient.Builder()
+                .cache(cache)
+                .readTimeout(15, TimeUnit.SECONDS)
+                .connectTimeout(15, TimeUnit.SECONDS)
+                .build();
+
+
+        OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(client);
+
+        glide.getRegistry().replace(GlideUrl.class, InputStream.class, factory);
+    }
+}

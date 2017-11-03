@@ -50,7 +50,13 @@ public class CacheDataSourceFactory implements DataSource.Factory {
         File file;
         long fileCache;
         long fileCacheMax;
-        if ((Build.VERSION.SDK_INT >= 23) &&
+        if ((Build.VERSION.SDK_INT < 23) && isExternalStorageWritable()) {
+            file = new File(Environment.getExternalStoragePublicDirectory(mContext.getPackageName()) + Costants.PATH_SEPARATOR +
+                    mContext.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
+
+            fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
+            fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
+        } else if ((Build.VERSION.SDK_INT >= 23) &&
                 (Utility.isPermissionExtStorage(mContext)) &&
                 isExternalStorageWritable()) {
 
@@ -60,7 +66,7 @@ public class CacheDataSourceFactory implements DataSource.Factory {
             fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
         } else {
-            file = new File(mContext.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
+            file = new File(mContext.getCacheDir().toString() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
             fileCache = Costants.CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.CACHE_SIZE_MAX;
 
@@ -82,16 +88,20 @@ public class CacheDataSourceFactory implements DataSource.Factory {
     public static void getClearData(Context context) {
         File file;
         String path;
-        if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
+        if (Build.VERSION.SDK_INT < 23)  {
             path = Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
-                   context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR;
+                    context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR;
+
+        } else if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
+            path = Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
+                    context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR;
 
         } else {
-            path = context.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR;
+            path = context.getCacheDir().toString() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR;
         }
         try {
             file = new File(path);
-            if(file.exists()){
+            if (file.exists()) {
                 FileUtils.cleanDirectory(file);
             }
         } catch (IOException e) {
