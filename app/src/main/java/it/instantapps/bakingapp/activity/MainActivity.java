@@ -203,7 +203,6 @@ public class MainActivity extends BaseActivity implements
                 @Override
                 public void onClick(View v) {
                     initializeMainJob();
-
                     if (NetworkState.isOnline(mContext)) {
                         v.setClickable(false);
                     }

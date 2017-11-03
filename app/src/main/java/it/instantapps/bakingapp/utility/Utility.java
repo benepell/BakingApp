@@ -17,6 +17,8 @@ import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.app.ActionBar;
 import android.text.TextPaint;
 
+import java.util.Locale;
+
 import it.instantapps.bakingapp.R;
 
 /*
@@ -90,7 +92,10 @@ public class Utility {
     }
     public static Bitmap bitmapTitleImage(Context context, String string) {
 
+
         if ((context == null) || (string == null)) return null;
+
+        string = string.toUpperCase(Locale.ROOT);
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.indie_flower);
         int fontSizePx = (int) (Costants.BITMAT_FONT_SIZE_DP * context.getResources().getDisplayMetrics().scaledDensity);
