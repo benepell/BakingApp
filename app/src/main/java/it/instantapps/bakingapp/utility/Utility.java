@@ -81,6 +81,13 @@ public class Utility {
         }
     }
 
+    public static void isDeniedPermissionExtStorage(Activity thisActivity) {
+        if (ActivityCompat.shouldShowRequestPermissionRationale(thisActivity,
+                Manifest.permission.WRITE_EXTERNAL_STORAGE)) {
+            thisActivity.getSharedPreferences(thisActivity.getString(R.string.pref_write_external_storage), 0).edit().clear().apply();
+
+        }
+    }
     public static Bitmap bitmapTitleImage(Context context, String string) {
 
         if ((context == null) || (string == null)) return null;

@@ -1,5 +1,6 @@
 package it.instantapps.bakingapp.activity;
 
+import android.Manifest;
 import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
@@ -11,7 +12,10 @@ import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import com.google.android.exoplayer2.util.Util;
+
 import java.util.ArrayList;
+import java.util.Objects;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -26,6 +30,8 @@ import it.instantapps.bakingapp.utility.NetworkState;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
 import timber.log.Timber;
+
+import static it.instantapps.bakingapp.utility.Utility.RequestPermissionExtStorage;
 
 /*
  *  ____        _    _                  _                
@@ -68,6 +74,20 @@ public class MainActivity extends BaseActivity implements
 
     private boolean mStateProgressBar;
 
+
+    @Override
+    public boolean shouldShowRequestPermissionRationale(@NonNull String permission) {
+        if((Objects.equals(permission, Manifest.permission.WRITE_EXTERNAL_STORAGE))&&
+                (!Utility.isPermissionExtStorage(mContext)  &&
+                !PrefManager.isPref(mContext,R.string.pref_request_permission)) ){
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            PrefManager.putBoolPref(mContext,R.string.pref_request_permission,true);
+        }
+        return super.shouldShowRequestPermissionRationale(permission);
+    }
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setLayoutResource(R.layout.activity_main);
@@ -78,6 +98,7 @@ public class MainActivity extends BaseActivity implements
 
         mContext = MainActivity.this;
         ButterKnife.bind(this);
+
 
 
         Timber.plant(new Timber.DebugTree());
@@ -91,7 +112,12 @@ public class MainActivity extends BaseActivity implements
         }
 
         isTablet();
-        Utility.RequestPermissionExtStorage(MainActivity.this);
+
+        if (Util.SDK_INT > 23) {
+            RequestPermissionExtStorage(MainActivity.this);
+            Utility.isDeniedPermissionExtStorage(MainActivity.this);
+        }
+
         initializeMainJob();
         clearPosition();
 
@@ -112,6 +138,9 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
+
+
+
     @Override
     protected void onRestoreInstanceState(Bundle savedInstanceState) {
         super.onRestoreInstanceState(savedInstanceState);
@@ -129,6 +158,7 @@ public class MainActivity extends BaseActivity implements
                 if (grantResults.length > 0
                         && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
                     PrefManager.putBoolPref(mContext, R.string.pref_write_external_storage,true);
+                    PrefManager.putBoolPref(mContext,R.string.pref_request_permission,true);
                 }
             }
         }

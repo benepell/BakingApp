@@ -55,7 +55,7 @@ public class PrefManager {
         sharedPreferences.edit().clear().apply();
     }
 
-    public static void putIntPref(Context context, @SuppressWarnings("SameParameterValue") int key , int value) {
+    public static void putIntPref(Context context, @SuppressWarnings("SameParameterValue") int key, int value) {
         SharedPreferences prefId = context
                 .getSharedPreferences(context.getString(key), Context.MODE_PRIVATE);
         SharedPreferences.Editor editor = prefId.edit();
@@ -103,7 +103,8 @@ public class PrefManager {
 
     public static void clearPref(Context context) {
         int[] prefArrays = {R.string.pref_video_uri, R.string.pref_rendering_video, R.string.pref_tab_layout,
-                R.string.pref_title_sync_frequency, R.string.pref_video_notification, R.string.pref_widget_id,R.string.pref_widget_name};
+                R.string.pref_title_sync_frequency, R.string.pref_video_notification,
+                R.string.pref_widget_id, R.string.pref_widget_name, R.string.pref_write_external_storage, R.string.pref_request_permission};
 
         for (int pref : prefArrays) {
             context.getSharedPreferences(context.getString(pref), 0).edit().clear().apply();

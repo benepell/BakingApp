@@ -94,6 +94,7 @@ public class DetailActivity extends BaseActivity
         visibleFrameLayout();
     }
 
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater inflater = getMenuInflater();
@@ -107,7 +108,7 @@ public class DetailActivity extends BaseActivity
         menuItemListShopping = menu.getItem(0);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             menuItemListShopping.setVisible(true);
-        }else if(PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))){
+        } else if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
             menuItemListShopping.setVisible(true);
         }
 
@@ -138,6 +139,7 @@ public class DetailActivity extends BaseActivity
         intent.putExtra(Costants.EXTRA_RECIPE_NAME, BaseActivity.getRecipeName());
         startActivity(intent);
     }
+
 
     @Override
     public void onFragmentIngredient(int position) {
@@ -193,7 +195,6 @@ public class DetailActivity extends BaseActivity
             mFrameStepLayout.setVisibility(View.VISIBLE);
         }
     }
-
 
 
 }

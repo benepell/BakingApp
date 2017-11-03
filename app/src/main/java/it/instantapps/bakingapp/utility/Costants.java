@@ -23,10 +23,7 @@ package it.instantapps.bakingapp.utility;
  * limitations under the License.
  */
 @SuppressWarnings("ALL")
-public class Costants {
-
-    private Costants() {
-    }
+public interface Costants {
 
     /**
      * Costants URI
@@ -103,7 +100,7 @@ public class Costants {
     public static final String BUNDLE_EXOPLAYER_AUTOPLAY = "it.instantapps.bakingapp.activity.exoplayer.autoplay";
 
     public static final String USER_AGENT_CACHE = "CacheDataSourceFactory";
-    public static final String CACHE_VIDEO_DIR = "MediaBakingApp";
+    public static final String CACHE_VIDEO_DIR = "media";
     public static final long EXT_CACHE_SIZE_MAX = 500 * 1024 * 1024;
     public static final long EXT_CACHE_FILE_SIZE_MAX = 40 * 1024 * 1024;
     public static final long CACHE_SIZE_MAX = 100 * 1024 * 1024;
@@ -158,6 +155,8 @@ public class Costants {
 
 
     public static final int PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE = 10;
+
+    public static final String PATH_SEPARATOR = "/";
 
 
 }

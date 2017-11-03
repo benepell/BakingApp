@@ -143,11 +143,11 @@ public class StepActivity extends BaseActivity
         if ((sIdData > 0)) {
             infoDbVideo(sIdData);
             showVideo();
-            PrefManager.putStringPref(mContext,R.string.pref_video_uri,getVideoUri());
+            PrefManager.putStringPref(mContext, R.string.pref_video_uri, getVideoUri());
         } else {
             infoDbVideo(getFirstRow(getRecipeId()));
             showVideo();
-            PrefManager.putStringPref(mContext,R.string.pref_video_uri,getVideoUri());
+            PrefManager.putStringPref(mContext, R.string.pref_video_uri, getVideoUri());
         }
 
 
@@ -247,15 +247,15 @@ public class StepActivity extends BaseActivity
 
         }
 
-        int widgetId = PrefManager.getIntPref(mContext,R.string.pref_widget_id);
+        int widgetId = PrefManager.getIntPref(mContext, R.string.pref_widget_id);
 
-        if ((widgetId != 0)&& (widgetId == getRecipeId())) {
+        if ((widgetId != 0) && (widgetId == getRecipeId())) {
             menuItemWidget.setCheckable(true);
             menuItemWidget.setChecked(true);
             menuItemWidget.setIcon(R.drawable.ic_widgets_blu_24dp);
             menuItemWidget.setTitle(R.string.title_widget_remove);
 
-        } else{
+        } else {
             menuItemWidget.setCheckable(false);
             menuItemWidget.setChecked(false);
             menuItemWidget.setTitle(R.string.title_widget_add);
@@ -282,6 +282,7 @@ public class StepActivity extends BaseActivity
         if (!mIsVideoBackground) {
             destroyVideo();
         }
+
     }
 
     @Override
@@ -672,14 +673,14 @@ public class StepActivity extends BaseActivity
 
     private void addRemoveWidget(int recipeId, String recipeName) {
 
-        int widgetId = PrefManager.getIntPref(mContext,R.string.pref_widget_id);
+        int widgetId = PrefManager.getIntPref(mContext, R.string.pref_widget_id);
         if (widgetId == getRecipeId()) {
             recipeId = 0;
             recipeName = "";
         }
 
-        PrefManager.putIntPref(mContext, R.string.pref_widget_id,recipeId);
-        PrefManager.putStringPref(mContext,R.string.pref_widget_name,recipeName);
+        PrefManager.putIntPref(mContext, R.string.pref_widget_id, recipeId);
+        PrefManager.putStringPref(mContext, R.string.pref_widget_name, recipeName);
 
         UpdateWidgetService.startWidgetService(mContext);
 

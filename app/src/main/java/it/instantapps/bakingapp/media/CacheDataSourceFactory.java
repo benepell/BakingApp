@@ -3,6 +3,7 @@ package it.instantapps.bakingapp.media;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -54,13 +55,16 @@ public class CacheDataSourceFactory implements DataSource.Factory {
                 (Utility.isPermissionExtStorage(mContext)) &&
                 isExternalStorageWritable()) {
 
-            file = new File(mContext.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
+            file = new File(Environment.getExternalStoragePublicDirectory(mContext.getPackageName()) + Costants.PATH_SEPARATOR +
+                    mContext.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
+
             fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
-
+            Toast.makeText(mContext,"video in sd",Toast.LENGTH_LONG).show();
         } else {
+            Toast.makeText(mContext,"video in locale",Toast.LENGTH_LONG).show();
 
-            file = new File(mContext.getCacheDir(), Costants.CACHE_VIDEO_DIR);
+            file = new File(mContext.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
             fileCache = Costants.CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.CACHE_SIZE_MAX;
 
@@ -83,22 +87,26 @@ public class CacheDataSourceFactory implements DataSource.Factory {
         File file;
         String path;
         if ((Build.VERSION.SDK_INT >= 23) && (Utility.isPermissionExtStorage(context))) {
-            path = Environment.getExternalStorageState().concat(Costants.CACHE_VIDEO_DIR);
+            path = Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
+                   context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR;
+
         } else {
-            path = Environment.getDataDirectory().toString().concat(Costants.CACHE_VIDEO_DIR);
+            path = context.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR;
         }
         try {
             file = new File(path);
-            FileUtils.deleteDirectory(file);
+            if(file.exists()){
+                FileUtils.cleanDirectory(file);
+            }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-   private boolean isExternalStorageWritable() {
+    private boolean isExternalStorageWritable() {
         String state = Environment.getExternalStorageState();
-       return Environment.MEDIA_MOUNTED.equals(state);
-   }
+        return Environment.MEDIA_MOUNTED.equals(state);
+    }
 
 
 }

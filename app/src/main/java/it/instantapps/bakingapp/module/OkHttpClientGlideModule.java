@@ -3,6 +3,7 @@ package it.instantapps.bakingapp.module;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
+import android.widget.Toast;
 
 
 import com.bumptech.glide.Glide;
@@ -34,12 +35,13 @@ import okhttp3.OkHttpClient;
                    (Utility.isPermissionExtStorage(context)) &&
                    (Environment.MEDIA_MOUNTED.equals(Environment.getExternalStorageState()))) {
 
-               file = new File(context.getExternalCacheDir(), Costants.CACHE_VIDEO_DIR);
+               file = new File(Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
+                       context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
                fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
-
+               Toast.makeText(context,"immagini in sd",Toast.LENGTH_LONG).show();
            } else {
-
-               file = new File(context.getCacheDir(), Costants.CACHE_VIDEO_DIR);
+               Toast.makeText(context,"immagiini in locale",Toast.LENGTH_LONG).show();
+               file = new File(context.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
                fileCacheMax = Costants.CACHE_SIZE_MAX;
 
            }
