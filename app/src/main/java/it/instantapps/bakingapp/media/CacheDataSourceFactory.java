@@ -3,7 +3,6 @@ package it.instantapps.bakingapp.media;
 import android.content.Context;
 import android.os.Build;
 import android.os.Environment;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.upstream.DataSource;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
@@ -60,10 +59,7 @@ public class CacheDataSourceFactory implements DataSource.Factory {
 
             fileCache = Costants.EXT_CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
-            Toast.makeText(mContext,"video in sd",Toast.LENGTH_LONG).show();
         } else {
-            Toast.makeText(mContext,"video in locale",Toast.LENGTH_LONG).show();
-
             file = new File(mContext.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
             fileCache = Costants.CACHE_FILE_SIZE_MAX;
             fileCacheMax = Costants.CACHE_SIZE_MAX;

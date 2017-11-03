@@ -38,9 +38,7 @@ import okhttp3.OkHttpClient;
                file = new File(Environment.getExternalStoragePublicDirectory(context.getPackageName()) + Costants.PATH_SEPARATOR +
                        context.getCacheDir().getName() + Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
                fileCacheMax = Costants.EXT_CACHE_SIZE_MAX;
-               Toast.makeText(context,"immagini in sd",Toast.LENGTH_LONG).show();
            } else {
-               Toast.makeText(context,"immagiini in locale",Toast.LENGTH_LONG).show();
                file = new File(context.getCacheDir().toString()+ Costants.PATH_SEPARATOR + Costants.CACHE_VIDEO_DIR);
                fileCacheMax = Costants.CACHE_SIZE_MAX;
 
