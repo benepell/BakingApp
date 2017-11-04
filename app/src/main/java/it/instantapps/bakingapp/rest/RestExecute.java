@@ -59,7 +59,7 @@ public class RestExecute {
             public void onFailure(@NonNull Call<ArrayList<Recipe>> call, @NonNull Throwable t) {
                 call.cancel();
                 if (call.isCanceled()) {
-                    myCallBack.onErrorData(t.getMessage());
+                    myCallBack.onErrorData(t);
                 }
             }
         };
@@ -96,6 +96,6 @@ public class RestExecute {
 
     public interface RestData {
         void onRestData(ArrayList<Recipe> listenerData);
-        void onErrorData(String error);
+        void onErrorData(Throwable t);
     }
 }

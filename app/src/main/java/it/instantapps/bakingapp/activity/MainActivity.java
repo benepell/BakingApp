@@ -11,11 +11,10 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import com.google.android.exoplayer2.util.Util;
 
-import java.io.IOException;
+import java.net.SocketTimeoutException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -26,7 +25,6 @@ import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.fragment.RecipeFragment;
 import it.instantapps.bakingapp.model.Recipe;
 import it.instantapps.bakingapp.rest.RestExecute;
-import it.instantapps.bakingapp.rest.RestManager;
 import it.instantapps.bakingapp.service.SyncUtils;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.NetworkState;
@@ -78,19 +76,6 @@ public class MainActivity extends BaseActivity implements
 
 
     @Override
-    public boolean shouldShowRequestPermissionRationale(@NonNull String permission) {
-        if ((Objects.equals(permission, Manifest.permission.WRITE_EXTERNAL_STORAGE)) &&
-                (!Utility.isPermissionExtStorage(mContext) &&
-                        !PrefManager.isPref(mContext, R.string.pref_request_permission))) {
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-            PrefManager.putBoolPref(mContext, R.string.pref_request_permission, true);
-        }
-        return super.shouldShowRequestPermissionRationale(permission);
-    }
-
-    @Override
     protected void onCreate(Bundle savedInstanceState) {
         setLayoutResource(R.layout.activity_main);
         setEnableNavigationView(true);
@@ -138,15 +123,6 @@ public class MainActivity extends BaseActivity implements
         }
     }
 
-
-    @Override
-    protected void onRestoreInstanceState(Bundle savedInstanceState) {
-        super.onRestoreInstanceState(savedInstanceState);
-        mId = savedInstanceState.getInt(Costants.EXTRA_RECIPE_ID);
-        mRecipeName = savedInstanceState.getString(Costants.EXTRA_RECIPE_NAME);
-        mStateProgressBar = savedInstanceState.getBoolean(Costants.EXTRA_PROGRESSBAR_MAIN);
-    }
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
                                            @NonNull int[] grantResults) {
@@ -160,6 +136,27 @@ public class MainActivity extends BaseActivity implements
                 }
             }
         }
+    }
+
+    @Override
+    public boolean shouldShowRequestPermissionRationale(@NonNull String permission) {
+        if ((Objects.equals(permission, Manifest.permission.WRITE_EXTERNAL_STORAGE)) &&
+                (!Utility.isPermissionExtStorage(mContext) &&
+                        !PrefManager.isPref(mContext, R.string.pref_request_permission))) {
+            ActivityCompat.requestPermissions(MainActivity.this,
+                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                    Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+            PrefManager.putBoolPref(mContext, R.string.pref_request_permission, true);
+        }
+        return super.shouldShowRequestPermissionRationale(permission);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
+        mId = savedInstanceState.getInt(Costants.EXTRA_RECIPE_ID);
+        mRecipeName = savedInstanceState.getString(Costants.EXTRA_RECIPE_NAME);
+        mStateProgressBar = savedInstanceState.getBoolean(Costants.EXTRA_PROGRESSBAR_MAIN);
     }
 
     @Override
@@ -189,35 +186,41 @@ public class MainActivity extends BaseActivity implements
     public void onRestData(ArrayList<Recipe> listenerData) {
         if (listenerData != null) {
             hiddenProgressBar();
-            new DataUtils(mContext).saveDB(listenerData);
+            DataUtils dataUtils = new DataUtils(mContext);
+            if (dataUtils.saveDB(listenerData)) {
+                startFragmentDb();
+            } else {
+                shownError(R.string.error_state_critical, "Insert Data");
+            }
         }
 
-        try {
-            startFragmentDb();
-        } catch (IllegalStateException e) {
-            Timber.e("ON rest data: " + e.getMessage());
-        }
     }
 
     @Override
-    public void onErrorData(String error) {
-        if(!error.isEmpty()){
+    public void onErrorData(Throwable throwable) {
+        if (throwable instanceof SocketTimeoutException) {
             hiddenProgressBar();
-            shownErrorNetwork();
+            shownError(R.string.network_state_not_connected, null);
+        } else {
+            hiddenProgressBar();
+            shownError(R.string.error_state_critical, throwable.getMessage());
         }
+
     }
 
     public void restartNetwork(View view) {
         if (view != null) {
-            view.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    initializeMainJob();
-                    if (NetworkState.isOnline(mContext)) {
-                        v.setClickable(false);
+            if (view.getTag().equals(R.string.network_state_not_connected)) {
+                view.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        initializeMainJob();
+                        if (NetworkState.isOnline(mContext)) {
+                            v.setClickable(false);
+                        }
                     }
-                }
-            });
+                });
+            }
         }
     }
 
@@ -227,7 +230,7 @@ public class MainActivity extends BaseActivity implements
                 showProgressBar();
                 new RestExecute().loadData(this);
             } else {
-                shownErrorNetwork();
+                shownError(R.string.network_state_not_connected, null);
             }
         } else {
             new Utility(mContext, getSupportActionBar()).setColorOfflineActionBar();
@@ -248,9 +251,11 @@ public class MainActivity extends BaseActivity implements
 
     }
 
-    private void shownErrorNetwork() {
+    private void shownError(int resourceError, String details) {
         mErrorText.setVisibility(View.VISIBLE);
-        mErrorText.setText(getString(R.string.network_state_not_connected));
+        if (details == null) details = "";
+        mErrorText.setText(getString(resourceError, details));
+        mErrorText.setTag(resourceError);
     }
 
     private void showProgressBar() {
@@ -262,6 +267,7 @@ public class MainActivity extends BaseActivity implements
         mProgressBar.setVisibility(View.INVISIBLE);
         mStateProgressBar = false;
     }
+
 
     public static void homeActivity(Context context) {
         context.startActivity(new Intent(context, MainActivity.class)

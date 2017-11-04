@@ -23,6 +23,7 @@
         android:textAppearance="?android:textAppearanceLarge"
         android:textColor="@android:color/holo_blue_dark"
         android:onClick="restartNetwork"
+        android:tag="@string/error_tag"
         android:visibility="gone" />
 
     <FrameLayout

@@ -59,9 +59,12 @@ public class DataUtils {
 
     }
 
-    private void insertData(ArrayList<Recipe> recipeArrayList) {
+    private boolean insertData(ArrayList<Recipe> recipeArrayList) {
 
         int idRecipe;
+        int ingredientResult;
+        int stepResult;
+        int recipeResult;
 
         ContentValues[] arrContentValues = new ContentValues[recipeArrayList.size()];
 
@@ -106,10 +109,12 @@ public class DataUtils {
                 arrContentValuesSteps[j].put(Contract.StepEntry.COLUMN_NAME_THUMBNAIL_URL, stepArrayList.get(j).getThumbnailURL());
             }
 
-            mContext.getContentResolver().bulkInsert(Contract.IngredientEntry.CONTENT_URI, arrContentValuesIngredients);
-            mContext.getContentResolver().bulkInsert(Contract.StepEntry.CONTENT_URI, arrContentValuesSteps);
+            ingredientResult = mContext.getContentResolver().bulkInsert(Contract.IngredientEntry.CONTENT_URI, arrContentValuesIngredients);
+            stepResult = mContext.getContentResolver().bulkInsert(Contract.StepEntry.CONTENT_URI, arrContentValuesSteps);
+            if (ingredientResult == 0 || stepResult == 0) return false;
         }
-        mContext.getContentResolver().bulkInsert(Contract.RecipeEntry.CONTENT_URI, arrContentValues);
+        recipeResult = mContext.getContentResolver().bulkInsert(Contract.RecipeEntry.CONTENT_URI, arrContentValues);
+        return recipeResult != 0;
     }
 
 
@@ -122,20 +127,23 @@ public class DataUtils {
     }
 
     @SuppressWarnings("WeakerAccess")
-    protected void clearPreferenceDb(){
+    protected void clearPreferenceDb() {
         SharedPreferences pref = mContext.getSharedPreferences(mContext.getString(R.string.pref_insert_data), 0);
         SharedPreferences.Editor editor = pref.edit();
         editor.putBoolean(mContext.getString(R.string.pref_insert_data), false);
         editor.apply();
     }
 
-    public void saveDB(ArrayList<Recipe> recipes) {
+    public boolean saveDB(ArrayList<Recipe> recipes) {
         if (isRecordData()) clearData();
-        insertData(recipes);
-        prefInsertDb();
+        if (insertData(recipes)) {
+            prefInsertDb();
+            return true;
+        }
+        return false;
     }
 
-    public  void ClearDataPrivacy(){
+    public void ClearDataPrivacy() {
         clearData();
         clearPreferenceDb();
     }
