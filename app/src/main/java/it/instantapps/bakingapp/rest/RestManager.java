@@ -25,6 +25,7 @@ package it.instantapps.bakingapp.rest;
 
 
 import java.util.ArrayList;
+import java.util.concurrent.TimeUnit;
 
 import it.instantapps.bakingapp.model.Recipe;
 import it.instantapps.bakingapp.service.UdacityService;
@@ -37,15 +38,18 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class RestManager {
 
+
     private static UdacityService sUdacityService;
     private static RestManager sRestManager;
     private Call<ArrayList<Recipe>> mCall;
 
     private RestManager() {
 
-        OkHttpClient okHttpClient = new OkHttpClient();
-        okHttpClient.dispatcher().setMaxRequestsPerHost(1);
-
+        OkHttpClient okHttpClient = new OkHttpClient.Builder()
+                .connectTimeout(1, TimeUnit.MINUTES)
+                .readTimeout(30, TimeUnit.SECONDS)
+                .writeTimeout(15, TimeUnit.SECONDS)
+                .build();
 
         Retrofit retrofit = new Retrofit.Builder()
                 .baseUrl(Costants.UDACITY_BASE_URL)
@@ -54,7 +58,6 @@ public class RestManager {
                 .build();
 
         sUdacityService = retrofit.create(UdacityService.class);
-
 
     }
 
@@ -80,4 +83,5 @@ public class RestManager {
             mCall.cancel();
         }
     }
+
 }

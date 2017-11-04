@@ -10,7 +10,6 @@ import it.instantapps.bakingapp.model.Recipe;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
-import timber.log.Timber;
 
 /*
  *  ____        _    _                  _                
@@ -58,10 +57,10 @@ public class RestExecute {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<Recipe>> call, @NonNull Throwable t) {
+                call.cancel();
                 if (call.isCanceled()) {
-                    Timber.e("STOP Jobs JSON Data cancelled");
+                    myCallBack.onErrorData(t.getMessage());
                 }
-                Timber.d("Get JSON Data failure");
             }
         };
         restManager.getUdacityRecipe(callback);
@@ -82,7 +81,7 @@ public class RestExecute {
 
             @Override
             public void onFailure(@NonNull Call<ArrayList<Recipe>> call, @NonNull Throwable t) {
-                Timber.d("Get JSON Data failure");
+                call.cancel();
             }
         };
         restManager.getUdacityRecipeSync(callback);
@@ -97,6 +96,6 @@ public class RestExecute {
 
     public interface RestData {
         void onRestData(ArrayList<Recipe> listenerData);
-
+        void onErrorData(String error);
     }
 }

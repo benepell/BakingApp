@@ -11,9 +11,11 @@ import android.support.v4.app.ActivityCompat;
 import android.view.View;
 import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.google.android.exoplayer2.util.Util;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -24,6 +26,7 @@ import it.instantapps.bakingapp.data.DataUtils;
 import it.instantapps.bakingapp.fragment.RecipeFragment;
 import it.instantapps.bakingapp.model.Recipe;
 import it.instantapps.bakingapp.rest.RestExecute;
+import it.instantapps.bakingapp.rest.RestManager;
 import it.instantapps.bakingapp.service.SyncUtils;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.NetworkState;
@@ -117,7 +120,6 @@ public class MainActivity extends BaseActivity implements
         }
 
         initializeMainJob();
-        clearPosition();
 
 
     }
@@ -193,7 +195,15 @@ public class MainActivity extends BaseActivity implements
         try {
             startFragmentDb();
         } catch (IllegalStateException e) {
-            Timber.e("on rest data: " + e.getMessage());
+            Timber.e("ON rest data: " + e.getMessage());
+        }
+    }
+
+    @Override
+    public void onErrorData(String error) {
+        if(!error.isEmpty()){
+            hiddenProgressBar();
+            shownErrorNetwork();
         }
     }
 
@@ -224,6 +234,8 @@ public class MainActivity extends BaseActivity implements
 
             startFragmentDb();
         }
+        clearPosition();
+
     }
 
     private void startFragmentDb() {
