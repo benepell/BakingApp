@@ -1,9 +1,10 @@
 package it.instantapps.bakingapp.adapter;
 
 import android.content.Context;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.graphics.Bitmap;
-import android.graphics.PorterDuff;
+import android.graphics.ColorMatrixColorFilter;
 import android.graphics.Typeface;
 import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
@@ -33,6 +34,7 @@ import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.activity.StepActivity;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.Costants;
+import it.instantapps.bakingapp.utility.PrefManager;
 
 /*
  *  ____        _    _                  _
@@ -99,6 +101,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
         final RequestOptions requestOptions;
         if (imageStep.isEmpty()) {
+
             imageStep = null;
             requestOptions = new RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.NONE)
@@ -108,6 +111,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
                     .placeholder(R.drawable.download_in_progress);
 
         } else {
+
             requestOptions = new RequestOptions()
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .error(R.drawable.no_media)
@@ -125,7 +129,14 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
                     @Override
                     public void onLoadFailed(@Nullable Drawable errorDrawable) {
                         super.onLoadFailed(errorDrawable);
-                        holder.mTextViewShortDescription.setBackgroundResource(R.drawable.no_media);
+
+                        int imageFallBack;
+                        if (idStepDetail == StepActivity.getIdData() && (BaseActivity.getPositionStep() >= 0)) {
+                            imageFallBack = R.drawable.no_media_grayscale;
+                        } else {
+                            imageFallBack = R.drawable.no_media;
+                        }
+                        holder.mTextViewShortDescription.setBackgroundResource(imageFallBack);
                     }
 
                     @Override
@@ -139,7 +150,14 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
                         Drawable drawable = new BitmapDrawable(mContext.getResources(), resource);
                         if (idStepDetail == StepActivity.getIdData() && (BaseActivity.getPositionStep() >= 0)) {
 
-                            drawable.setColorFilter(0x77000000, PorterDuff.Mode.SRC_ATOP);
+                            float[] colorMatrix = {
+                                    0.33f, 0.33f, 0.33f, 0, Costants.BRIGHTNESS_COLOR_GRAYSCALE,
+                                    0.33f, 0.33f, 0.33f, 0, Costants.BRIGHTNESS_COLOR_GRAYSCALE,
+                                    0.33f, 0.33f, 0.33f, 0, Costants.BRIGHTNESS_COLOR_GRAYSCALE,
+                                    0, 0, 0, 1, 0
+                            };
+
+                            drawable.setColorFilter(new ColorMatrixColorFilter(colorMatrix));
                         } else {
                             drawable.setColorFilter(null);
                         }
@@ -210,8 +228,18 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
-            mOnStepClickLister.onStepItemClick(mId, position);
-
+            if (PrefManager.isPref(mContext, R.string.pref_device_tablet) &&
+                    (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)) {
+                if (position == BaseActivity.getPositionStep()) {
+                    view.setClickable(false);
+                } else {
+                    view.setClickable(true);
+                    mOnStepClickLister.onStepItemClick(mId, position);
+                }
+            } else {
+                view.setClickable(true);
+                mOnStepClickLister.onStepItemClick(mId, position);
+            }
         }
 
     }

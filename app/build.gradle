@@ -7,7 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 27
         versionName 'Yellow'
-        versionCode 11
+        versionCode 13
 
     }
     buildTypes {

@@ -108,6 +108,8 @@ public interface Costants {
 
     public static final int EXO_PROGRESSBAR_DELAY = 200;
 
+    public static final float BRIGHTNESS_COLOR_GRAYSCALE = 07f;
+
     public static final String BAKING_SYNC_TAG = "baking-sync";
     public static final String EXO_PLAYER_MANAGER_TAG = "StepActivity";
 
