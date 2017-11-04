@@ -15,6 +15,7 @@ import android.widget.TextView;
 import com.google.android.exoplayer2.util.Util;
 
 import java.net.SocketTimeoutException;
+import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Objects;
 
@@ -198,7 +199,7 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onErrorData(Throwable throwable) {
-        if (throwable instanceof SocketTimeoutException) {
+        if ((throwable instanceof SocketTimeoutException) ||(throwable instanceof UnknownHostException)) {
             hiddenProgressBar();
             shownError(R.string.network_state_not_connected, null);
         } else {
@@ -226,12 +227,9 @@ public class MainActivity extends BaseActivity implements
 
     private void initializeMainJob() {
         if (!PrefManager.isPref(mContext, R.string.pref_insert_data)) {
-            if (NetworkState.isOnline(mContext)) {
-                showProgressBar();
-                new RestExecute().loadData(this);
-            } else {
-                shownError(R.string.network_state_not_connected, null);
-            }
+            showProgressBar();
+            new RestExecute().loadData(this);
+
         } else {
             new Utility(mContext, getSupportActionBar()).setColorOfflineActionBar();
 

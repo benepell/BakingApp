@@ -102,7 +102,7 @@ public class PrefManager {
 
 
     public static void clearPref(Context context) {
-        int[] prefArrays = {R.string.pref_video_uri, R.string.pref_rendering_video, R.string.pref_tab_layout,
+        int[] prefArrays = {R.string.pref_video_uri, R.string.pref_tab_layout,
                 R.string.pref_title_sync_frequency, R.string.pref_video_notification,
                 R.string.pref_widget_id, R.string.pref_widget_name, R.string.pref_write_external_storage, R.string.pref_request_permission};
 

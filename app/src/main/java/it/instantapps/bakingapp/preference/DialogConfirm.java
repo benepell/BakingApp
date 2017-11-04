@@ -75,7 +75,7 @@ public class DialogConfirm extends DialogPreference {
             Context context = sWeakReference.get();
             if (context != null) {
                 CacheDataSourceFactory.getClearData(context);
-                new DataUtils(context).ClearDataPrivacy();
+                new DataUtils(context).resetAllData();
                 Glide.get(context).clearDiskCache();
 
             }
