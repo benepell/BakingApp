@@ -77,7 +77,7 @@ In this project you will:
 
 
 ### Google Play 
-* Verified by Play Protect 
+* [Verified by Google Play Protect](https://www.android.com/play-protect/)
 
 ## License
 
