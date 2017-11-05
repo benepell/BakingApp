@@ -71,7 +71,7 @@ In this project you will:
 * [Nexus 5X, Virtual, livello API 26](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus5X-26-en_US-portrait/video.mp4)
 * Nexus 6, Virtual, livello API 21
 * [Nexus 6P, Virtual, livello API 26](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus6P-26-en_US-portrait/video.mp4)
-* Nexus 7 (2012), Virtual, livello API 21
+* [Nexus 7 (2012), Virtual, livello API 21](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus7-21-en_US-portrait/video.mp4)
 * Pixel, livello API 26
 * [Sony XPERIA XZ Premium, livello API 25](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-04T23%3A27%3A39.231Z_pb1x/G8142-25-en_US-portrait/video.mp4)
 
