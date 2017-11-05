@@ -64,7 +64,7 @@ In this project you will:
 * Galaxy S7, livello API 23
 * Huawei P8 lite, livello API 21
 * LG G6 LGUS997, livello API 24
-* Low-resolution MDPI phone, Virtual, livello API 23
+* [Low-resolution MDPI phone, Virtual, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A01%3A44.994Z_jowi/NexusLowRes-23-en_US-landscape/video.mp4)
 *  [Nexus 10, Virtual, livello API 21](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus10-21-en_US-portrait/video.mp4)
 * [Nexus 5, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-03T14%3A00%3A20.010Z_5j5y/hammerhead-23-en_US-portrait/video.mp4)
 * [Nexus 5, Virtual, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/hammerhead-23-en_US-portrait/video.mp4)
