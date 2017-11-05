@@ -199,11 +199,10 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public void onErrorData(Throwable throwable) {
-        if ((throwable instanceof SocketTimeoutException) ||(throwable instanceof UnknownHostException)) {
-            hiddenProgressBar();
+        hiddenProgressBar();
+        if ((throwable instanceof SocketTimeoutException) || (throwable instanceof UnknownHostException)) {
             shownError(R.string.network_state_not_connected, null);
         } else {
-            hiddenProgressBar();
             shownError(R.string.error_state_critical, throwable.getMessage());
         }
 
@@ -215,8 +214,8 @@ public class MainActivity extends BaseActivity implements
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        initializeMainJob();
                         if (NetworkState.isOnline(mContext)) {
+                            initializeMainJob();
                             v.setClickable(false);
                         }
                     }
@@ -251,7 +250,7 @@ public class MainActivity extends BaseActivity implements
 
     private void shownError(int resourceError, String details) {
         mErrorText.setVisibility(View.VISIBLE);
-        if (details == null) details = "";
+        if (details == null) details = "...";
         mErrorText.setText(getString(resourceError, details));
         mErrorText.setTag(resourceError);
     }

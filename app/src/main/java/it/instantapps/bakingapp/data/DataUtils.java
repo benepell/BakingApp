@@ -143,7 +143,7 @@ public class DataUtils {
         return false;
     }
 
-    public void resetAllData() {
+    public void ClearDataPrivacy() {
         clearData();
         clearPreferenceDb();
     }

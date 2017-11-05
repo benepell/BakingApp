@@ -69,6 +69,10 @@
     <string name="title_video_notification">Video Notification</string>
     <string name="summary_video_notification">Continue video playback in background when turning device screen off or click Home button.</string>
 
+    <string name="pref_rendering_video" translatable="false">pref_resume_video</string>
+    <string name="title_rendering_video">Video Rendering</string>
+    <string name="summary_rendering_video">Allow use of extension renderers.</string>
+
     <string name="pref_sync_frequency" translatable="false">pref_sync_frequency</string>
     <string name="pref_title_sync_frequency" translatable="false">Sync Data</string>
     <string-array name="pref_sync_frequency_titles">
