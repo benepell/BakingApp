@@ -44,7 +44,8 @@ In this project you will:
 
 ## Screens
 
-![screen](https://github.com/benepell/BakingAppProject3/blob/master/images/poster.png)
+![screen](https://user-images.githubusercontent.com/18085976/32411293-8fe77754-c1ad-11e7-860f-2062db16e73a.png)
+
 
 ## Libraries
 
