@@ -14,6 +14,7 @@ import android.widget.TextView;
 
 import com.google.android.exoplayer2.util.Util;
 
+import java.net.ConnectException;
 import java.net.SocketTimeoutException;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
@@ -28,7 +29,6 @@ import it.instantapps.bakingapp.model.Recipe;
 import it.instantapps.bakingapp.rest.RestExecute;
 import it.instantapps.bakingapp.service.SyncUtils;
 import it.instantapps.bakingapp.utility.Costants;
-import it.instantapps.bakingapp.utility.NetworkState;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
 import timber.log.Timber;
@@ -200,7 +200,8 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onErrorData(Throwable throwable) {
         hiddenProgressBar();
-        if ((throwable instanceof SocketTimeoutException) || (throwable instanceof UnknownHostException)) {
+        if ((throwable instanceof SocketTimeoutException) ||
+                (throwable instanceof UnknownHostException) || (throwable instanceof ConnectException)) {
             shownError(R.string.network_state_not_connected, null);
         } else {
             shownError(R.string.error_state_critical, throwable.getMessage());
@@ -214,7 +215,7 @@ public class MainActivity extends BaseActivity implements
                 view.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View v) {
-                        if (NetworkState.isOnline(mContext)) {
+                        if (Utility.isOnline(mContext)) {
                             initializeMainJob();
                             v.setClickable(false);
                         }

@@ -15,7 +15,7 @@
     <string name="tablet_landscape_span_count_grid_step" translatable="false">3</string>
 
     <string name="network_state_not_connected">No Internet connection &#8230; \nMake sure Wi-Fi \nor cellular data is turned on,\n then click here to try again.</string>
-    <string name="error_state_critical">Unable to start &app_name;\n cause: %1$s </string>
+    <string name="error_state_critical">Unable to start &app_name;\n cause: %1$s\n Please, start factory data reset in menu settings or restart app. </string>
 
     <string name="asset_statements" translatable="false">[{\n  \"relation\": [\"delegate_permission/common.handle_all_urls\"],\n  \"target\": {\n    \"namespace\": \"web\",\n    \"site\": \"http://bakingapp.instantapps.it\",\n  }\n}]</string>
 

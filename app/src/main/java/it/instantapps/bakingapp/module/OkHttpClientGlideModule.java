@@ -50,13 +50,11 @@ public class OkHttpClientGlideModule extends AppGlideModule {
 
         Cache cache = new Cache(file, fileCacheMax);
 
-
         OkHttpClient client = new OkHttpClient.Builder()
                 .cache(cache)
                 .readTimeout(15, TimeUnit.SECONDS)
                 .connectTimeout(15, TimeUnit.SECONDS)
                 .build();
-
 
         OkHttpUrlLoader.Factory factory = new OkHttpUrlLoader.Factory(client);
 

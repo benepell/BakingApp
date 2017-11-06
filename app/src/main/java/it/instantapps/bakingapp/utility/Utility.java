@@ -11,6 +11,8 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Typeface;
 import android.graphics.drawable.ColorDrawable;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v4.content.res.ResourcesCompat;
@@ -53,7 +55,7 @@ public class Utility {
     }
 
     public void setColorOfflineActionBar() {
-        if (! NetworkState.isOnline(mContext)) {
+        if (! isOnline(mContext)) {
             if (mActionBar != null) {
                 mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(Costants.COLOR_BACKGROUND_ACTIONBAR_OFFLINE)));
             }
@@ -81,6 +83,16 @@ public class Utility {
             }
 
         }
+    }
+
+    public static boolean isOnline(Context context) {
+        ConnectivityManager connMgr = (ConnectivityManager)
+                context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        if(connMgr!=null){
+            NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+            return (networkInfo != null) && (networkInfo.getState() == NetworkInfo.State.CONNECTED);
+        }
+        return false;
     }
 
     public static void isDeniedPermissionExtStorage(Activity thisActivity) {
