@@ -56,7 +56,8 @@ In this project you will:
 * [Apache Common Version](http://commons.apache.org/)
 * [Exoplayer](https://github.com/google/ExoPlayer/)
 * [Firebase jobdispatcher ](https://github.com/firebase/firebase-jobdispatcher-android/)
-* [Espresso] (https://developer.android.com/training/testing/espresso/index.html)
+* [Espresso](https://developer.android.com/training/testing/espresso/index.html)
+
 ## Test 
 
 ### Firebase Test Robo (Passed)
