@@ -111,7 +111,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
 
                 GridLayoutManager gridLayoutManager;
 
-                if ((getActivity() != null) && (getActivity().findViewById(R.id.exo__detail_step_fragment_player_view) == null)) {
+                if ((getActivity() != null) && (getActivity().findViewById(R.id.exo_detail_step_fragment_player_view) == null)) {
                     gridLayoutManager = new GridLayoutManager(getActivity(), Integer.valueOf(getString(R.string.tablet_landscape_span_count_grid_step)));
 
                 } else {
