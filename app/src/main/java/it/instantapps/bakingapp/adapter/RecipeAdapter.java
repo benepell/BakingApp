@@ -65,6 +65,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     }
 
 
+
     @Override
     public RecipeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
 
@@ -158,9 +159,8 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
 
         holder.mTextViewRecipeName.setText(nameRecipe);
-
+        holder.mTextViewRecipeName.setContentDescription(nameRecipe);
         holder.mTextViewRecipeServings.setText(String.valueOf(servingsRecipe));
-
         holder.bind(index, nameRecipe);
     }
 

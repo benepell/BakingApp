@@ -61,6 +61,7 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
     private RecipeAdapter mAdapter;
     private FragmentInteractionListener mListener;
 
+
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -116,6 +117,7 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
         mAdapter = new RecipeAdapter(this);
 
         mRecyclerView.setAdapter(mAdapter);
+
         return view;
     }
 

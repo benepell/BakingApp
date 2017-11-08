@@ -56,12 +56,16 @@ public interface Costants {
     public static final int INGREDIENT_LOADER_ID = 1;
     public static final int STEP_LOADER_ID = 2;
 
+
+
     public static final String RECIPE_WIDGET_UPDATE = "it.instantapps.bakingapp.receiver.recipe.widget.update";
 
     public static final int DEFAULT_TIMBER_COUNT = 3;
 
     public static final int TAB_ORDER_INGREDIENT = 0;
     public static final int TAB_ORDER_STEP = 1;
+
+    public static final String EXTRA_RECIPE_IDLING = "it.instantapps.bakingapp.activity.recipe.idling";
 
     public static final String EXTRA_RECIPE_ID = "it.instantapps.bakingapp.activity.recipe.id";
     public static final String EXTRA_RECIPE_POSITION = "it.instantapps.bakingapp.activity.recipe.position";

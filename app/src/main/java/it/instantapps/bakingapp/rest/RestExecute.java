@@ -6,6 +6,7 @@ import android.support.annotation.NonNull;
 import java.util.ArrayList;
 
 import it.instantapps.bakingapp.data.DataUtils;
+import it.instantapps.bakingapp.idling.SimpleIdlingResource;
 import it.instantapps.bakingapp.model.Recipe;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -43,7 +44,11 @@ public class RestExecute {
         restManager = RestManager.getInstance();
     }
 
-    public void loadData(final RestData myCallBack) {
+    public void loadData(final RestData myCallBack, final SimpleIdlingResource simpleIdlingResource) {
+        if(simpleIdlingResource!=null){
+            simpleIdlingResource.setIdleState(false);
+        }
+
         Callback<ArrayList<Recipe>> callback = new Callback<ArrayList<Recipe>>() {
             @Override
             public void onResponse(@NonNull Call<ArrayList<Recipe>> call, @NonNull Response<ArrayList<Recipe>> response) {
@@ -52,6 +57,9 @@ public class RestExecute {
 
                 if (response.isSuccessful()) {
                     myCallBack.onRestData(mRecipeArrayList);
+                    if(simpleIdlingResource!=null){
+                        simpleIdlingResource.setIdleState(true);
+                    }
                 }
             }
 
@@ -64,6 +72,7 @@ public class RestExecute {
             }
         };
         restManager.getUdacityRecipe(callback);
+
     }
 
     public void syncData(final Context context) {

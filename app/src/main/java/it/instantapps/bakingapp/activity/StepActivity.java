@@ -53,7 +53,7 @@ public class StepActivity extends BaseActivity
     ProgressBar mProgressBar;
 
     @SuppressWarnings("CanBeFinal")
-    @BindView(R.id.exo__detail_step_fragment_player_view)
+    @BindView(R.id.exo_detail_step_fragment_player_view)
     SimpleExoPlayerView mSimpleExoPlayerView;
 
     @SuppressWarnings("CanBeFinal")

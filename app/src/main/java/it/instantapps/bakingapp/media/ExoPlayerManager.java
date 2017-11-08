@@ -124,6 +124,7 @@ public class ExoPlayerManager implements Player.EventListener {
                     loadControl);
             mSimpleExoPlayerView.setPlayer(mExoPlayer);
 
+
             MediaSource mediaSource;
             mediaSource = new ExtractorMediaSource(mediaUri,
                     new CacheDataSourceFactory(mContext),
