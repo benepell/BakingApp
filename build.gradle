@@ -6,6 +6,7 @@ buildscript {
             url "https://maven.google.com"
         }
         jcenter()
+        google()
     }
     dependencies {
         classpath 'com.android.tools.build:gradle:3.0.0'
@@ -21,6 +22,8 @@ allprojects {
         maven {
             url "https://maven.google.com"
         }
+        google()
+
     }
 }
 
@@ -29,26 +32,23 @@ task clean(type: Delete) {
 }
 
 ext {
+    sdkVersion = 27
     buildToolsVersion = "27.0.0"
 
-    supportLibVersion = "27.0.0"
-    supportConstraintVersion = "1.0.2"
-    firebaseJobDispVersion = "0.8.3"
-
-    espressoVersion = "2.2.2"
+    firebaseJobDispVersion = "0.8.4"
     timberVersion = "4.5.1"
-
     butterKnifeVersion = "8.8.1"
+
     retrofitVersion = "2.3.0"
-    apacheCommonsVersion = "2.5"
+    apacheCommonsVersion = "2.6"
 
     glideVersion = "4.2.0"
     glideOkHttpIntegretionVersion = glideVersion + "@aar"
 
-    wasabeefGlideTrasformationsVersion = "3.0.1"
-    wasabeefGlideGPUFiltersVersion = "1.4.1"
+    exoPlayerVersion = "r2.5.4"
 
-    exoPlayerVersion = "r2.5.3"
+    espressoVersion = "3.0.1"
+    testRulesVersion = "1.0.1"
 
 }
 
