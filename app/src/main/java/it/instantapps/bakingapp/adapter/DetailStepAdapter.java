@@ -99,7 +99,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
                         .error(R.drawable.no_media)
                         .placeholder(R.drawable.download_in_progress);
             }
-            Glide.with(holder.itemView.getContext())
+            Glide.with(holder.itemView.getContext().getApplicationContext())
                     .load(mThumbnailUrl)
                     .apply(requestOptions)
                     .into(holder.mImageViewDetailStep);

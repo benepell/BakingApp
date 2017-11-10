@@ -122,7 +122,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
         }
 
-        Glide.with(holder.itemView.getContext())
+        Glide.with(holder.itemView.getContext().getApplicationContext())
                 .asBitmap()
                 .load(imageStep)
                 .apply(requestOptions)

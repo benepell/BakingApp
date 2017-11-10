@@ -155,7 +155,7 @@ public class StepActivity extends BaseActivity
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             startFragmentTablet(getRecipeId(), Costants.TAB_ORDER_STEP);
 
-            if (TextUtils.isEmpty(mVideoUri)) {
+            if (!TextUtils.isEmpty(mVideoUri)) {
                 mContainerLayout.setVisibility(View.VISIBLE);
 
                 if (isTablet()) {
@@ -170,7 +170,7 @@ public class StepActivity extends BaseActivity
 
         } else {
 
-            if (TextUtils.isEmpty(mVideoUri)) {
+            if (!TextUtils.isEmpty(mVideoUri)) {
                 mContainerLayout.setVisibility(View.VISIBLE);
             }
             mContainerFragment.setVisibility(View.VISIBLE);
@@ -475,7 +475,7 @@ public class StepActivity extends BaseActivity
     }
 
     public void showVideo() {
-        if (TextUtils.isEmpty(mVideoUri)) {
+        if (!TextUtils.isEmpty(mVideoUri)) {
             mExoPlayerManager = new ExoPlayerManager(mContext, mSimpleExoPlayerView,
                     mProgressBar, getShortDescription(), mTvErrorVideo);
 
