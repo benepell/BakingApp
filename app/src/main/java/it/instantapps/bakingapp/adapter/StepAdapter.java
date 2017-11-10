@@ -59,6 +59,7 @@ import it.instantapps.bakingapp.activity.StepActivity;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
+import it.instantapps.bakingapp.utility.Utility;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
@@ -230,7 +231,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         @Override
         public void onClick(View view) {
             int position = getAdapterPosition();
-            if (PrefManager.isPref(mContext, R.string.pref_device_tablet) &&
+            if (Utility.isTablet(mContext) &&
                     (mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE)) {
                 if (position == BaseActivity.getPositionStep()) {
                     view.setClickable(false);

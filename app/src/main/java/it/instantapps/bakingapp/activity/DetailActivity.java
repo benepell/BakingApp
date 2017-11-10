@@ -186,10 +186,10 @@ public class DetailActivity extends BaseActivity
         if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
             mFrameTabLayout.setVisibility(View.VISIBLE);
         } else {
-            if (!isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (!Utility.isTablet(getApplicationContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 mFrameIngredientLayout.setVisibility(View.VISIBLE);
             }
-            if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if (Utility.isTablet(getApplicationContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
                 mFrameIngredientLayout.setVisibility(View.VISIBLE);
             }
 

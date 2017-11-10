@@ -120,7 +120,7 @@ public class StepActivity extends BaseActivity
         setLayoutResource(R.layout.activity_step);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             setEnableNavigationView(true);
-        } else if (isTablet()) {
+        } else if (Utility.isTablet(getApplicationContext())) {
             setEnableNavigationView(true);
         } else {
             setEnableNavigationView(false);
@@ -181,7 +181,7 @@ public class StepActivity extends BaseActivity
             if (!TextUtils.isEmpty(mVideoUri)) {
                 mContainerLayout.setVisibility(View.VISIBLE);
 
-                if (isTablet()) {
+                if (Utility.isTablet(getApplicationContext())) {
                     mContainerFragment.setVisibility(View.VISIBLE);
                 } else {
                     leanBackUI();
@@ -201,7 +201,7 @@ public class StepActivity extends BaseActivity
         startFragmentDetail(sIdData, mDescription, mShortDescription, mThumbnailURL, mVideoUri);
 
         if (Timber.treeCount() < Costants.DEFAULT_TIMBER_COUNT) {
-            if (!isTablet()) {
+            if (!Utility.isTablet(getApplicationContext())) {
                 startActivity(new Intent(this, MainActivity.class));
             }
         }
@@ -256,16 +256,16 @@ public class StepActivity extends BaseActivity
         menuItemWidget = menu.getItem(2);
 
 
-        if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+        if (Utility.isTablet(getApplicationContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
             menuItemShare.setVisible(true);
             menuItemWidget.setVisible(true);
 
-        } else if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        } else if (Utility.isTablet(getApplicationContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             menuItemListShopping.setVisible(true);
             menuItemShare.setVisible(true);
             menuItemWidget.setVisible(true);
 
-        } else if (!isTablet() && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+        } else if (!Utility.isTablet(getApplicationContext()) && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
             menuItemShare.setVisible(true);
             menuItemWidget.setVisible(true);
 
@@ -606,7 +606,7 @@ public class StepActivity extends BaseActivity
 
     public void backToDetailActivity() {
         Class backActivity;
-        if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (Utility.isTablet(getApplicationContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             backActivity = MainActivity.class;
         } else {
             backActivity = DetailActivity.class;
@@ -634,7 +634,7 @@ public class StepActivity extends BaseActivity
 
 
     private void startFragmentTablet(int index, int orderTab) {
-        if ((isTablet()) && (index >= 0)) {
+        if (Utility.isTablet(mContext) && (index >= 0)) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             Bundle bundle = new Bundle();
 

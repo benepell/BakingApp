@@ -26,6 +26,7 @@ package it.instantapps.bakingapp.activity;
 import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.AsyncTask;
@@ -353,18 +354,4 @@ public class BaseActivity extends AppCompatActivity
         sPositionStep = RecyclerView.NO_POSITION;
     }
 
-        boolean isTablet() {
-            boolean isTablet =  PrefManager.isPref (getBaseContext(),R.string.pref_device_tablet);
-
-            if (isTablet) {
-                return true;
-            }
-
-            //noinspection ConstantConditions,ConstantConditions
-            if ((frameLayout != null) && (frameLayout.getTag() == getString(R.string.device_type_tablet))) {
-                PrefManager.putBoolPref(getBaseContext(),R.string.pref_device_tablet,true);
-                return true;
-            }
-            return false;
-        }
 }

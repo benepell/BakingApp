@@ -45,6 +45,7 @@ import it.instantapps.bakingapp.activity.DetailActivity;
 import it.instantapps.bakingapp.adapter.FragmentTabAdapter;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
+import it.instantapps.bakingapp.utility.Utility;
 import it.instantapps.bakingapp.widget.SlidingTabLayout;
 
 @SuppressWarnings("ALL")
@@ -146,9 +147,8 @@ public class TabFragment extends Fragment {
 
             });
         } else {
-            boolean isTablet = PrefManager.isPref(getActivity(), R.string.pref_device_tablet);
 
-            if ((isTablet) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            if ((Utility.isTablet(getContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
                 Intent intent = new Intent(getActivity(), DetailActivity.class);
                 intent.putExtra(Costants.EXTRA_RECIPE_ID, index);
                 intent.putExtra(Costants.EXTRA_RECIPE_NAME, BaseActivity.getRecipeName());

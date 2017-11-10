@@ -121,8 +121,6 @@ public class MainActivity extends BaseActivity implements
 
         }
 
-        isTablet();
-
         if (Util.SDK_INT > 23) {
             RequestPermissionExtStorage(MainActivity.this);
             Utility.isDeniedPermissionExtStorage(MainActivity.this);
@@ -194,7 +192,7 @@ public class MainActivity extends BaseActivity implements
     @Override
     public void onFragmentInteraction(int id, String recipeName) {
         Intent intent;
-        if (isTablet() && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+        if (Utility.isTablet(mContext) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             intent = new Intent(mContext, StepActivity.class);
             setRecipeId(id);
         } else {

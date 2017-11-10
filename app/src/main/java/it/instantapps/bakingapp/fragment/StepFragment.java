@@ -53,6 +53,7 @@ import it.instantapps.bakingapp.adapter.StepAdapter;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
+import it.instantapps.bakingapp.utility.Utility;
 import timber.log.Timber;
 
 public class StepFragment extends Fragment implements StepAdapter.StepItemClickListener, LoaderManager.LoaderCallbacks<Cursor> {
@@ -106,7 +107,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
         ButterKnife.bind(this, view);
 
 
-        if (PrefManager.isPref(getActivity(), R.string.pref_device_tablet)) {
+        if (Utility.isTablet(getContext())) {
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
 

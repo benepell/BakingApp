@@ -43,6 +43,7 @@ import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.utility.PrefManager;
+import it.instantapps.bakingapp.utility.Utility;
 
 public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.DetailStepHolder> {
 
@@ -75,7 +76,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
         if (TextUtils.isEmpty(mVideoUri)) {
 
-            if ((!PrefManager.isPref(mContext, R.string.pref_device_tablet)) && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            if ((!Utility.isTablet(mContext)) && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 holder.mTextViewDetailDescription.setVisibility(View.GONE);
                 holder.mTextViewShortDetailDescription.setVisibility(View.GONE);
                 holder.mImageViewDetailStep.setBackgroundResource(R.color.colorBackgroundPlayer);

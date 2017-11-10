@@ -7,8 +7,6 @@
     <string name="content_authority" translatable="false">it.instantapps.bakingapp</string>
 
     <string name="device_type_tablet" translatable="false">TABLET</string>
-    <string name="device_type_phone" translatable="false">PHONE</string>
-    <string name="pref_device_tablet" translatable="false">it.instantapps.bakingapp.device.tablet</string>
     <string name="span_count_grid_recipe" translatable="false">3</string>
     <string name="tablet_span_count_grid_recipe" translatable="false">2</string>
     <string name="tablet_portrait_span_count_grid_step" translatable="false">2</string>

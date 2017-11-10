@@ -84,7 +84,8 @@
         <provider
             android:name=".data.ContentProvider"
             android:authorities="@string/content_authority"
-            android:exported="false" />
+            android:exported="false"
+            tools:ignore="ManifestResource" />
 
         <service
             android:name=".service.FirebaseJobService"

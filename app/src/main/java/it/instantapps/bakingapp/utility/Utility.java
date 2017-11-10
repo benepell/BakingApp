@@ -29,6 +29,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.content.res.Configuration;
 import android.graphics.Bitmap;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -54,6 +55,13 @@ public class Utility {
     public Utility(Context context, ActionBar actionBar) {
         mContext = context;
         mActionBar = actionBar;
+    }
+
+    public static boolean isTablet(Context context) {
+        if(context==null) return false;
+        return (context.getResources().getConfiguration().screenLayout
+                & Configuration.SCREENLAYOUT_SIZE_MASK)
+                >= Configuration.SCREENLAYOUT_SIZE_LARGE;
     }
 
     public void setColorOfflineActionBar() {

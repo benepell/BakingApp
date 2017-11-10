@@ -14,8 +14,7 @@
         <FrameLayout
             android:id="@+id/content_frame"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:tag="@string/device_type_phone">
+            android:layout_height="wrap_content">
 
             <ViewStub
                 android:id="@+id/stub_base_layout"

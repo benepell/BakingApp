@@ -47,6 +47,7 @@ import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.adapter.RecipeAdapter;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.PrefManager;
+import it.instantapps.bakingapp.utility.Utility;
 import timber.log.Timber;
 
 import static it.instantapps.bakingapp.utility.Costants.RECIPE_LOADER_ID;
@@ -80,7 +81,7 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
         ButterKnife.bind(this, view);
         GridLayoutManager gridLayoutManager;
 
-        if (PrefManager.isPref(getActivity(), R.string.pref_device_tablet)) {
+        if (Utility.isTablet(getActivity())) {
 
             if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 gridLayoutManager = new GridLayoutManager(getActivity(),
