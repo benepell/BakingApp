@@ -7,6 +7,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
 
@@ -27,7 +28,7 @@ public class RecipeAppWidget extends AppWidgetProvider {
 
         String widgetRecipeName = PrefManager.getStringPref(context, R.string.pref_widget_name);
 
-        if(widgetRecipeName.isEmpty()) widgetRecipeName = context.getString(R.string.app_name);
+        if(TextUtils.isEmpty(widgetRecipeName)) widgetRecipeName = context.getString(R.string.app_name);
 
         int id = PrefManager.getIntPref(context, R.string.pref_widget_id);
         RemoteViews views = new RemoteViews(context.getPackageName(), R.layout.recipe_app_widget);

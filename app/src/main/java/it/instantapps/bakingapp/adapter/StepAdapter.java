@@ -14,6 +14,7 @@ import android.support.annotation.Nullable;
 import android.support.v4.provider.FontRequest;
 import android.support.v4.provider.FontsContractCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -100,7 +101,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
         holder.bind(idStepDetail);
 
         final RequestOptions requestOptions;
-        if (imageStep.isEmpty()) {
+        if (TextUtils.isEmpty(imageStep)) {
 
             imageStep = null;
             requestOptions = new RequestOptions()

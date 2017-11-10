@@ -13,6 +13,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.media.session.MediaButtonReceiver;
 import android.support.v4.media.session.MediaSessionCompat;
+import android.text.TextUtils;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -154,7 +155,7 @@ public class StepActivity extends BaseActivity
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
             startFragmentTablet(getRecipeId(), Costants.TAB_ORDER_STEP);
 
-            if ((mVideoUri != null) && (!mVideoUri.isEmpty())) {
+            if (TextUtils.isEmpty(mVideoUri)) {
                 mContainerLayout.setVisibility(View.VISIBLE);
 
                 if (isTablet()) {
@@ -169,7 +170,7 @@ public class StepActivity extends BaseActivity
 
         } else {
 
-            if ((mVideoUri != null) && (!mVideoUri.isEmpty())) {
+            if (TextUtils.isEmpty(mVideoUri)) {
                 mContainerLayout.setVisibility(View.VISIBLE);
             }
             mContainerFragment.setVisibility(View.VISIBLE);
@@ -474,7 +475,7 @@ public class StepActivity extends BaseActivity
     }
 
     public void showVideo() {
-        if ((mVideoUri != null) && (!mVideoUri.isEmpty())) {
+        if (TextUtils.isEmpty(mVideoUri)) {
             mExoPlayerManager = new ExoPlayerManager(mContext, mSimpleExoPlayerView,
                     mProgressBar, getShortDescription(), mTvErrorVideo);
 

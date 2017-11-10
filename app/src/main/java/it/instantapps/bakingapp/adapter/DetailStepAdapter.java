@@ -5,6 +5,7 @@ import android.content.res.Configuration;
 import android.graphics.Typeface;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
+import android.text.TextUtils;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -71,7 +72,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
     @Override
     public void onBindViewHolder(final DetailStepHolder holder, int position) {
 
-        if (mVideoUri != null && mVideoUri.isEmpty()) {
+        if (TextUtils.isEmpty(mVideoUri)) {
 
             if ((!PrefManager.isPref(mContext, R.string.pref_device_tablet)) && mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
                 holder.mTextViewDetailDescription.setVisibility(View.GONE);
@@ -82,7 +83,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
             }
 
             final RequestOptions requestOptions;
-            if (mThumbnailUrl.isEmpty()) {
+            if (TextUtils.isEmpty(mThumbnailUrl)) {
                 mThumbnailUrl = null;
                 requestOptions = new RequestOptions()
                         .diskCacheStrategy(DiskCacheStrategy.NONE)
