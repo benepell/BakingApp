@@ -42,7 +42,6 @@ import com.bumptech.glide.request.RequestOptions;
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.instantapps.bakingapp.R;
-import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
 
 public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.DetailStepHolder> {

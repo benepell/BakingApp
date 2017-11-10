@@ -58,7 +58,6 @@ import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.activity.StepActivity;
 import it.instantapps.bakingapp.data.Contract;
 import it.instantapps.bakingapp.utility.Costants;
-import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
 
 public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {

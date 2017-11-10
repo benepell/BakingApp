@@ -44,7 +44,6 @@ import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.activity.DetailActivity;
 import it.instantapps.bakingapp.adapter.FragmentTabAdapter;
 import it.instantapps.bakingapp.utility.Costants;
-import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.utility.Utility;
 import it.instantapps.bakingapp.widget.SlidingTabLayout;
 

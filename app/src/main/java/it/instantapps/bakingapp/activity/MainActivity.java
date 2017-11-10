@@ -162,14 +162,15 @@ public class MainActivity extends BaseActivity implements
 
     @Override
     public boolean shouldShowRequestPermissionRationale(@NonNull String permission) {
-        if ((Objects.equals(permission, Manifest.permission.WRITE_EXTERNAL_STORAGE)) &&
-                (!Utility.isPermissionExtStorage(mContext) &&
-                        !PrefManager.isPref(mContext, R.string.pref_request_permission))) {
-            ActivityCompat.requestPermissions(MainActivity.this,
-                    new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
-                    Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
-            PrefManager.putBoolPref(mContext, R.string.pref_request_permission, true);
+        if ((!Objects.equals(permission, Manifest.permission.WRITE_EXTERNAL_STORAGE)) ||
+                (Utility.isPermissionExtStorage(mContext) ||
+                        PrefManager.isPref(mContext, R.string.pref_request_permission))) {
+            return super.shouldShowRequestPermissionRationale(permission);
         }
+        ActivityCompat.requestPermissions(MainActivity.this,
+                new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE},
+                Costants.PERMISSIONS_REQUEST_WRITE_EXTERNAL_STORAGE);
+        PrefManager.putBoolPref(mContext, R.string.pref_request_permission, true);
         return super.shouldShowRequestPermissionRationale(permission);
     }
 
@@ -247,14 +248,14 @@ public class MainActivity extends BaseActivity implements
     }
 
     private void initializeMainJob() {
-        if (!PrefManager.isPref(mContext, R.string.pref_insert_data)) {
-            showProgressBar();
-            new RestExecute().loadData(this,mIdlingResource);
-
-        } else {
+        if (PrefManager.isPref(mContext, R.string.pref_insert_data)) {
             new Utility(mContext, getSupportActionBar()).setColorOfflineActionBar();
 
             startFragmentDb();
+        } else {
+            showProgressBar();
+            new RestExecute().loadData(this,mIdlingResource);
+
         }
         clearPosition();
 
