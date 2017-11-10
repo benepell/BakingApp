@@ -1,26 +1,10 @@
-package it.instantapps.bakingapp.data;
-
-import android.content.ContentUris;
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.UriMatcher;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteException;
-import android.net.Uri;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-
-import timber.log.Timber;
-
-
 /*
- *  ____        _    _                  _                
- * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __  
- * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \ 
+ *  ____        _    _                  _
+ * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
+ * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \
  * | |_) | (_| |   <| | | | | (_| |  / ___ \| |_) | |_) |
- * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/ 
- *                           |___/          |_|   |_|    
+ * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/
+ *                           |___/          |_|   |_|
  *
  * Copyright (C) 2017 Benedetto Pellerito
  *
@@ -36,6 +20,22 @@ import timber.log.Timber;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package it.instantapps.bakingapp.data;
+
+import android.content.ContentUris;
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.UriMatcher;
+import android.database.Cursor;
+import android.database.sqlite.SQLiteDatabase;
+import android.database.sqlite.SQLiteException;
+import android.net.Uri;
+import android.support.annotation.NonNull;
+import android.support.annotation.Nullable;
+
+import timber.log.Timber;
+
 public class ContentProvider extends android.content.ContentProvider {
 
     private static final int RECIPES = 100;

@@ -1,13 +1,3 @@
-package it.instantapps.bakingapp.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.SerializedName;
-
-import java.util.ArrayList;
-
-import it.instantapps.bakingapp.utility.Costants;
 
 /*
  *  ____        _    _                  _
@@ -32,6 +22,16 @@ import it.instantapps.bakingapp.utility.Costants;
  * limitations under the License.
  */
 
+package it.instantapps.bakingapp.model;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
+
+import java.util.ArrayList;
+
+import it.instantapps.bakingapp.utility.Costants;
 
 public class Recipe implements Parcelable {
 

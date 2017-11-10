@@ -1,16 +1,11 @@
-package it.instantapps.bakingapp.data;
-
-import android.content.ContentResolver;
-import android.net.Uri;
-import android.provider.BaseColumns;
 
 /*
- *  ____        _    _                  _                
- * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __  
- * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \ 
+ *  ____        _    _                  _
+ * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
+ * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \
  * | |_) | (_| |   <| | | | | (_| |  / ___ \| |_) | |_) |
- * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/ 
- *                           |___/          |_|   |_|    
+ * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/
+ *                           |___/          |_|   |_|
  *
  * Copyright (C) 2017 Benedetto Pellerito
  *
@@ -26,6 +21,12 @@ import android.provider.BaseColumns;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+package it.instantapps.bakingapp.data;
+
+import android.content.ContentResolver;
+import android.net.Uri;
+import android.provider.BaseColumns;
+
 public class Contract {
 
     public static final String CONTENT_AUTHORITY = "it.instantapps.bakingapp";

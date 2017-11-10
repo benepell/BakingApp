@@ -1,24 +1,3 @@
-package it.instantapps.bakingapp.adapter;
-
-import android.content.Context;
-import android.database.Cursor;
-import android.graphics.Typeface;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.widget.RecyclerView;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.TextView;
-
-import java.text.DecimalFormat;
-
-import butterknife.BindView;
-import butterknife.ButterKnife;
-import it.instantapps.bakingapp.R;
-import it.instantapps.bakingapp.activity.BaseActivity;
-import it.instantapps.bakingapp.data.Contract;
-import timber.log.Timber;
-
 /*
  *  ____        _    _                  _
  * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
@@ -41,6 +20,28 @@ import timber.log.Timber;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package it.instantapps.bakingapp.adapter;
+
+import android.content.Context;
+import android.database.Cursor;
+import android.graphics.Typeface;
+import android.support.v4.content.res.ResourcesCompat;
+import android.support.v7.widget.RecyclerView;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.TextView;
+
+import java.text.DecimalFormat;
+
+import butterknife.BindView;
+import butterknife.ButterKnife;
+import it.instantapps.bakingapp.R;
+import it.instantapps.bakingapp.activity.BaseActivity;
+import it.instantapps.bakingapp.data.Contract;
+import timber.log.Timber;
+
 public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.DetailIngredientHolder> {
 
     private final IngredientItemClickListener mOnIngredientItemClickListener;

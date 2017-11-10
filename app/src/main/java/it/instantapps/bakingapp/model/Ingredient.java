@@ -1,19 +1,11 @@
-package it.instantapps.bakingapp.model;
-
-import android.os.Parcel;
-import android.os.Parcelable;
-
-import com.google.gson.annotations.SerializedName;
-
-import it.instantapps.bakingapp.utility.Costants;
 
 /*
- *  ____        _    _                  _                
- * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __  
- * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \ 
+ *  ____        _    _                  _
+ * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
+ * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \
  * | |_) | (_| |   <| | | | | (_| |  / ___ \| |_) | |_) |
- * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/ 
- *                           |___/          |_|   |_|    
+ * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/
+ *                           |___/          |_|   |_|
  *
  * Copyright (C) 2017 Benedetto Pellerito
  *
@@ -29,6 +21,16 @@ import it.instantapps.bakingapp.utility.Costants;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package it.instantapps.bakingapp.model;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+
+import com.google.gson.annotations.SerializedName;
+
+import it.instantapps.bakingapp.utility.Costants;
+
 public class Ingredient implements Parcelable {
 
     @SuppressWarnings("CanBeFinal")

@@ -1,24 +1,11 @@
-package it.instantapps.bakingapp.rest;
-
-import android.content.Context;
-import android.support.annotation.NonNull;
-
-import java.util.ArrayList;
-
-import it.instantapps.bakingapp.data.DataUtils;
-import it.instantapps.bakingapp.idling.SimpleIdlingResource;
-import it.instantapps.bakingapp.model.Recipe;
-import retrofit2.Call;
-import retrofit2.Callback;
-import retrofit2.Response;
 
 /*
- *  ____        _    _                  _                
- * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __  
- * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \ 
+ *  ____        _    _                  _
+ * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
+ * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \
  * | |_) | (_| |   <| | | | | (_| |  / ___ \| |_) | |_) |
- * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/ 
- *                           |___/          |_|   |_|    
+ * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/
+ *                           |___/          |_|   |_|
  *
  * Copyright (C) 2017 Benedetto Pellerito
  *
@@ -34,6 +21,21 @@ import retrofit2.Response;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package it.instantapps.bakingapp.rest;
+
+import android.content.Context;
+import android.support.annotation.NonNull;
+
+import java.util.ArrayList;
+
+import it.instantapps.bakingapp.data.DataUtils;
+import it.instantapps.bakingapp.idling.SimpleIdlingResource;
+import it.instantapps.bakingapp.model.Recipe;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+
 public class RestExecute {
 
     private final RestManager restManager;

@@ -1,12 +1,11 @@
-package it.instantapps.bakingapp.rest;
 
 /*
- *  ____        _    _                  _                
- * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __  
- * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \ 
+ *  ____        _    _                  _
+ * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
+ * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \
  * | |_) | (_| |   <| | | | | (_| |  / ___ \| |_) | |_) |
- * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/ 
- *                           |___/          |_|   |_|    
+ * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/
+ *                           |___/          |_|   |_|
  *
  * Copyright (C) 2017 Benedetto Pellerito
  *
@@ -23,6 +22,7 @@ package it.instantapps.bakingapp.rest;
  * limitations under the License.
  */
 
+package it.instantapps.bakingapp.rest;
 
 import java.util.ArrayList;
 import java.util.concurrent.TimeUnit;

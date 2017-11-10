@@ -1,5 +1,13 @@
+
 /*
- * Copyright 2016, The Android Open Source Project
+ *  ____        _    _                  _
+ * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
+ * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \
+ * | |_) | (_| |   <| | | | | (_| |  / ___ \| |_) | |_) |
+ * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/
+ *                           |___/          |_|   |_|
+ *
+ * Copyright (C) 2017 Benedetto Pellerito
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.

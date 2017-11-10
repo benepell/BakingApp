@@ -1,24 +1,11 @@
-package it.instantapps.bakingapp.data;
-
-import android.content.ContentValues;
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.database.Cursor;
-
-import java.util.ArrayList;
-
-import it.instantapps.bakingapp.R;
-import it.instantapps.bakingapp.model.Ingredient;
-import it.instantapps.bakingapp.model.Recipe;
-import it.instantapps.bakingapp.model.Step;
 
 /*
- *  ____        _    _                  _                
- * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __  
- * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \ 
+ *  ____        _    _                  _
+ * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
+ * |  _ \ / _` | |/ / | '_ \ / _` |   / _ \ | '_ \| '_ \
  * | |_) | (_| |   <| | | | | (_| |  / ___ \| |_) | |_) |
- * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/ 
- *                           |___/          |_|   |_|    
+ * |____/ \__,_|_|\_\_|_| |_|\__, | /_/   \_\ .__/| .__/
+ *                           |___/          |_|   |_|
  *
  * Copyright (C) 2017 Benedetto Pellerito
  *
@@ -34,6 +21,21 @@ import it.instantapps.bakingapp.model.Step;
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+
+package it.instantapps.bakingapp.data;
+
+import android.content.ContentValues;
+import android.content.Context;
+import android.content.SharedPreferences;
+import android.database.Cursor;
+
+import java.util.ArrayList;
+
+import it.instantapps.bakingapp.R;
+import it.instantapps.bakingapp.model.Ingredient;
+import it.instantapps.bakingapp.model.Recipe;
+import it.instantapps.bakingapp.model.Step;
+
 public class DataUtils {
 
     private final Context mContext;
