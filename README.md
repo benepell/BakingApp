@@ -55,6 +55,7 @@ In this project you will:
 * [Exoplayer](https://github.com/google/ExoPlayer/)
 * [Firebase jobdispatcher ](https://github.com/firebase/firebase-jobdispatcher-android/)
 * [Espresso](https://developer.android.com/training/testing/espresso/index.html)
+* [Android-Iconics](https://github.com/mikepenz/Android-Iconics)
 
 ## Test 
 
