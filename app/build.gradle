@@ -7,7 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion rootProject.sdkVersion
         versionName 'BakingTime'
-        versionCode 23
+        versionCode 24
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
