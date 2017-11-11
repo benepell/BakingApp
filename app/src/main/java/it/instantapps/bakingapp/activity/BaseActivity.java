@@ -68,6 +68,7 @@ public class BaseActivity extends AppCompatActivity
     private static int sPositionStep = RecyclerView.NO_POSITION;
     private static int sPositionIngredient = RecyclerView.NO_POSITION;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

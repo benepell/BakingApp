@@ -33,6 +33,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.FrameLayout;
 
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
+
 import butterknife.BindView;
 import butterknife.ButterKnife;
 import it.instantapps.bakingapp.R;
@@ -78,6 +81,8 @@ public class DetailActivity extends BaseActivity
         Intent intent = getIntent();
         new Utility(DetailActivity.this, getSupportActionBar()).setColorOfflineActionBar();
 
+
+
         if (savedInstanceState != null) {
             setRecipeId(savedInstanceState.getInt(Costants.BUNDLE_RECIPE_ID, 0));
             setRecipeName(savedInstanceState.getString(Costants.BUNDLE_RECIPE_NAME));
@@ -108,8 +113,20 @@ public class DetailActivity extends BaseActivity
         MenuItem menuItemListShopping;
         menuItemListShopping = menu.getItem(0);
         if (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            menuItemListShopping.setIcon(
+                    new IconicsDrawable(getApplicationContext(), MaterialDesignIconic.Icon.gmi_share)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
+            menuItemListShopping.setVisible(true);
+
             menuItemListShopping.setVisible(true);
         } else if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
+            menuItemListShopping.setIcon(
+                    new IconicsDrawable(getApplicationContext(), MaterialDesignIconic.Icon.gmi_share)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemListShopping.setVisible(true);
         }
 

@@ -4,23 +4,20 @@
 
     <item
         android:id="@+id/navigation_list_shopping"
-        android:icon="@drawable/ic_menu_share_white"
         android:title="@string/share_shopping_list"
         android:visible="false"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_share_video"
-        android:icon="@drawable/ic_menu_send_white"
         android:title="@string/send_video"
         android:visible="false"
         app:showAsAction="ifRoom" />
 
     <item
         android:id="@+id/navigation_widget"
-        android:icon="@drawable/ic_widgets_white_24dp"
-        android:title="@string/title_widget_add"
         android:visible="false"
+        android:title="@string/title_widget_add"
         app:showAsAction="ifRoom" />
 
 </menu>

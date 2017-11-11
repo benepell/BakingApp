@@ -117,6 +117,7 @@ public class NavigationActivity extends AppCompatActivity {
             return cursor;
         }
 
+
         @Override
         protected void onPostExecute(Cursor cursor) {
             super.onPostExecute(cursor);

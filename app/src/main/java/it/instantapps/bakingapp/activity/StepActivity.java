@@ -23,6 +23,7 @@
 
 package it.instantapps.bakingapp.activity;
 
+import android.annotation.SuppressLint;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -50,6 +51,8 @@ import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
 import com.google.android.exoplayer2.util.Util;
+import com.mikepenz.iconics.IconicsDrawable;
+import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -127,6 +130,7 @@ public class StepActivity extends BaseActivity
         }
         super.onCreate(savedInstanceState);
         getLayoutInflater().inflate(getLayoutResource(), getFrameLayout());
+
 
         mContext = StepActivity.this;
 
@@ -245,6 +249,7 @@ public class StepActivity extends BaseActivity
     }
 
 
+    @SuppressLint("ResourceAsColor")
     @Override
     public boolean onPrepareOptionsMenu(Menu menu) {
         MenuItem menuItemListShopping;
@@ -257,16 +262,56 @@ public class StepActivity extends BaseActivity
 
 
         if (Utility.isTablet(getApplicationContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT) {
+            menuItemShare.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_mail_send)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemShare.setVisible(true);
+
+            menuItemWidget.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_widgets)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemWidget.setVisible(true);
 
+
         } else if (Utility.isTablet(getApplicationContext()) && getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE) {
+            menuItemListShopping.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_share)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemListShopping.setVisible(true);
+
+            menuItemShare.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_mail_send)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemShare.setVisible(true);
+
+            menuItemWidget.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_widgets)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemWidget.setVisible(true);
 
         } else if (!Utility.isTablet(getApplicationContext()) && (getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)) {
+            menuItemShare.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_mail_send)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemShare.setVisible(true);
+
+            menuItemWidget.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_widgets)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemWidget.setVisible(true);
 
         }
@@ -276,13 +321,23 @@ public class StepActivity extends BaseActivity
         if ((widgetId != 0) && (widgetId == getRecipeId())) {
             menuItemWidget.setCheckable(true);
             menuItemWidget.setChecked(true);
-            menuItemWidget.setIcon(R.drawable.ic_widgets_blu_24dp);
+            menuItemWidget.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_widgets)
+                            .colorRes(R.color.light_blue_A400)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
             menuItemWidget.setTitle(R.string.title_widget_remove);
 
         } else {
             menuItemWidget.setCheckable(false);
             menuItemWidget.setChecked(false);
             menuItemWidget.setTitle(R.string.title_widget_add);
+            menuItemWidget.setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_widgets)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
+
         }
 
         return true;
@@ -399,6 +454,7 @@ public class StepActivity extends BaseActivity
 
     }
 
+
     @Override
     public void onBackPressed() {
         super.onBackPressed();
@@ -406,6 +462,7 @@ public class StepActivity extends BaseActivity
         backToDetailActivity();
 
     }
+
 
     private void startFragmentDetail(int idData, String description, String shortDescription, String thumbnailURL, String videoUri) {
 
@@ -555,8 +612,21 @@ public class StepActivity extends BaseActivity
         if ((getRecipeId() >= 0) && (mBottomNavigationView != null)) {
             setNavigationIdMax(getRecipeId());
             mBottomNavigationView.setVisibility(View.VISIBLE);
+
             mBottomNavigationView.getMenu().getItem(0).setCheckable(false);
+            mBottomNavigationView.getMenu().getItem(0).setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_arrow_back)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
+
             mBottomNavigationView.getMenu().getItem(1).setCheckable(false);
+            mBottomNavigationView.getMenu().getItem(1).setIcon(
+                    new IconicsDrawable(mContext, MaterialDesignIconic.Icon.gmi_arrow_forward)
+                            .colorRes(R.color.white)
+                            .sizeDp(24)
+                            .respectFontBounds(true));
+
 
             mBottomNavigationView.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
         }

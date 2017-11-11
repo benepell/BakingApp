@@ -3,12 +3,10 @@
 
     <item
         android:id="@+id/navigation_back"
-        android:icon="@drawable/ic_arrow_back_black_24dp"
         android:title="@string/title_navigation_back" />
 
     <item
         android:id="@+id/navigation_forward"
-        android:icon="@drawable/ic_arrow_forward_black_24dp"
         android:title="@string/title_navigation_forward" />
 
 </menu>
