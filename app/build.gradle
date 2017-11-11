@@ -7,7 +7,7 @@ android {
         minSdkVersion 21
         targetSdkVersion rootProject.sdkVersion
         versionName 'BakingTime'
-        versionCode 25
+        versionCode 27
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -40,11 +40,9 @@ dependencies {
     implementation 'commons-io:commons-io:' + rootProject.apacheCommonsVersion
     implementation 'com.firebase:firebase-jobdispatcher:' + rootProject.firebaseJobDispVersion
     implementation 'com.android.support.test.espresso:espresso-idling-resource:' + rootProject.espressoVersion
-
     implementation "com.mikepenz:iconics-core:" + rootProject.mikepenzIconicsVersion
-    implementation "com.mikepenz:material-design-iconic-typeface:" + rootProject.mikepenzMaterialDesignIconicsVersion 
+    implementation "com.mikepenz:material-design-iconic-typeface:" + rootProject.mikepenzMaterialDesignIconicsVersion
     implementation "com.android.support:appcompat-v7:" + rootProject.buildToolsVersion
-
     // Testing-only dependencies
     androidTestImplementation 'com.android.support:support-annotations:' + rootProject.buildToolsVersion
     androidTestImplementation 'com.android.support.test.espresso:espresso-contrib:' + rootProject.espressoVersion

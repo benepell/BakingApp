@@ -121,7 +121,7 @@ public class DetailActivity extends BaseActivity
             menuItemListShopping.setVisible(true);
 
             menuItemListShopping.setVisible(true);
-        } else if (PrefManager.isGeneralSettings(this, getString(R.string.pref_tab_layout))) {
+        } else {
             menuItemListShopping.setIcon(
                     new IconicsDrawable(getApplicationContext(), MaterialDesignIconic.Icon.gmi_share)
                             .colorRes(R.color.white)
