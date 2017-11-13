@@ -33,7 +33,7 @@ task clean(type: Delete) {
 
 ext {
     sdkVersion = 27
-    buildToolsVersion = "27.0.0"
+    buildToolsVersion = "27.0.1"
 
     firebaseJobDispVersion = "0.8.4"
     timberVersion = "4.5.1"
@@ -49,6 +49,7 @@ ext {
 
     espressoVersion = "3.0.1"
     testRulesVersion = "1.0.1"
-
+    mikepenzIconicsVersion = "2.9.5@aar"
+    mikepenzMaterialDesignIconicsVersion = "2.2.0.4@aar"
 }
 
