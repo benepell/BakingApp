@@ -507,7 +507,7 @@ public class StepActivity extends BaseActivity
                     }
                 }
             } catch (Exception e) {
-                Timber.e("Error query: " + new Throwable().getMessage());
+                Timber.e("Error query: %s", new Throwable().getMessage());
             } finally {
                 assert mCursor != null;
                 mCursor.close();
@@ -536,7 +536,7 @@ public class StepActivity extends BaseActivity
 
             }
         } catch (Exception e) {
-            Timber.e("Error query: " + new Throwable().getMessage());
+            Timber.e("Error query: %s", new Throwable().getMessage());
         } finally {
             assert mCursor != null;
             mCursor.close();
@@ -750,7 +750,7 @@ public class StepActivity extends BaseActivity
                 row = mCursor.getInt(mCursor.getColumnIndex(Contract.StepEntry._ID));
             }
         } catch (Exception e) {
-            Timber.e("Error query single row: " + new Throwable().getMessage());
+            Timber.e("Error query single row: %s", new Throwable().getMessage());
         } finally {
             if (mCursor != null) {
                 mCursor.close();

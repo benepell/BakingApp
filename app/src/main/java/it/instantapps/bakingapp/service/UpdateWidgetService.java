@@ -58,7 +58,7 @@ public class UpdateWidgetService extends IntentService {
                     intent, PendingIntent.FLAG_UPDATE_CURRENT);
             pendingIntent.send();
         } catch (PendingIntent.CanceledException e) {
-            Timber.e("pending" + e.getMessage());
+            Timber.e("pending%s", e.getMessage());
         }
     }
 

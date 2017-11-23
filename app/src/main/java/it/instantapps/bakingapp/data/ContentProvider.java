@@ -453,7 +453,7 @@ public class ContentProvider extends android.content.ContentProvider {
                     db.setTransactionSuccessful();
 
                 } catch (SQLiteException e) {
-                    Timber.v("Attempting to insert " + e.getMessage());
+                    Timber.v("Attempting to insert %s", e.getMessage());
                 } finally {
                     // execute after ..... when is complete
                     db.endTransaction();
@@ -485,7 +485,7 @@ public class ContentProvider extends android.content.ContentProvider {
                     db.setTransactionSuccessful();
 
                 } catch (SQLiteException e) {
-                    Timber.v("Attempting to insert " + e.getMessage());
+                    Timber.v("Attempting to insert %s", e.getMessage());
                 } finally {
                     // execute after ..... when is complete
                     db.endTransaction();
@@ -515,7 +515,7 @@ public class ContentProvider extends android.content.ContentProvider {
                     db.setTransactionSuccessful();
 
                 } catch (SQLiteException e) {
-                    Timber.v("Attempting to insert " + e.getMessage());
+                    Timber.v("Attempting to insert %s", e.getMessage());
                 } finally {
                     db.endTransaction();
                 }
