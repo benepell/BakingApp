@@ -1,13 +1,13 @@
 apply plugin: 'com.android.application'
 android {
-    compileSdkVersion rootProject.sdkVersion
+    compileSdkVersion 27
     buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
         applicationId "it.instantapps.bakingapp"
         minSdkVersion 21
         targetSdkVersion rootProject.sdkVersion
         versionName 'BakingTime'
-        versionCode 27
+        versionCode 29
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
 
     }
@@ -18,6 +18,10 @@ android {
         }
     }
     productFlavors {
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
     }
 }
 

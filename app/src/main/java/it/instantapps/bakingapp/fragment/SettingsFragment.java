@@ -50,33 +50,31 @@ public class SettingsFragment extends PreferenceFragmentCompat {
 
     private void prefMail(){
         final Preference mailTo = findPreference("pref_contact");
-        mailTo.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-            public boolean onPreferenceClick(Preference preference) {
-                int androidVersionCode = 0;
-                String hwInfo = null;
-                try {
-                    androidVersionCode = Util.SDK_INT;
-                    hwInfo = Util.MANUFACTURER + " - " + Util.MODEL;
-                    mAppVersionName = new Utility(getActivity(), null).appVersionName();
-                } catch (PackageManager.NameNotFoundException e) {
-                    e.printStackTrace();
-                }
-
-                String textMail = "Version: " +
-                        mAppVersionName + "\n" +
-                        "Model: " +
-                        hwInfo + "\n" +
-                        "Api: " +
-                        String.valueOf(androidVersionCode)+"\n\n";
-
-                Intent mailIntent = new Intent(Intent.ACTION_SEND);
-                mailIntent.setType("message/rfc822");
-                mailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.app_support_mail)});
-                mailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject_support_mail) + " " + getString(R.string.app_name));
-                mailIntent.putExtra(Intent.EXTRA_TEXT, textMail);
-                startActivity(Intent.createChooser(mailIntent, getString(R.string.text_mail_intent)));
-                return true;
+        mailTo.setOnPreferenceClickListener(preference -> {
+            int androidVersionCode = 0;
+            String hwInfo = null;
+            try {
+                androidVersionCode = Util.SDK_INT;
+                hwInfo = Util.MANUFACTURER + " - " + Util.MODEL;
+                mAppVersionName = new Utility(getActivity(), null).appVersionName();
+            } catch (PackageManager.NameNotFoundException e) {
+                e.printStackTrace();
             }
+
+            String textMail = "Version: " +
+                    mAppVersionName + "\n" +
+                    "Model: " +
+                    hwInfo + "\n" +
+                    "Api: " +
+                    String.valueOf(androidVersionCode)+"\n\n";
+
+            Intent mailIntent = new Intent(Intent.ACTION_SEND);
+            mailIntent.setType("message/rfc822");
+            mailIntent.putExtra(Intent.EXTRA_EMAIL, new String[]{getString(R.string.app_support_mail)});
+            mailIntent.putExtra(Intent.EXTRA_SUBJECT, getString(R.string.subject_support_mail) + " " + getString(R.string.app_name));
+            mailIntent.putExtra(Intent.EXTRA_TEXT, textMail);
+            startActivity(Intent.createChooser(mailIntent, getString(R.string.text_mail_intent)));
+            return true;
         });
 
     }

@@ -25,7 +25,6 @@
 package it.instantapps.bakingapp.preference;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.preference.DialogPreference;
@@ -59,20 +58,9 @@ public class DialogConfirm extends DialogPreference {
         dialog.setTitle(R.string.title_dialog_confirm);
         dialog.setMessage(R.string.text_clear_data);
         dialog.setCancelable(true);
-        dialog.setPositiveButton(R.string.text_positive_dialog_confirm, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                new ResetAsyncTask().execute();
+        dialog.setPositiveButton(R.string.text_positive_dialog_confirm, (dialog1, which) -> new ResetAsyncTask().execute());
 
-            }
-        });
-
-        dialog.setNegativeButton(R.string.text_dialog_confirm_no_reset, new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dlg, int which) {
-                dlg.cancel();
-            }
-        });
+        dialog.setNegativeButton(R.string.text_dialog_confirm_no_reset, (dlg, which) -> dlg.cancel());
 
         AlertDialog al = dialog.create();
         al.show();

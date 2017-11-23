@@ -196,20 +196,14 @@ public class ExoPlayerManager implements Player.EventListener {
         } else if (exoPlayer.getBufferedPosition() < exoPlayer.getBufferedPercentage()) {
             visibilityProgressBar(false);
         }
-        new Thread(new Runnable() {
-            public void run() {
-                while (mProgressStatus < mProgressBar.getMax()) {
-                    mProgressStatus = exoPlayer.getBufferedPercentage();
-                    mHandler.post(new Runnable() {
-                        public void run() {
-                            mProgressBar.setProgress(mProgressStatus);
-                        }
-                    });
-                    try {
-                        Thread.sleep(Costants.EXO_PROGRESSBAR_DELAY);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+        new Thread(() -> {
+            while (mProgressStatus < mProgressBar.getMax()) {
+                mProgressStatus = exoPlayer.getBufferedPercentage();
+                mHandler.post(() -> mProgressBar.setProgress(mProgressStatus));
+                try {
+                    Thread.sleep(Costants.EXO_PROGRESSBAR_DELAY);
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
                 }
             }
         }).start();

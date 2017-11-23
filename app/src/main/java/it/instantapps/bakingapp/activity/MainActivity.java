@@ -234,13 +234,10 @@ public class MainActivity extends BaseActivity implements
     public void restartNetwork(View view) {
         if (view != null) {
             if (view.getTag().equals(R.string.network_state_not_connected)) {
-                view.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (Utility.isOnline(mContext)) {
-                            initializeMainJob();
-                            v.setClickable(false);
-                        }
+                view.setOnClickListener(v -> {
+                    if (Utility.isOnline(mContext)) {
+                        initializeMainJob();
+                        v.setClickable(false);
                     }
                 });
             }

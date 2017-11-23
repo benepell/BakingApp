@@ -32,7 +32,6 @@ import android.content.res.Configuration;
 import android.database.Cursor;
 import android.net.Uri;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v4.media.session.MediaButtonReceiver;
@@ -635,32 +634,28 @@ public class StepActivity extends BaseActivity
 
 
     private final BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
-            = new BottomNavigationView.OnNavigationItemSelectedListener() {
+            = item -> {
 
-        @Override
-        public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                switch (item.getItemId()) {
+                    case R.id.navigation_back:
+                        if (getNavigationId() > 0) {
+                            navigationIntent(R.id.navigation_back);
+                        } else {
+                            item.setEnabled(false);
+                        }
+                        return true;
 
-            switch (item.getItemId()) {
-                case R.id.navigation_back:
-                    if (getNavigationId() > 0) {
-                        navigationIntent(R.id.navigation_back);
-                    } else {
-                        item.setEnabled(false);
-                    }
-                    return true;
+                    case R.id.navigation_forward:
+                        if (getNavigationId() < getNavigationIdMax()) {
+                            navigationIntent(R.id.navigation_forward);
+                        } else {
+                            item.setEnabled(false);
+                        }
+                        return true;
+                }
 
-                case R.id.navigation_forward:
-                    if (getNavigationId() < getNavigationIdMax()) {
-                        navigationIntent(R.id.navigation_forward);
-                    } else {
-                        item.setEnabled(false);
-                    }
-                    return true;
-            }
-
-            return false;
-        }
-    };
+                return false;
+            };
 
     private void navigationIntent(int navigationType) {
         clearResources();
