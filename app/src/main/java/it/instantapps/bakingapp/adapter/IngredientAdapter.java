@@ -34,6 +34,7 @@ import android.view.ViewGroup;
 import android.widget.TextView;
 
 import java.text.DecimalFormat;
+import java.util.Locale;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -86,7 +87,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.De
         Typeface typeface = ResourcesCompat.getFont(mContext, R.font.abel);
         holder.mTextViewIngredientName.setTypeface(typeface);
 
-        StringBuilder stringBuilder = new StringBuilder(ingredientName.trim().toLowerCase());
+        StringBuilder stringBuilder = new StringBuilder(ingredientName.trim().toLowerCase(Locale.getDefault()));
         stringBuilder.setCharAt(0,Character.toUpperCase(ingredientName.charAt(0)));
         holder.mTextViewIngredientName.setText(stringBuilder);
 
@@ -119,7 +120,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.De
         @BindView(R.id.tv_measure_name)
         TextView mTextViewMeasureName;
 
-        public DetailIngredientHolder(View itemView) {
+        DetailIngredientHolder(View itemView) {
             super(itemView);
             ButterKnife.bind(this, itemView);
             itemView.setOnClickListener(this);

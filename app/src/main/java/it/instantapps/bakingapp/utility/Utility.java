@@ -114,7 +114,7 @@ public class Utility {
 
         if ((context == null) || (string == null)) return null;
 
-        string = string.toUpperCase(Locale.ROOT);
+        string = string.toUpperCase(Locale.getDefault());
 
         Typeface typeface = ResourcesCompat.getFont(context, R.font.indie_flower);
         int fontSizePx = (int) (Costants.BITMAT_FONT_SIZE_DP * context.getResources().getDisplayMetrics().scaledDensity);
