@@ -2,14 +2,13 @@
 
 buildscript {
     repositories {
+        jcenter()
         maven {
             url "https://maven.google.com"
         }
-        jcenter()
-        google()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:3.0.0'
+        classpath 'com.android.tools.build:gradle:3.0.1'
 
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
@@ -22,8 +21,6 @@ allprojects {
         maven {
             url "https://maven.google.com"
         }
-        google()
-
     }
 }
 
@@ -34,22 +31,24 @@ task clean(type: Delete) {
 ext {
     sdkVersion = 27
     buildToolsVersion = "27.0.1"
+    buildVersion = "27.0.2"
 
     firebaseJobDispVersion = "0.8.4"
-    timberVersion = "4.5.1"
+    timberVersion = "4.6.0"
     butterKnifeVersion = "8.8.1"
 
     retrofitVersion = "2.3.0"
     apacheCommonsVersion = "2.6"
 
-    glideVersion = "4.2.0"
+    glideVersion = "4.3.1"
     glideOkHttpIntegretionVersion = glideVersion + "@aar"
 
     exoPlayerVersion = "r2.5.4"
 
     espressoVersion = "3.0.1"
     testRulesVersion = "1.0.1"
-    mikepenzIconicsVersion = "2.9.5@aar"
+
+    mikepenzIconicsVersion = "3.0.0@aar"
     mikepenzMaterialDesignIconicsVersion = "2.2.0.4@aar"
 }
 
