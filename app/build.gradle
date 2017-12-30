@@ -1,7 +1,6 @@
 apply plugin: 'com.android.application'
 android {
     compileSdkVersion 27
-    buildToolsVersion rootProject.buildToolsVersion
     defaultConfig {
         applicationId "it.instantapps.bakingapp"
         minSdkVersion 21
@@ -18,8 +17,6 @@ android {
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
-    productFlavors {
-    }
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -28,11 +25,11 @@ android {
 
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation "com.android.support:appcompat-v7:${rootProject.ext.buildToolsVersion}"
-    implementation "com.android.support:recyclerview-v7:${rootProject.ext.buildToolsVersion}"
-    implementation "com.android.support:preference-v7:${rootProject.ext.buildToolsVersion}"
-    implementation "com.android.support:cardview-v7:${rootProject.ext.buildToolsVersion}"
-    implementation "com.android.support:design:${rootProject.ext.buildToolsVersion}"
+    implementation "com.android.support:appcompat-v7:${rootProject.ext.buildVersion}"
+    implementation "com.android.support:recyclerview-v7:${rootProject.ext.buildVersion}"
+    implementation "com.android.support:preference-v7:${rootProject.ext.buildVersion}"
+    implementation "com.android.support:cardview-v7:${rootProject.ext.buildVersion}"
+    implementation "com.android.support:design:${rootProject.ext.buildVersion}"
     implementation "com.squareup.retrofit2:retrofit:${rootProject.ext.retrofitVersion}"
     implementation "com.squareup.retrofit2:converter-gson:${rootProject.ext.retrofitVersion}"
     implementation "com.jakewharton.timber:timber:${rootProject.ext.timberVersion}"
@@ -48,7 +45,7 @@ dependencies {
     implementation "com.mikepenz:iconics-core:${rootProject.ext.mikepenzIconicsVersion}"
     implementation "com.mikepenz:material-design-iconic-typeface:${rootProject.ext.mikepenzMaterialDesignIconicsVersion}"
     // Testing-only dependencies
-    androidTestImplementation "com.android.support:support-annotations:${rootProject.ext.buildToolsVersion}"
+    androidTestImplementation "com.android.support:support-annotations:${rootProject.ext.buildVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-contrib:${rootProject.ext.espressoVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-core:${rootProject.ext.espressoVersion}"
     androidTestImplementation "com.android.support.test.espresso:espresso-intents:${rootProject.ext.espressoVersion}"
