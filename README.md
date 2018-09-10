@@ -1,10 +1,10 @@
-
+<!--
 <a style="margin-bottom: 0;" 
 	href='https://play.google.com/store/apps/details?id=it.instantapps.bakingapp'>
 	<img alt='Get it on Google Play' 
 	src='https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png' height="80px"/>
 </a>
-
+-->
 # Baking app
 It was evaluated by certified [Udacity](https://www.udacity.com/course/android-developer-nanodegree-by-google--nd801) code reviewer and was graded as "Exceeds Specifications".
 
@@ -56,29 +56,6 @@ In this project you will:
 * [Firebase jobdispatcher ](https://github.com/firebase/firebase-jobdispatcher-android/)
 * [Espresso](https://developer.android.com/training/testing/espresso/index.html)
 * [Android-Iconics](https://github.com/mikepenz/Android-Iconics)
-
-## Test 
-
-### Firebase Test Robo (Passed)
-
-* [Galaxy S7 edge, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-01T17%3A23%3A29.734Z_b1aq/hero2lte-23-en_US-portrait/video.mp4)
-* [Galaxy S7, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A33%3A53.559Z_7q6i/herolte-23-en_US-landscape/video.mp4)
-* [Huawei P8 lite, livello API 21](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-01T17%3A23%3A29.734Z_b1aq/hwALE-H-21-en_US-portrait/video.mp4)
-* [LG G6 LGUS997, livello API 24](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-01T17%3A23%3A29.734Z_b1aq/lucye-24-en_US-portrait/video.mp4)
-* [Low-resolution MDPI phone, Virtual, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A01%3A44.994Z_jowi/NexusLowRes-23-en_US-landscape/video.mp4)
-*  [Nexus 10, Virtual, livello API 21](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus10-21-en_US-portrait/video.mp4)
-* [Nexus 5, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-03T14%3A00%3A20.010Z_5j5y/hammerhead-23-en_US-portrait/video.mp4)
-* [Nexus 5, Virtual, livello API 23](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/hammerhead-23-en_US-portrait/video.mp4)
-* [Nexus 5X, Virtual, livello API 26](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus5X-26-en_US-portrait/video.mp4)
-* [Nexus 6, Virtual, livello API 21](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A01%3A44.994Z_jowi/Nexus6-21-en_US-landscape/video.mp4)
-* [Nexus 6P, Virtual, livello API 26](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus6P-26-en_US-portrait/video.mp4)
-* [Nexus 7 (2012), Virtual, livello API 21](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-02T17%3A19%3A03.091Z_28lo/Nexus7-21-en_US-portrait/video.mp4)
-* [Pixel, livello API 26](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-01T17%3A23%3A29.734Z_b1aq/sailfish-26-en_US-portrait/video.mp4)
-* [Sony XPERIA XZ Premium, livello API 25](https://storage.googleapis.com/test-lab-7mbff5754t2f0-nqu2bv2ntmrs8/web-build_2017-11-05T02%3A42%3A20.784Z_irew/G8142-25-en_US-portrait/video.mp4)
-
-
-### Google Play 
-* [Verified by Google Play Protect](https://www.android.com/play-protect/)
 
 ## License
 
