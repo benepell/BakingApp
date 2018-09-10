@@ -1,4 +1,3 @@
-
 /*
  *  ____        _    _                  _
  * | __ )  __ _| | _(_)_ __   __ _     / \   _ __  _ __
@@ -30,43 +29,22 @@ import android.content.Context;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.content.res.Configuration;
-import android.graphics.Bitmap;
-import android.graphics.Canvas;
-import android.graphics.Color;
-import android.graphics.Paint;
-import android.graphics.Typeface;
-import android.graphics.drawable.ColorDrawable;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
-import android.support.v4.content.res.ResourcesCompat;
-import android.support.v7.app.ActionBar;
-import android.text.TextPaint;
-
-import java.util.Locale;
 
 import it.instantapps.bakingapp.R;
 
 public class Utility {
     private final Context mContext;
-    private final ActionBar mActionBar;
 
-    public Utility(Context context, ActionBar actionBar) {
+    public Utility(Context context) {
         mContext = context;
-        mActionBar = actionBar;
     }
 
     public static boolean isTablet(Context context) {
         return context != null && (context.getResources().getConfiguration().screenLayout & Configuration.SCREENLAYOUT_SIZE_MASK) >= Configuration.SCREENLAYOUT_SIZE_LARGE;
-    }
-
-    public void setColorOfflineActionBar() {
-        if (! isOnline(mContext)) {
-            if (mActionBar != null) {
-                mActionBar.setBackgroundDrawable(new ColorDrawable(Color.parseColor(Costants.COLOR_BACKGROUND_ACTIONBAR_OFFLINE)));
-            }
-        }
     }
 
     public String appVersionName() throws PackageManager.NameNotFoundException {
@@ -93,13 +71,20 @@ public class Utility {
     }
 
     public static boolean isOnline(Context context) {
+
         ConnectivityManager connMgr = (ConnectivityManager)
                 context.getSystemService(Context.CONNECTIVITY_SERVICE);
-        if(connMgr!=null){
+
+        if (connMgr != null) {
+
             NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
+
             return (networkInfo != null) && (networkInfo.getState() == NetworkInfo.State.CONNECTED);
+
         }
+
         return false;
+
     }
 
     public static void isDeniedPermissionExtStorage(Activity thisActivity) {
@@ -109,38 +94,4 @@ public class Utility {
 
         }
     }
-    public static Bitmap bitmapTitleImage(Context context, String string) {
-
-
-        if ((context == null) || (string == null)) return null;
-
-        string = string.toUpperCase(Locale.getDefault());
-
-        Typeface typeface = ResourcesCompat.getFont(context, R.font.indie_flower);
-        int fontSizePx = (int) (Costants.BITMAT_FONT_SIZE_DP * context.getResources().getDisplayMetrics().scaledDensity);
-
-        Paint paint = new Paint();
-        paint.setAntiAlias(true);
-        paint.setSubpixelText(true);
-        paint.setTypeface(typeface);
-        paint.setStyle(Paint.Style.FILL_AND_STROKE);
-        paint.setColor(context.getResources().getColor(R.color.white));
-        paint.setTextSize(fontSizePx);
-        paint.setTextAlign(Paint.Align.LEFT);
-        Paint.FontMetrics fontMetrics = paint.getFontMetrics();
-
-        int textHeight = (int) (fontMetrics.descent - fontMetrics.ascent + fontMetrics.leading);
-        TextPaint textPaint = new TextPaint(paint);
-
-        Bitmap bitmap = Bitmap.createBitmap((int) textPaint.measureText(string),
-                textHeight, Bitmap.Config.ARGB_8888);
-        Canvas myCanvas = new Canvas(bitmap);
-        if ((bitmap.getHeight() > 0)) {
-            myCanvas.drawText(string, 0, bitmap.getHeight(), paint);
-            return bitmap;
-        }
-
-        return null;
-    }
-
 }

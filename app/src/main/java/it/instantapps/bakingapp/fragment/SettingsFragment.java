@@ -56,7 +56,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
             try {
                 androidVersionCode = Util.SDK_INT;
                 hwInfo = Util.MANUFACTURER + " - " + Util.MODEL;
-                mAppVersionName = new Utility(getActivity(), null).appVersionName();
+                mAppVersionName = new Utility(getActivity()).appVersionName();
             } catch (PackageManager.NameNotFoundException e) {
                 e.printStackTrace();
             }
@@ -83,7 +83,7 @@ public class SettingsFragment extends PreferenceFragmentCompat {
         final Preference prefVersion = findPreference(getString(R.string.pref_app_version));
 
         try {
-            mAppVersionName = new Utility(getActivity(), null).appVersionName();
+            mAppVersionName = new Utility(getActivity()).appVersionName();
         } catch (PackageManager.NameNotFoundException e) {
             e.printStackTrace();
         }

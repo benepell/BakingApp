@@ -30,7 +30,6 @@ import android.appwidget.AppWidgetProvider;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
 import android.text.TextUtils;
 import android.view.View;
 import android.widget.RemoteViews;
@@ -44,7 +43,6 @@ import it.instantapps.bakingapp.utility.Costants;
 import it.instantapps.bakingapp.utility.PrefManager;
 
 import static it.instantapps.bakingapp.utility.Costants.RECIPE_WIDGET_UPDATE;
-import static it.instantapps.bakingapp.utility.Utility.bitmapTitleImage;
 
 public class RecipeAppWidget extends AppWidgetProvider {
 
@@ -62,11 +60,11 @@ public class RecipeAppWidget extends AppWidgetProvider {
             views.setViewVisibility(R.id.widget_text_error, View.GONE);
             views.setViewVisibility(R.id.widget_listView, View.VISIBLE);
 
-            Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), widgetRecipeName);
-            if (bitmap != null) {
-                views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);
+            if (!TextUtils.isEmpty(widgetRecipeName)) {
+                views.setTextViewText(R.id.recipe_widget_name, widgetRecipeName);
 
             }
+
 
             Intent intent = new Intent(context, MainActivity.class);
             intent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK | Intent.FLAG_ACTIVITY_NO_HISTORY);
@@ -83,9 +81,8 @@ public class RecipeAppWidget extends AppWidgetProvider {
             views.setViewVisibility(R.id.widget_text_error, View.VISIBLE);
             views.setTextViewText(R.id.widget_text_error, context.getString(R.string.widget_text_error));
 
-            Bitmap bitmap = bitmapTitleImage(context.getApplicationContext(), widgetRecipeName);
-            if (bitmap != null) {
-                views.setImageViewBitmap(R.id.recipe_widget_name, bitmap);
+            if (TextUtils.isEmpty(widgetRecipeName)) {
+                views.setTextViewText(R.id.recipe_widget_name, widgetRecipeName);
 
             }
 

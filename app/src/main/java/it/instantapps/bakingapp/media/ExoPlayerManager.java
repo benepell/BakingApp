@@ -51,7 +51,6 @@ import com.google.android.exoplayer2.PlaybackParameters;
 import com.google.android.exoplayer2.Player;
 import com.google.android.exoplayer2.SimpleExoPlayer;
 import com.google.android.exoplayer2.Timeline;
-import com.google.android.exoplayer2.extractor.DefaultExtractorsFactory;
 import com.google.android.exoplayer2.source.ExtractorMediaSource;
 import com.google.android.exoplayer2.source.MediaSource;
 import com.google.android.exoplayer2.source.TrackGroupArray;
@@ -60,9 +59,11 @@ import com.google.android.exoplayer2.trackselection.DefaultTrackSelector;
 import com.google.android.exoplayer2.trackselection.TrackSelection;
 import com.google.android.exoplayer2.trackselection.TrackSelectionArray;
 import com.google.android.exoplayer2.trackselection.TrackSelector;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.upstream.BandwidthMeter;
 import com.google.android.exoplayer2.upstream.DefaultBandwidthMeter;
+import com.google.android.exoplayer2.upstream.DefaultDataSourceFactory;
+import com.google.android.exoplayer2.util.Util;
 
 import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.activity.StepActivity;
@@ -75,7 +76,7 @@ import static it.instantapps.bakingapp.activity.StepActivity.mMediaSession;
 public class ExoPlayerManager implements Player.EventListener {
 
     private PlaybackStateCompat.Builder mStateBuilder;
-    private final SimpleExoPlayerView mSimpleExoPlayerView;
+    private final PlayerView mSimpleExoPlayerView;
     private final Context mContext;
     private final TextView mTvErrorVideo;
     private SimpleExoPlayer mExoPlayer;
@@ -91,7 +92,7 @@ public class ExoPlayerManager implements Player.EventListener {
     private boolean isAutoPlay;
 
 
-    public ExoPlayerManager(Context context, SimpleExoPlayerView simpleExoPlayerView, ProgressBar progressBar,
+    public ExoPlayerManager(Context context, PlayerView simpleExoPlayerView, ProgressBar progressBar,
                             String shortDescription, TextView tvErrorVideo) {
         mContext = context;
         mSimpleExoPlayerView = simpleExoPlayerView;
@@ -121,16 +122,21 @@ public class ExoPlayerManager implements Player.EventListener {
             }
 
             mExoPlayer = ExoPlayerFactory.newSimpleInstance(
-                    new DefaultRenderersFactory(mContext,null,extensionRendererMode),
+                    new DefaultRenderersFactory(mContext,extensionRendererMode),
                     trackSelector,
                     loadControl);
             mSimpleExoPlayerView.setPlayer(mExoPlayer);
 
+            String userAgent = Util.getUserAgent(mContext, Costants.USER_AGENT_CACHE);
 
-            MediaSource mediaSource;
-            mediaSource = new ExtractorMediaSource(mediaUri,
-                    new CacheDataSourceFactory(mContext),
-                    new DefaultExtractorsFactory(), null, null);
+
+
+            DefaultDataSourceFactory dataSourceFactory =  new DefaultDataSourceFactory(mContext,
+                    Util.getUserAgent(mContext, userAgent));
+
+            MediaSource mediaSource = new ExtractorMediaSource.Factory(dataSourceFactory)
+                    .createMediaSource(mediaUri);
+
             final boolean isResume = mResumeWindow != C.INDEX_UNSET;
             if (isResume) {
                 mExoPlayer.seekTo(mResumeWindow, mResumePosition);
@@ -291,8 +297,9 @@ public class ExoPlayerManager implements Player.EventListener {
 
     }
 
+
     @Override
-    public void onTimelineChanged(Timeline timeline, Object manifest) {
+    public void onTimelineChanged(Timeline timeline, Object manifest, int reason) {
 
     }
 
@@ -353,17 +360,29 @@ public class ExoPlayerManager implements Player.EventListener {
     }
 
     @Override
+    public void onShuffleModeEnabledChanged(boolean shuffleModeEnabled) {
+
+    }
+
+    @Override
     public void onPlayerError(ExoPlaybackException error) {
         mTvErrorVideo.setText(R.string.error_video);
         mTvErrorVideo.setVisibility(View.VISIBLE);
     }
 
     @Override
-    public void onPositionDiscontinuity() {
+    public void onPositionDiscontinuity(int reason) {
+
     }
+
 
     @Override
     public void onPlaybackParametersChanged(PlaybackParameters playbackParameters) {
+    }
+
+    @Override
+    public void onSeekProcessed() {
+
     }
 
     private class MySessionCallback extends MediaSessionCompat.Callback implements BakingExoPlayer {

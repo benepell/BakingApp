@@ -48,7 +48,7 @@ import android.widget.TextView;
 
 import com.google.android.exoplayer2.C;
 import com.google.android.exoplayer2.SimpleExoPlayer;
-import com.google.android.exoplayer2.ui.SimpleExoPlayerView;
+import com.google.android.exoplayer2.ui.PlayerView;
 import com.google.android.exoplayer2.util.Util;
 import com.mikepenz.iconics.IconicsDrawable;
 import com.mikepenz.material_design_iconic_typeface_library.MaterialDesignIconic;
@@ -80,7 +80,7 @@ public class StepActivity extends BaseActivity
 
     @SuppressWarnings("CanBeFinal")
     @BindView(R.id.exo_detail_step_fragment_player_view)
-    SimpleExoPlayerView mSimpleExoPlayerView;
+    PlayerView mSimpleExoPlayerView;
 
     @SuppressWarnings("CanBeFinal")
     @BindView(R.id.id_player_layout)
@@ -161,7 +161,6 @@ public class StepActivity extends BaseActivity
 
         if (getRecipeName() != null) {
             setTitle(getRecipeName());
-            new Utility(StepActivity.this, getSupportActionBar()).setColorOfflineActionBar();
         }
 
         mIsVideoBackground = PrefManager.isGeneralSettings(this,

@@ -164,13 +164,14 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
         return view;
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new StepFragmentAsyncTask(getActivity());
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         if (mAdapter != null) {
             mAdapter.swapCursor(data);
         }
@@ -181,7 +182,7 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         if (mAdapter != null) {
             mAdapter.swapCursor(null);
         }
@@ -268,12 +269,8 @@ public class StepFragment extends Fragment implements StepAdapter.StepItemClickL
 
         @Override
         public void deliverResult(Cursor data) {
-            if ((data != null) && (data.getCount() > 0)) {
-                stepData = data;
-                super.deliverResult(data);
-            } else {
-                forceLoad();
-            }
+            stepData = data;
+            super.deliverResult(data);
         }
     }
 }

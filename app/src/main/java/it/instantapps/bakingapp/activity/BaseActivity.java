@@ -146,50 +146,57 @@ public class BaseActivity extends AppCompatActivity
 
         int id = item.getItemId();
 
-        if (id == R.id.nav_home) {
-            closeNotification();
-            startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
-            item.setEnabled(true);
-        } else if (id == R.id.nav_ingredients) {
-            if (getRecipeId() > 0) {
+        switch (id) {
+            case R.id.nav_home:
                 closeNotification();
+                startActivity(new Intent(this, MainActivity.class).setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK));
                 item.setEnabled(true);
-            } else {
-                item.setEnabled(false);
-            }
-            openNavDetailActivity(Costants.TAB_ORDER_INGREDIENT);
+                break;
+            case R.id.nav_ingredients:
+                if (getRecipeId() > 0) {
+                    closeNotification();
+                    item.setEnabled(true);
+                } else {
+                    item.setEnabled(false);
+                }
+                openNavDetailActivity(Costants.TAB_ORDER_INGREDIENT);
 
-        } else if (id == R.id.nav_steps) {
-            if (getRecipeId() > 0) {
+                break;
+            case R.id.nav_steps:
+                if (getRecipeId() > 0) {
+                    closeNotification();
+                    item.setEnabled(true);
+                } else {
+                    item.setEnabled(false);
+                }
+                openNavDetailActivity(Costants.TAB_ORDER_STEP);
+
+                break;
+            case R.id.nav_settings:
                 closeNotification();
+                startActivity(new Intent(this, SettingsActivity.class));
                 item.setEnabled(true);
-            } else {
-                item.setEnabled(false);
-            }
-            openNavDetailActivity(Costants.TAB_ORDER_STEP);
 
-        } else if (id == R.id.nav_settings) {
-            closeNotification();
-            startActivity(new Intent(this, SettingsActivity.class));
-            item.setEnabled(true);
+                break;
+            case R.id.nav_share:
+                if (getRecipeId() > 0) {
+                    new ShoppingListAsyncTask().execute(getRecipeId());
+                    item.setEnabled(true);
+                } else {
+                    item.setEnabled(false);
+                }
 
-        } else if (id == R.id.nav_share) {
-            if (getRecipeId() > 0) {
-                new ShoppingListAsyncTask().execute(getRecipeId());
-                item.setEnabled(true);
-            } else {
-                item.setEnabled(false);
-            }
+                break;
+            case R.id.nav_send:
 
-        } else if (id == R.id.nav_send) {
+                if (sendNavUrl()) {
+                    item.setEnabled(true);
+                    sendNavUrl();
+                } else {
+                    item.setEnabled(false);
+                }
 
-            if (sendNavUrl()) {
-                item.setEnabled(true);
-                sendNavUrl();
-            } else {
-                item.setEnabled(false);
-            }
-
+                break;
         }
 
         DrawerLayout drawer = findViewById(R.id.drawer_layout);

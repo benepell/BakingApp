@@ -26,6 +26,7 @@ package it.instantapps.bakingapp.adapter;
 import android.content.Context;
 import android.content.res.Configuration;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.text.TextUtils;
@@ -59,8 +60,9 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
         mVideoUri = videoUri;
     }
 
+    @NonNull
     @Override
-    public DetailStepHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DetailStepHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         int layoutId = R.layout.list_detail_step;
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -71,7 +73,7 @@ public class DetailStepAdapter extends RecyclerView.Adapter<DetailStepAdapter.De
 
 
     @Override
-    public void onBindViewHolder(final DetailStepHolder holder, int position) {
+    public void onBindViewHolder(@NonNull final DetailStepHolder holder, int position) {
 
         if (TextUtils.isEmpty(mVideoUri)) {
 

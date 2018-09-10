@@ -246,7 +246,6 @@ public class MainActivity extends BaseActivity implements
 
     private void initializeMainJob() {
         if (PrefManager.isPref(mContext, R.string.pref_insert_data)) {
-            new Utility(mContext, getSupportActionBar()).setColorOfflineActionBar();
 
             startFragmentDb();
         } else {

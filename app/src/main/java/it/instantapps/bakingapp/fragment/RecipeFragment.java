@@ -120,20 +120,21 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
         return view;
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new RecipeFragmentAsyncTask(getActivity());
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         if ((data != null) && (mAdapter != null)) {
             mAdapter.swapCursor(data);
         }
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         mAdapter.swapCursor(null);
     }
 
@@ -199,12 +200,8 @@ public class RecipeFragment extends Fragment implements RecipeAdapter.ListItemCl
 
         @Override
         public void deliverResult(Cursor data) {
-            if ((data != null) && (data.getCount() > 0)) {
-                mRecipeData = data;
-                super.deliverResult(data);
-            } else {
-                forceLoad();
-            }
+            mRecipeData = data;
+            super.deliverResult(data);
 
         }
     }

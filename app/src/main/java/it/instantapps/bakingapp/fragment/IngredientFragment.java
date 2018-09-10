@@ -110,13 +110,14 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
         return view;
     }
 
+    @NonNull
     @Override
     public Loader<Cursor> onCreateLoader(int id, Bundle args) {
         return new IngredientFragmentAsyncTask(getActivity());
     }
 
     @Override
-    public void onLoadFinished(Loader<Cursor> loader, Cursor data) {
+    public void onLoadFinished(@NonNull Loader<Cursor> loader, Cursor data) {
         if (mAdapter != null) {
             mAdapter.swapCursor(data);
         }
@@ -127,7 +128,7 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
     }
 
     @Override
-    public void onLoaderReset(Loader<Cursor> loader) {
+    public void onLoaderReset(@NonNull Loader<Cursor> loader) {
         if (mAdapter != null) {
             mAdapter.swapCursor(null);
         }
@@ -158,7 +159,7 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
             mFragmentIngredientListener = (IngredientFragment.FragmentIngredientListener) getActivity();
 
         } catch (ClassCastException e) {
-            if (getActivity() != null){
+            if (getActivity() != null) {
                 throw new ClassCastException(getActivity().getLocalClassName() + "must implement OnFragmentIngredientListener");
             }
         }
@@ -218,13 +219,9 @@ public class IngredientFragment extends Fragment implements LoaderManager.Loader
 
         @Override
         public void deliverResult(Cursor data) {
-            if ((data != null) && (data.getCount() > 0)) {
-                ingredientData = data;
-                super.deliverResult(data);
-            } else {
-                forceLoad();
-            }
+            ingredientData = data;
+            super.deliverResult(data);
         }
-    }
 
+    }
 }

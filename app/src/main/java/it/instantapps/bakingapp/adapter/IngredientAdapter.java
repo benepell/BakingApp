@@ -26,6 +26,7 @@ package it.instantapps.bakingapp.adapter;
 import android.content.Context;
 import android.database.Cursor;
 import android.graphics.Typeface;
+import android.support.annotation.NonNull;
 import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -56,8 +57,9 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.De
         void onIngredientItemClick(int position, int itemCount);
     }
 
+    @NonNull
     @Override
-    public DetailIngredientHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public DetailIngredientHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         int layoutId = R.layout.list_ingredient;
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -69,7 +71,7 @@ public class IngredientAdapter extends RecyclerView.Adapter<IngredientAdapter.De
     }
 
     @Override
-    public void onBindViewHolder(IngredientAdapter.DetailIngredientHolder holder, int position) {
+    public void onBindViewHolder(@NonNull IngredientAdapter.DetailIngredientHolder holder, int position) {
 
         if (!mCursor.moveToPosition(position)) {
             throw new IllegalStateException("couldn't move cursor to position " + position);

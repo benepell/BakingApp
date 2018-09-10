@@ -33,6 +33,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.provider.FontRequest;
 import android.support.v4.provider.FontsContractCompat;
@@ -77,8 +78,9 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
     }
 
 
+    @NonNull
     @Override
-    public StepHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public StepHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         mContext = parent.getContext();
         int layoutId = R.layout.list_step;
         LayoutInflater inflater = LayoutInflater.from(mContext);
@@ -90,7 +92,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
 
     @Override
-    public void onBindViewHolder(final StepHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final StepHolder holder, final int position) {
 
         mCursor.moveToPosition(position);
 
@@ -148,7 +150,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
                     }
 
                     @Override
-                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                    public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
                         Drawable drawable = new BitmapDrawable(mContext.getResources(), resource);
                         if (idStepDetail == StepActivity.getIdData() && (BaseActivity.getPositionStep() >= 0)) {
 
@@ -223,7 +225,7 @@ public class StepAdapter extends RecyclerView.Adapter<StepAdapter.StepHolder> {
 
         }
 
-        public void bind(int idData) {
+        void bind(int idData) {
             mId = idData;
         }
 

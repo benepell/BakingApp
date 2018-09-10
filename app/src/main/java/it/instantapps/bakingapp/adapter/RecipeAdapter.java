@@ -31,6 +31,7 @@ import android.graphics.drawable.BitmapDrawable;
 import android.graphics.drawable.Drawable;
 import android.os.Handler;
 import android.os.HandlerThread;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.provider.FontRequest;
 import android.support.v4.provider.FontsContractCompat;
@@ -67,8 +68,9 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
 
 
 
+    @NonNull
     @Override
-    public RecipeHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public RecipeHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
 
         mContext = parent.getContext();
         int layoutId = R.layout.list_recipe;
@@ -80,7 +82,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
     }
 
     @Override
-    public void onBindViewHolder(final RecipeHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final RecipeHolder holder, final int position) {
         mCursor.moveToPosition(position);
 
         String imageRecipe = mCursor.getString(mCursor.getColumnIndex(Contract.RecipeEntry.COLUMN_NAME_IMAGE));
@@ -127,7 +129,7 @@ public class RecipeAdapter extends RecyclerView.Adapter<RecipeAdapter.RecipeHold
                     }
 
                     @Override
-                    public void onResourceReady(Bitmap resource, Transition<? super Bitmap> transition) {
+                    public void onResourceReady(@NonNull Bitmap resource, Transition<? super Bitmap> transition) {
                         Drawable drawable = new BitmapDrawable(mContext.getResources(), resource);
                         holder.mTextViewRecipeName.setBackground(drawable);
                     }

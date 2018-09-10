@@ -39,7 +39,6 @@ import it.instantapps.bakingapp.R;
 import it.instantapps.bakingapp.activity.BaseActivity;
 import it.instantapps.bakingapp.activity.MainActivity;
 import it.instantapps.bakingapp.data.DataUtils;
-import it.instantapps.bakingapp.media.CacheDataSourceFactory;
 import it.instantapps.bakingapp.utility.PrefManager;
 import it.instantapps.bakingapp.service.UpdateWidgetService;
 
@@ -85,7 +84,6 @@ public class DialogConfirm extends DialogPreference {
         protected Void doInBackground(Void... params) {
             Context context = sWeakReference.get();
             if (context != null) {
-                CacheDataSourceFactory.getClearData(context);
                 new DataUtils(context).ClearDataPrivacy();
                 Glide.get(context).clearDiskCache();
 

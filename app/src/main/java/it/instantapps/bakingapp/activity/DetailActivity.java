@@ -79,7 +79,6 @@ public class DetailActivity extends BaseActivity
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        new Utility(DetailActivity.this, getSupportActionBar()).setColorOfflineActionBar();
 
 
 
