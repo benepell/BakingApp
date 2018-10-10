@@ -33,7 +33,7 @@ public interface Costants {
      * http://go.udacity.com/android-baking-app-json
      */
 
-    public static final String UDACITY_BASE_URL = "http://go.udacity.com/android-baking-app-json/";
+    public static final String UDACITY_BASE_URL = "https://go.udacity.com/android-baking-app-json/";
 
     public static final String JSON_RECIPE_ID = "id";
 
@@ -89,15 +89,15 @@ public interface Costants {
 
 
     public static final String BUNDLE_TAB_RECIPE_ID = "it.instantapps.bakingapp.bundle.tab.recipe.id";
-    public static final String BUNDLE_RECIPE_NAME = "it.instantapps.bakingapp.recipe.name";
+    public static final String BUNDLE_RECIPE_NAME = "it.instantapps.bakingapp.bundle.recipe.name";
     public static final String BUNDLE_TAB_ORDERTAB = "it.instantapps.bakingapp.bundle.tab.ordertab";
     public static final String BUNDLE_RECIPE_ID = "it.instantapps.bakingapp.bundle.recipe.id";
     public static final String BUNDLE_RECIPE_WIDGET = "it.instantapps.bakingapp.bundle.recipe.widget";
 
-    public static final String BUNDLE_DETAIL_STEP_VIDEOURI = "it.instantapps.bakingapp.activity.detail.step.videouri";
-    public static final String BUNDLE_DETAIL_STEP_THUMBNAILURL = "it.instantapps.bakingapp.activity.detail.step.thumbnailurl";
-    public static final String BUNDLE_DETAIL_STEP_DESCRIPTION = "it.instantapps.bakingapp.activity.detail.step.description";
-    public static final String BUNDLE_DETAIL_STEP_SHORT_DESCRIPTION = "it.instantapps.bakingapp.activity.detail.step.shortdescription";
+    public static final String BUNDLE_DETAIL_STEP_VIDEOURI = "it.instantapps.bakingapp.activity.detail.bundle.step.videouri";
+    public static final String BUNDLE_DETAIL_STEP_THUMBNAILURL = "it.instantapps.bakingapp.activity.detail.bundle.step.thumbnailurl";
+    public static final String BUNDLE_DETAIL_STEP_DESCRIPTION = "it.instantapps.bakingapp.activity.detail.bundle.step.description";
+    public static final String BUNDLE_DETAIL_STEP_SHORT_DESCRIPTION = "it.instantapps.bakingapp.activity.detail.step.bundle.shortdescription";
     public static final String BUNDLE_DETAIL_STEP_ID = "it.instantapps.bakingapp.activity.detail.step.id";
     public static final String BUNDLE_DETAIL_STEP_NAVIGATION_ID = "it.instantapps.bakingapp.activity.detail.step.navigation.id";
 
